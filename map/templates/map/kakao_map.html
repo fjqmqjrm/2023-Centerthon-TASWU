@@ -1,24 +1,39 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8" />
-    <script
-      type="text/javascript"
-      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=df9fbbf360a12deca34689f55c0a89ec"
-    ></script>
-    <title>Kakao 지도 시작하기</title>
-  </head>
+    <title>Kakao Map API 지도</title>
+</head>
 
-  <body>
-    <div id="map" style="width: 500px; height: 400px"></div>
+<body>
+    <div id="map" style="width: 100%; height: 350px"></div>
+
+    <script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=df9fbbf360a12deca34689f55c0a89ec"></script>
     <script>
-      var container = document.getElementById("map");
-      var options = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667),
-        level: 3,
-      };
+        var mapContainer = document.getElementById("map"), // 지도를 표시할 div
+            mapOption = {
+                center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                level: 3, // 지도의 확대 레벨
+            };
 
-      var map = new kakao.maps.Map(container, options);
+        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도 생성
+
+        // 마커가 표시될 위치
+        var markerPosition = new kakao.maps.LatLng(33.450701, 126.570667);
+
+        // 마커 생성
+        var marker = new kakao.maps.Marker({
+            position: markerPosition,
+        });
+
+        // 마커가 지도 위에 표시되도록 설정
+        marker.setMap(map);
+
+      //지도 위의 마커를 제거하는 코드
+      // marker.setMap(null);
     </script>
-  </body>
+</body>
+
 </html>
