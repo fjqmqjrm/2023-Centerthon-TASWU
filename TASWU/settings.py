@@ -38,6 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'map',
+
+    #카카오 로그인용
+    'django.contrib.sites',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.kakao',
 ]
 
 MIDDLEWARE = [
@@ -63,11 +71,22 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
+
+
+
             ],
         },
+
     },
 ]
+#카카오 로그인용
+SITE_ID = 2
 
+SOCIALACCOUNT_LOGIN_ON_GET = True
+LOGIN_REDIRECT_URL = 'map_main'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'index'
+ACCOUNT_LOGOUT_ON_GET = True
 WSGI_APPLICATION = 'TASWU.wsgi.application'
 
 
@@ -98,6 +117,12 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+]
+#카카오 로그인용
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 
