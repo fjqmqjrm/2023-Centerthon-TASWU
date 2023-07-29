@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'map',
+    'profiles',
 
     #카카오 로그인용
     'django.contrib.sites',
