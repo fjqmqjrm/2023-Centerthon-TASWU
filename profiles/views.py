@@ -4,6 +4,8 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from .forms import TaxiDriverForm
 # Create your views here.
+def start_login(request):
+    return render(request, 'profiles/mainlogin.html')
 
 def custom_logout(request):
     logout(request)
