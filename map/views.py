@@ -3,7 +3,13 @@ from django.contrib.auth import logout
 from django.shortcuts import redirect
 # Create your views here.
 def map_main(request):
-    return render(request, 'map/kakao_map.html')
+    user_profile = request.user.userprofile
+    context = {
+        'user': request.user,
+        'user_profile': user_profile,
+
+    }
+    return render(request, 'map/kakao_map.html',context)
 
 
 
