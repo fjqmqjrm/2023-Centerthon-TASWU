@@ -10,8 +10,13 @@
 <button type="button" onclick="location.href = '{% provider_login_url 'kakao' %}'"><img class = "kakao" src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" alt="" ></button>
 {% if user.is_authenticated %}
 <a href="{% url 'profiles:custom_logout' %}">로그아웃</a>
-<p>안녕하세요, {{ user.username }}님</p>
+{% if user_profile.is_taxi_driver %}
+<p>반갑습니다, {{ user.username }}기사님</p>
+{% else %}
+<p>반갑습니다, {{ user.username }}회원님</p>
+{% endif %}
 <a href="{% url 'profiles:my_page' %}">마이페이지</a>
+
 {% endif %}
 
 
@@ -20,6 +25,7 @@
 
     <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=df9fbbf360a12deca34689f55c0a89ec"></script>
+
     <script>
         var mapContainer = document.getElementById("map"), // 지도를 표시할 div
             mapOption = {
