@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap');
+
+
+
+        body {
+            background-color: #a4a4a4;
+            overflow: hidden;
+        }
+
+        #iphone-frame {
+        width: 375px;
+        height: 667px;
+        background: #ffffff;
+        margin: 50px auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        }
+
+        .id {
+            border-radius: 10px;
+            width: 230px;
+            height: 45px;
+            border: none;
+            box-shadow: 2px 2px 5px 2px rgba(105, 105, 105, 0.3);
+            font-size: 17px;
+            margin-bottom: 10px;
+        }
+
+        .pw {
+            border-radius: 10px;
+            width: 230px;
+            height: 45px;
+            border: none;
+            box-shadow: 2px 2px 5px 2px rgba(105, 105, 105, 0.3);
+            font-size: 17px;
+            margin-bottom: 10px;
+        }
+
+        input::placeholder {
+            color: #bfbfbf;
+        }
+
+        .btn-signup {
+            border-radius: 10px;
+            width: 230px;
+            height: 45px;
+            border: none;
+            box-shadow: 2px 2px 5px 2px rgba(105, 105, 105, 0.3);
+            font-size: 17px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            background-color: #6A7EEC;
+            color: #ffffff;
+        }
+
+        .btn-signup:hover {
+            background-color: #7186ff;
+        }
+
+        .btn-login {
+            color: #bfbfbf;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            background-color: transparent;
+        }
+
+        #member {
+            width: 100px;
+            height: 45px;
+            background-color: #ffffff;
+            color: #bfbfbf;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px 2px rgba(105, 105, 105, 0.3);
+            font-size: 17px;
+            margin-right: 10px;
+
+        }
+
+        #member:hover {
+            background-color: #6A7EEC;
+            color: #ffffff;
+        }
+
+        #member-driver {
+            width: 100px;
+            height: 45px;
+            background-color: #ffffff;
+            color: #bfbfbf;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px 2px rgba(105, 105, 105, 0.3);
+            font-size: 17px;
+            margin-left: 10px;
+        }
+
+        #member-driver:hover {
+            background-color: #6A7EEC;
+            color: #ffffff;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div id="iphone-frame">
+        <img src="img/title.png" style="margin-bottom: 20px;">
+        <h3 style="font-weight: bold; margin-bottom: 20px;">회원가입</h3>
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <div>
+                <p>아이디</p>
+                <input placeholder="아이디 입력하기" class="id">
+            </div>
+            <div>
+                <p>비밀번호</p>
+                <input placeholder="비밀번호 입력하기" type="password" class="pw">
+            </div>
+            <div style="margin-bottom: 40px;">
+                <p>회원구분</p>
+                <div>
+                    <input type="button" name="member" value="일반회원" id="member">
+                    <input type="button" name="member" value="택시기사" id="member-driver">
+                </div>
+            </div>
+            <input type="button" value="회원가입" class="btn-signup">
+            <input type="button" value="로그인" class="btn-login">
+       </div>
+
+
+    </div>
+</body>
+</html>
