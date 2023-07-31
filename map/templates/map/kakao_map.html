@@ -4,6 +4,32 @@
 <head>
     <meta charset="utf-8" />
     <title>Kakao Map API 지도</title>
+    <script>
+    // 현재 위치를 가져오는 함수
+    function getCurrentLocation(callback) {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var latitude = position.coords.latitude;
+                var longitude = position.coords.longitude;
+                callback(latitude, longitude);
+            });
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }
+
+    // 현재 위치를 기반으로 지도의 중심 좌표를 설정하는 함수
+    function setMapCenterWithCurrentLocation() {
+        getCurrentLocation(function(latitude, longitude) {
+            var mapOption = {
+                center: new kakao.maps.LatLng(latitude, longitude), // 현재 위치를 기본으로 지도의 중심좌표 설정
+                level: 3,
+            };
+            var map = new kakao.maps.Map(mapContainer, mapOption);
+        });
+    }
+</script>
+
 </head>
 {% load socialaccount %}
 
@@ -48,6 +74,9 @@
 
       //지도 위의 마커를 제거하는 코드
       // marker.setMap(null);
+
+      // 현재 위치를 기본 위치로 설정하는 함수 호출
+      setMapCenterWithCurrentLocation();
     </script>
 </body>
 
