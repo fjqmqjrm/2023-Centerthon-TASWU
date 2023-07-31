@@ -1,35 +1,11 @@
 <!DOCTYPE html>
 <html>
-
+{% load static %}
 <head>
     <meta charset="utf-8" />
     <title>Kakao Map API 지도</title>
-    <script>
-    // 현재 위치를 가져오는 함수
-    function getCurrentLocation(callback) {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                var latitude = position.coords.latitude;
-                var longitude = position.coords.longitude;
-                callback(latitude, longitude);
-            });
-        } else {
-            alert("Geolocation is not supported by this browser.");
-        }
-    }
-
-    // 현재 위치를 기반으로 지도의 중심 좌표를 설정하는 함수
-    function setMapCenterWithCurrentLocation() {
-        getCurrentLocation(function(latitude, longitude) {
-            var mapOption = {
-                center: new kakao.maps.LatLng(latitude, longitude), // 현재 위치를 기본으로 지도의 중심좌표 설정
-                level: 3,
-            };
-            var map = new kakao.maps.Map(mapContainer, mapOption);
-        });
-    }
-</script>
-
+    <script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=df9fbbf360a12deca34689f55c0a89ec"></script>
 </head>
 {% load socialaccount %}
 
@@ -45,38 +21,41 @@
 
 {% endif %}
 
-
 <body>
     <div id="map" style="width: 100%; height: 350px"></div>
-
-    <script type="text/javascript"
-        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=df9fbbf360a12deca34689f55c0a89ec"></script>
-
     <script>
-        var mapContainer = document.getElementById("map"), // 지도를 표시할 div
-            mapOption = {
-                center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-                level: 3, // 지도의 확대 레벨
-            };
+        document.addEventListener("DOMContentLoaded", function() {
+            kakao.maps.load(function() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
 
-        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도 생성
+                        var latitude = position.coords.latitude;
+                        var longitude = position.coords.longitude;
 
-        // 마커가 표시될 위치
-        var markerPosition = new kakao.maps.LatLng(33.450701, 126.570667);
+                        var mapContainer = document.getElementById('map');
+                        var mapOptions = {
+                            center: new kakao.maps.LatLng(latitude, longitude),
+                            level: 3
+                        };
+                        var map = new kakao.maps.Map(mapContainer, mapOptions);
 
-        // 마커 생성
-        var marker = new kakao.maps.Marker({
-            position: markerPosition,
+                        var imageSrc = "/static/img/marker_red.png",
+                            imageSize = new kakao.maps.Size(35, 35), 
+                            imageOption = {offset: new kakao.maps.Point(20, 90)};
+
+                        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
+
+                        var marker = new kakao.maps.Marker({
+                            position: new kakao.maps.LatLng(latitude, longitude),
+                            map: map,
+                            image: markerImage
+                        });
+                    });
+                } else {
+                    console.log("Geolocation is not available.");
+                }
+            });
         });
-
-        // 마커가 지도 위에 표시되도록 설정
-        marker.setMap(map);
-
-      //지도 위의 마커를 제거하는 코드
-      // marker.setMap(null);
-
-      // 현재 위치를 기본 위치로 설정하는 함수 호출
-      setMapCenterWithCurrentLocation();
     </script>
 </body>
 
