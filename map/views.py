@@ -20,3 +20,6 @@ def map_main(request):
 def custom_logout(request):
     logout(request)
     return redirect('map_main')
+
+def map_search(request):
+    return render(request, 'map/map_search.html')
