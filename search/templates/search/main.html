@@ -41,10 +41,8 @@
         #pagination a {display:inline-block;margin-right:10px;}
         #pagination .on {font-weight: bold; cursor: default;color:#777;}
     </style>
-    <script src='http://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js'></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
-
     // Check if the browser supports Web Speech API
     if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
         var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
@@ -84,7 +82,7 @@
             <div class="option">
                 <div>
                     <form onsubmit="searchPlaces(); return false;">
-                        <input type="text" placeholder="원하는 장소를 입력하세요" id="keyword" size="20">
+                        <input type="text" placeholder="원하는 장소를 입력하세요" id="keyword" size="20" value="서울여대">
                         <button onclick="startListening()">STT</button>
                         <button type="submit">검색하기</button>
                     </form>
