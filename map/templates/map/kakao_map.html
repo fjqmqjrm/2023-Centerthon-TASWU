@@ -186,7 +186,7 @@
                             var map = new kakao.maps.Map(mapContainer, mapOptions); // 전역 변수에 map 객체 할당
 
                             var imageSrc = "/static/img/marker_red.png",
-                                imageSize = new kakao.maps.Size(35, 35),
+                                imageSize = new kakao.maps.Size(23, 31),
                                 imageOption = {offset: new kakao.maps.Point(20, 90)};
 
                             var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
@@ -217,12 +217,13 @@
                                     }
                                 });
                             });
-                        } else {
+                        });
+                    }else {
                             console.log("Geolocation is not available.");
                         }
                     });
                 });
-         </script>
+        </script>
     </div>
 </body>
 </html>
