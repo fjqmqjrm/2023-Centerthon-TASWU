@@ -22,6 +22,9 @@ def my_page(request):
             return redirect('map:map_main')  # 폼 저장 후 프로필 페이지로 리디렉션
     else:
         form = TaxiDriverForm(instance=user_profile)
+        
+    if 'image' in request.FILES:
+        image = request.FILES['image']
 
     context = {
         'user': request.user,

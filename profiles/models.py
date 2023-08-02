@@ -10,7 +10,7 @@ class UserProfile(models.Model):
     # 예를 들어, 닉네임, 프로필 사진, 연락처 등
     nickname = models.CharField(null=True, max_length=20)
     email = models.EmailField(null=True)
-    image = models.ImageField(blank=True, null=True, upload_to='profile')
+    image = models.ImageField(blank=True, null=True, upload_to='static/img/profile')
     phone_number = models.CharField(null=True, max_length=20)
     current_location = models.CharField(null=True, max_length=200)   
 

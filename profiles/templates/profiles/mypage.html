@@ -1,12 +1,21 @@
 <!-- mypage.html -->
 <!DOCTYPE html>
 <html>
+{% load static %}
 <head>
     <title>마이페이지</title>
 </head>
 <body>
     <h1>마이페이지</h1>
     <p>안녕하세요, {{ user.username }}님</p>
+    <p>{{ user.email }}</p>
+    <p>{{ UserProfile.phone_number }}</p>
+    {% csrf_token %} {% if UserProfile.image %}
+    <img src="{{ UserProfile.image.url }}" width="60" />
+    {% else %}
+    <!-- 프로필 사진 등록 안 했을 때 기본 프로필 이미지 //추후 mypage.png로 바꾸기-->
+    <img src="/static/img/marker_red.png" width="60" />
+    {% endif %}
 
     <h2>Taxi Driver Status:</h2>
     <form method="post" action="{% url 'profiles:my_page' %}">
