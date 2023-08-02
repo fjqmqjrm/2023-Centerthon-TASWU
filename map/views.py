@@ -23,3 +23,5 @@ def custom_logout(request):
 
 def map_search(request):
     return render(request, 'map/map_search.html')
+
+
