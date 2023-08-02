@@ -127,26 +127,24 @@
             transform: translate(-50%, -50%);
         }
     </style>
-
 </head>
 
 {% load socialaccount %}
-<button type="button" onclick="location.href = '{% provider_login_url 'kakao' %}'"><img class="kakao"
-        src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" alt=""></button>
+<button type="button" onclick="location.href = '{% provider_login_url 'kakao' %}'"><img class="kakao" src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" alt=""></button>
 {% if user.is_authenticated %}
 <a href="{% url 'profiles:custom_logout' %}">로그아웃</a>
-
 {% if user_profile.is_taxi_driver %}
 <p>반갑습니다, {{ user.username }}기사님</p>
 {% else %}
 <p>반갑습니다, {{ user.username }}회원님</p>
+{% endif %}
+<a href="{% url 'profiles:my_page' %}">마이페이지</a>
+{% endif %}
 
 
 
 <body>
-
     <div id="iphone-frame">
-
         <!-- 상단바 -->
         <div class="top-bar">&nbsp;&nbsp;&nbsp;
             <p class="logo-text" style="color: #ffffff;">PICK</p>
@@ -174,27 +172,24 @@
         <div class="down-bar">
 
             <p class="search-text1" style="color: #6A7EEC; font-weight: bolder;">내 위치</p>
-            <input class="search1"></input>
+            <!--<input class="search1" ></input>-->
+            <div id="addressInfo" ></div>
 
             <a class="current-location" href="#">택시승강장 등록하기</a>
 
             <p class="search-text2" style="color: #6A7EEC; font-weight: bolder;">내 근처에 택시승강장이 없어요!</p>
 
             <button class="call-button">이 위치로 택시 호출하기</button>
-
-
         </div>
-
-
-
         <div id="map"
             style="width: 375px; height: 365px; position:absolute; z-index: 1; top: 36%; right: -188px; transform: translate(-50%, -50%);">
         </div>
+
         <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                kakao.maps.load(function () {
+            document.addEventListener("DOMContentLoaded", function() {
+                kakao.maps.load(function() {
                     if (navigator.geolocation) {
-                        navigator.geolocation.getCurrentPosition(function (position) {
+                        navigator.geolocation.getCurrentPosition(function(position) {
 
                             var latitude = position.coords.latitude;
                             var longitude = position.coords.longitude;
@@ -204,31 +199,46 @@
                                 center: new kakao.maps.LatLng(latitude, longitude),
                                 level: 3
                             };
-                            var map = new kakao.maps.Map(mapContainer, mapOptions);
+                            var map = new kakao.maps.Map(mapContainer, mapOptions); // 전역 변수에 map 객체 할당
 
                             var imageSrc = "/static/img/marker_red.png",
-                                imageSize = new kakao.maps.Size(23, 31),
-                                imageOption = { offset: new kakao.maps.Point(20, 90) };
+                                imageSize = new kakao.maps.Size(35, 35),
+                                imageOption = {offset: new kakao.maps.Point(20, 90)};
 
                             var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
 
                             var marker = new kakao.maps.Marker({
                                 position: new kakao.maps.LatLng(latitude, longitude),
                                 map: map,
-                                image: markerImage
+                                image: markerImage,
+                                draggable: true // 마커를 드래그 가능하도록 설정
                             });
-                        });
-                    } else {
-                        console.log("Geolocation is not available.");
-                    }
+
+                            // 주소 정보를 표시할 엘리먼트 추가
+                            var addressInfoDiv = document.getElementById('addressInfo');
+
+                            // 마커 드래그 이벤트 등록
+                            kakao.maps.event.addListener(marker, 'dragend', function() {
+                                var latlng = marker.getPosition();
+
+                                // 클릭한 위치의 주소를 표시합니다
+                                var geocoder = new kakao.maps.services.Geocoder();
+                                geocoder.coord2Address(latlng.getLng(), latlng.getLat(), function(result, status) {
+                                    if (status === kakao.maps.services.Status.OK) {
+                                        var address = result[0].address.address_name;
+                                        addressInfoDiv.innerText = address;
+                                    } else {
+                                        console.error("주소 변환 오류:", status);
+                                        addressInfoDiv.innerText = '주소 변환 오류';
+                                    }
+                                });
+                            });
+                        } else {
+                            console.log("Geolocation is not available.");
+                        }
+                    });
                 });
-            });
-        </script>
+         </script>
     </div>
-
-
-
-
 </body>
-
 </html>
