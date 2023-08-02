@@ -129,20 +129,6 @@
     </style>
 </head>
 
-{% load socialaccount %}
-<button type="button" onclick="location.href = '{% provider_login_url 'kakao' %}'"><img class="kakao" src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" alt=""></button>
-{% if user.is_authenticated %}
-<a href="{% url 'profiles:custom_logout' %}">로그아웃</a>
-{% if user_profile.is_taxi_driver %}
-<p>반갑습니다, {{ user.username }}기사님</p>
-{% else %}
-<p>반갑습니다, {{ user.username }}회원님</p>
-{% endif %}
-<a href="{% url 'profiles:my_page' %}">마이페이지</a>
-{% endif %}
-
-
-
 <body>
     <div id="iphone-frame">
         <!-- 상단바 -->
@@ -160,9 +146,7 @@
 
 
             <button class="logo-button style=display: flex; justify-content: center; align-items: center;">
-                {% endif %}
                 <a href="{% url 'profiles:my_page' %}"><img class="logo-img" src="{% static 'img/mypage.png' %}"></a>
-                {% endif %}
             </button>
 
 
@@ -202,7 +186,7 @@
                             var map = new kakao.maps.Map(mapContainer, mapOptions); // 전역 변수에 map 객체 할당
 
                             var imageSrc = "/static/img/marker_red.png",
-                                imageSize = new kakao.maps.Size(35, 35),
+                                imageSize = new kakao.maps.Size(23, 31),
                                 imageOption = {offset: new kakao.maps.Point(20, 90)};
 
                             var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
@@ -233,12 +217,13 @@
                                     }
                                 });
                             });
-                        } else {
+                        });
+                    }else {
                             console.log("Geolocation is not available.");
                         }
                     });
                 });
-         </script>
+        </script>
     </div>
 </body>
 </html>
