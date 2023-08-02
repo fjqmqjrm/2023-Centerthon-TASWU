@@ -129,20 +129,6 @@
     </style>
 </head>
 
-{% load socialaccount %}
-<button type="button" onclick="location.href = '{% provider_login_url 'kakao' %}'"><img class="kakao" src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" alt=""></button>
-{% if user.is_authenticated %}
-<a href="{% url 'profiles:custom_logout' %}">로그아웃</a>
-{% if user_profile.is_taxi_driver %}
-<p>반갑습니다, {{ user.username }}기사님</p>
-{% else %}
-<p>반갑습니다, {{ user.username }}회원님</p>
-{% endif %}
-<a href="{% url 'profiles:my_page' %}">마이페이지</a>
-{% endif %}
-
-
-
 <body>
     <div id="iphone-frame">
         <!-- 상단바 -->
