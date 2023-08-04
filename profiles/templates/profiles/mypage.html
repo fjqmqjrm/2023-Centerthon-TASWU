@@ -161,10 +161,6 @@
             <p class="user" style="color: #ffffff; font-weight: bolder; font-size: large;">{{ user.username }}님</p>
 
             <img class="profile" src="{% static 'img/profile.png' %}">
-          
-             {% csrf_token %} {% if UserProfile.image %}
-    <img src="{{ UserProfile.image.url }}" width="60" />
-    {% else %}
 
             <button class="certification" style="font-size:3px; font-weight: bold;" >전화번호를 인증해주세요
                 <img style="height: 9px; width: 4px;" src="{% static 'img/numCertificate.png' %}">
