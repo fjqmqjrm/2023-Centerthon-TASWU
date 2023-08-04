@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html>
 {% load static %}
-
 <head>
     <title>마이페이지</title>
 
@@ -155,7 +154,6 @@
     </style>
 </head>
 <body>
-
     <div id="iphone-frame">
 
         <!-- 상단바 -->
@@ -163,6 +161,10 @@
             <p class="user" style="color: #ffffff; font-weight: bolder; font-size: large;">{{ user.username }}님</p>
 
             <img class="profile" src="{% static 'img/profile.png' %}">
+          
+             {% csrf_token %} {% if UserProfile.image %}
+    <img src="{{ UserProfile.image.url }}" width="60" />
+    {% else %}
 
             <button class="certification" style="font-size:3px; font-weight: bold;" >전화번호를 인증해주세요
                 <img style="height: 9px; width: 4px;" src="{% static 'img/numCertificate.png' %}">
@@ -209,8 +211,27 @@
 
         </div>
     </div>
+  <!--
+    <h1>마이페이지</h1>
+    <p>안녕하세요, {{ user.username }}님</p>
+    <p>{{ user.email }}</p>
+    <p>{{ UserProfile.phone_number }}</p> 
+  
+    {% csrf_token %} {% if UserProfile.image %}
+    <img src="{{ UserProfile.image.url }}" width="60" />
+    {% else %} -->
+    <!-- 프로필 사진 등록 안 했을 때 기본 프로필 이미지 //추후 mypage.png로 바꾸기-->
+    <!--
+    <img src="/static/img/marker_red.png" width="60" />
+    {% endif %}
 
-
+    <h2>Taxi Driver Status:</h2>
+    <form method="post" action="{% url 'profiles:my_page' %}">
+        {% csrf_token %}
+        <input type="checkbox" name="is_taxi_driver" {% if user_profile.is_taxi_driver %}checked{% endif %}>
+        <label for="is_taxi_driver">기사님 입니다.</label>
+        <button type="submit">Save</button>
+    </form>-->
 </body>
 </html>
 
