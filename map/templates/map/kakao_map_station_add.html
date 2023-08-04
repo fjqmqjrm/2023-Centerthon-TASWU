@@ -155,17 +155,19 @@
         <!-- 하단바 -->
         <div class="down-bar">
 
-            <p class="search-text1" style="color: #6A7EEC; font-weight: bolder;">내 위치</p>
+            <p class="search-text1" style="color: #6A7EEC; font-weight: bolder;">선택한 위치</p>
             <!--<input class="search1" ></input>-->
             <div id="addressInfo" class="search1" style="margin-top: 70px; margin-left: 30px;" ></div>
             <!--<input class="search1" style="margin-top: 70px; margin-left: 30px;"></input>-->
 
+
+            <p class="search-text2" style="color: #6A7EEC; font-weight: bolder;">해당위치에 택시승강장을 등록할까요?</p>
             <!-- "택시승강장 등록하기" 링크에 주소 정보를 전달 -->
-            <a class="current-location" href="{% url 'map:station_add_turn' %}"  >택시승강장 등록하기</a>
+            <a class="current-location" href="#" onclick="registerTaxiStation();">택시승강장 등록하기(진짜 등록되는 버튼)</a>
 
-            <p class="search-text2" style="color: #6A7EEC; font-weight: bolder;">내 근처에 택시승강장이 없어요!</p>
 
-            <button class="call-button">이 위치로 택시 호출하기</button>
+
+
         </div>
         <div id="map"
             style="width: 390px; height: 415px; position:absolute; z-index: 1; top: 30%; right: -195px; transform: translate(-50%, -50%);">
