@@ -160,12 +160,22 @@
         <div class="top-bar">
             <p class="user" style="color: #ffffff; font-weight: bolder; font-size: large;">{{ user.username }}님</p>
 
+            {% csrf_token %} {% if user.UserProfile.image %}
+            <img class="profile" src="{{ user.UserProfile.image.url }}"/>
+            {% else %}
+            <!-- 프로필 사진 등록 안 했을 때 기본 프로필 이미지 //추후 mypage.png로 바꾸기--> 
             <img class="profile" src="{% static 'img/profile.png' %}">
+            {% endif %}
 
+
+            {% csrf_token %} {% if user.UserProfile.phone_number %}
+            <div class="certification" style="font-size:3px; font-weight: bold;" >{{ user.UserProfile.phone_number }}
+            </div>
+            {% else %} <!-- 전화번호 등록 안 했을 때 인증 멘트-->
             <button class="certification" style="font-size:3px; font-weight: bold;" >전화번호를 인증해주세요
                 <img style="height: 9px; width: 4px;" src="{% static 'img/numCertificate.png' %}">
             </button>
-
+            {% endif %}
             <button class="button1">
                 <img style="height: 31px; width: 31px; font-weight: bold;" src="{% static 'img/mp-map.png' %}"><br>메인지도</button>
 
@@ -208,18 +218,7 @@
         </div>
     </div>
   <!--
-    <h1>마이페이지</h1>
-    <p>안녕하세요, {{ user.username }}님</p>
-    <p>{{ user.email }}</p>
-    <p>{{ UserProfile.phone_number }}</p> 
-  
-    {% csrf_token %} {% if UserProfile.image %}
-    <img src="{{ UserProfile.image.url }}" width="60" />
-    {% else %} -->
-    <!-- 프로필 사진 등록 안 했을 때 기본 프로필 이미지 //추후 mypage.png로 바꾸기-->
-    <!--
-    <img src="/static/img/marker_red.png" width="60" />
-    {% endif %}
+
 
     <h2>Taxi Driver Status:</h2>
     <form method="post" action="{% url 'profiles:my_page' %}">
