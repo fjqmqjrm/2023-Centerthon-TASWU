@@ -8,12 +8,12 @@
     <style>
         body {
             background-color: #e9e9e9;
-            overflow: hidden;
+            overflow: scroll;
         }
 
         #iphone-frame {
-            width: 375px;
-            height: 667px;
+            width: 390px;
+            height: 844px;
             background: #F8F8F8;
             margin: 50px auto;
             position: relative;
@@ -22,8 +22,8 @@
         }
 
         .top-bar{
-            width: 375px;
-            height: 300px;
+            width: 390px;
+            height: 400px;
             background:#6A7EEC;
             border-radius: 0 0 23px 23px;
             display: flex;
@@ -36,8 +36,8 @@
             font-size: x-large;
         }
 
-        .call-button{
-            width: 374px;
+        .before-button{
+            width: 390px;
             height: 51px;
             background: #6A7EEC;
             border-radius: 10px;
@@ -48,15 +48,15 @@
             align-items: center;
             border-style: none;
             position: absolute;
-            top: 96%;
-            right: -186px;
+            top: 97%;
+            right: -195px;
             transform: translate(-50%, -50%);
             border-radius: 23px 23px 0 0;
         }
 
         .user{
             position: absolute;
-            top: 3%;
+            top: 4%;
             right: 240px;
             transform: translate(-50%, -50%);
         }
@@ -75,7 +75,7 @@
             width:144px;
             height:28px;
             position: absolute;
-            top: 15%;
+            top: 16%;
             right: 135px;
             transform: translate(-50%, -50%);
             background-color: rgba(255, 255, 255, 0.5);
@@ -85,11 +85,11 @@
         }
 
         .button1{
-            width:103px;
-            height:72px;
+            width:106px;
+            height:75px;
             position: absolute;
             top: 25%;
-            right: 200px;
+            right: 210px;
             transform: translate(-50%, -50%);
             background-color: rgba(255, 255, 255, 0.25);
             box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
@@ -98,11 +98,11 @@
         }
 
         .button2{
-            width:103px;
-            height:72px;
+            width:106px;
+            height:75px;
             position: absolute;
             top: 25%;
-            right: 80px;
+            right: 90px;
             transform: translate(-50%, -50%);
             background-color: rgba(255, 255, 255, 0.25);
             box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
@@ -111,11 +111,11 @@
         }
 
         .button3{
-            width:103px;
-            height:72px;
+            width:106px;
+            height:75px;
             position: absolute;
             top: 25%;
-            right: -40px;
+            right: -30px;
             transform: translate(-50%, -50%);
             background-color: rgba(255, 255, 255, 0.25);
             box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
@@ -125,12 +125,12 @@
 
         .card{
             width: 310px;
-            height: 180px;
+            height: 220px;
             background-color: #ffffff;
             border-radius: 20px;
             position: absolute;
             top: 46%;
-            right: -120px;
+            right: -115px;
             transform: translate(-50%, -50%);
             box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
             border-style: none;
@@ -139,12 +139,12 @@
 
         .reg{
             width: 310px;
-            height: 180px;
+            height: 220px;
             background-color: #ffffff;
             border-radius: 20px;
             position: absolute;
             top: 76%;
-            right: -120px;
+            right: -115px;
             transform: translate(-50%, -50%);
             box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
             border-style: none;
@@ -189,7 +189,7 @@
         <!-- 하단바 -->
         <div class="down-bar">
 
-            <button class="call-button">
+            <button class="before-button">
             <img style="height: 17; width: 10px;" src="{% static 'img/before.png' %}">이전</button>
 
             <button class="card">
@@ -207,7 +207,7 @@
                 <p style="font-weight: bold; text-align: center; position: relative; top: 4%;">자주가는 장소를 등록하고<br> 쉽게 예약을 요청하세요!</p>
             </button>
 
-            <form style="position: absolute; top: 8.5%; right: 175px;" method="post" action="{% url 'profiles:my_page' %}">
+            <form style="position: absolute; top: 10%; right: 175px;" method="post" action="{% url 'profiles:my_page' %}">
                 {% csrf_token %}
                 <input type="checkbox" name="is_taxi_driver" {% if user_profile.is_taxi_driver %}checked{% endif %}>
                 <label for="is_taxi_driver">기사님 입니다.</label>
