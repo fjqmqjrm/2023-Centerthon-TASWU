@@ -1,13 +1,105 @@
 <!DOCTYPE html>
 <html>
+{% load static %}
 <head>
     <meta charset="utf-8">
     <title>stt로 검색하기</title>
     <style>
+
+        body {
+            background-color: #e9e9e9;
+            overflow: scroll;
+        }
+
+        #iphone-frame {
+            width: 390px;
+            height: 844px;
+            background: #c0c0c0;
+            margin: 50px auto;
+            position: relative;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .top-bar{
+            width: 390px;
+            height: 74px;
+            background:#6A7EEC;
+            border-radius: 0 0 23px 23px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-text{
+            top: 100px;
+            font-weight: bolder;
+            font-size: x-large;
+        }
+
+        .map-img{
+            width: 23px;
+            height: 31px;
+        }
+
+        .map-button{
+            border: none;
+            background-color: #6A7EEC;
+        }
+
+        .logo-img{
+            width: 29px;
+            height: 29px;
+        }
+
+        .logo-button{
+            border: none;
+            background-color: #6A7EEC;
+        }
+
+        .down-bar{
+            width: 390px;
+            height: 400px;
+            margin-top: 370px;
+            background:#ffffff;
+            border-radius: 23px 23px 0 0;
+            position: relative;
+            z-index: 2;
+        }
+
+
+        .search-text1{
+            top: 5%;
+            right: 138px;
+            position: absolute;
+            transform: translate(-50%, -50%);
+        }
+
+        .search1{
+            width: 326px;
+            height: 45px;
+            background:#F9F9F9;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            border-style: none;
+            position: absolute;
+            top: 20%;
+            right: -140px;
+            transform: translate(-50%, -50%);
+        }
+
+        .search-text2{
+            top: 29%;
+            right: 138px;
+            position: absolute;
+            transform: translate(-50%, -50%);
+        }
+
         .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
         .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
         .map_wrap {position:relative;width:100%;height:500px;}
-        #menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
+        #menu_wrap {position:relative;top:150px;left:0;bottom:0;width:250px;height:200px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
         .bg_white {background:#fff;}
         #menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
         #menu_wrap .option{text-align: center;}
@@ -40,6 +132,7 @@
         #pagination {margin:10px auto;text-align: center;}
         #pagination a {display:inline-block;margin-right:10px;}
         #pagination .on {font-weight: bold; cursor: default;color:#777;}
+
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
@@ -75,16 +168,45 @@
     </script>
 </head>
 <body>
-    <div class="map_wrap">
-        <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 
-        <div id="menu_wrap" class="bg_white">
+    <div id="iphone-frame">
+
+        <!-- 상단바 -->
+        <div class="top-bar">&nbsp;&nbsp;&nbsp;
+            <p class="logo-text"style="color: #ffffff;">PICK</p>
+            <p class="logo-text" style="color: #FFF176;">XI</p>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;
+
+            <button class="map-button">
+            <img class="map-img" src="{% static 'img/map.png' %}">
+            </button>&nbsp;
+           
+
+            <button class="logo-button style=display: flex; justify-content: center; align-items: center;">
+                <a href="{% url 'profiles:my_page' %}"><img class="logo-img" src="{% static 'img/mypage.png' %}"></a>
+            </button>
+
+        </div>
+        
+        <!-- 하단바 -->
+        <div class="down-bar">
+
+        <p class="search-text1" style="color: #6A7EEC; font-weight: bolder;">내 근처 택시승강장</p>
+        <input class="search1"></input>
+        
+        
+        <p class="search-text2" style="color: #6A7EEC; font-weight: bolder;">어디로 안내할까요?</p>
+
+         <div id="menu_wrap" class="bg_white" style="width:390px;">
             <div class="option">
                 <div>
                     <form onsubmit="searchPlaces(); return false;">
                         <input type="text" placeholder="원하는 장소를 입력하세요" id="keyword" size="20" value="서울여대">
-                        <button onclick="startListening()">STT</button>
-                        <button type="submit">검색하기</button>
+                        <button style="border-style: none; background-color: #6A7EEC; color: #ffffff; border-radius: 3px;" onclick="startListening()">음성기능</button>
+                        <button style="border-style: none; background-color: #6A7EEC; color: #ffffff; border-radius: 3px;" type="submit">검색하기</button>
                     </form>
                 </div>
             </div>
@@ -92,7 +214,16 @@
             <ul id="placesList"></ul>
             <div id="pagination"></div>
         </div>
+
+        </div>
+    
+
+    <div class="map_wrap">
+        <div id="map" style="width: 390px; height: 465px; position: absolute; z-index: 1; top: -120%; right: -195px; transform: translate(-50%, -50%); overflow:hidden;"></div>
+
+
     </div>
+
 
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=df9fbbf360a12deca34689f55c0a89ec&libraries=services"></script>
@@ -315,5 +446,6 @@
             }
         }
     </script>
+    </div>
 </body>
 </html>
