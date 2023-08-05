@@ -2,12 +2,98 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PICKXI 메인로그인</title>
-</head>
-<body>
-<p>PICKXI로그인</p>
-{% load socialaccount %}
+    <style>
 
-<button type="button" onclick="location.href = '{% provider_login_url 'kakao' %}'"><img class = "kakao" src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" alt="" ></button>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap');
+
+
+
+        body {
+            background-color: #a4a4a4;
+            overflow: scroll;
+            margin: 0px;
+        }
+
+        #iphone-frame {
+        width: 390px;
+        height: 844px;
+        background: #6A7EEC;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        }
+
+        .id {
+            border-radius: 10px;
+            width: 230px;
+            height: 45px;
+            border: none;
+            box-shadow: 2px 2px 5px 2px rgba(105, 105, 105, 0.3);
+            font-size: 17px;
+            margin-bottom: 20px;
+        }
+
+        .pw {
+            border-radius: 10px;
+            width: 230px;
+            height: 45px;
+            border: none;
+            box-shadow: 2px 2px 5px 2px rgba(105, 105, 105, 0.3);
+            font-size: 17px;
+            margin-bottom: 40px;
+        }
+
+        input::placeholder {
+            color: #bfbfbf;
+        }
+
+        .btn-login {
+            border-radius: 10px;
+            width: 230px;
+            height: 45px;
+            border: none;
+            box-shadow: 2px 2px 5px 2px rgba(105, 105, 105, 0.3);
+            font-size: 17px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            background-color: #6A7EEC;
+            color: #ffffff;
+        }
+
+        .btn-login:hover {
+            background-color: #7186ff;
+        }
+
+        .btn-signup {
+            color: #bfbfbf;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            background-color: transparent;
+            margin-top: 20px;
+        }
+
+        .btn-kakao {
+            border: none;
+            background-color: transparent;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="iphone-frame">
+
+        <img src="static/img/main.png" style="margin-bottom: 20px;">
+
+        <p style="font-weight: bold; color: white;">로그인 후 PICKXI 이용하기</p>
+
+        {% load socialaccount %}
+        <button type="button" class="btn-kakao" onclick="location.href = '{% provider_login_url 'kakao' %}'"><img class = "kakao" src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" alt="" ></button>
+    </div>
+
 </body>
 </html>
