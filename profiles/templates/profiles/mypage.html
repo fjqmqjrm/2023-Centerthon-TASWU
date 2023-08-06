@@ -164,21 +164,27 @@
             {% csrf_token %} {% if user.UserProfile.image %}
             <img class="profile" src="{{ user.UserProfile.image.url }}"/>
             {% else %}
-            <!-- 프로필 사진 등록 안 했을 때 기본 프로필 이미지 //추후 mypage.png로 바꾸기--> 
+            <!-- 프로필 사진 등록 안 했을 때 기본 프로필 이미지 --> 
             <img class="profile" src="{% static 'img/profile.png' %}">
             {% endif %}
 
 
-            {% csrf_token %} {% if user.UserProfile.phone_number %}
-            <div class="certification" style="font-size:3px; font-weight: bold;" >{{ user.UserProfile.phone_number }}
+            {% csrf_token %} 
+            {% if user_profile.phone_number %}
+            <div class="certification" style="font-size:3px; font-weight: bold;">
+                {{ user_profile.phone_number }}
             </div>
             {% else %} <!-- 전화번호 등록 안 했을 때 인증 멘트-->
             <button class="certification" style="font-size:3px; font-weight: bold;" >전화번호를 인증해주세요
                 <img style="height: 9px; width: 4px;" src="{% static 'img/numCertificate.png' %}">
             </button>
             {% endif %}
-            <button class="button1">
-                <img style="height: 31px; width: 31px; font-weight: bold;" src="{% static 'img/mp-map.png' %}"><br>메인지도</button>
+            
+            <a href="{% url 'map:map_main' %}">
+                <button class="button1">
+                    <img style="height: 31px; width: 31px; font-weight: bold;" src="{% static 'img/mp-map.png' %}"><br>메인지도
+                </button>
+            </a>
 
             <button class="button2">
                 <img style="height: 30px; width: 30px; font-weight: bold;" src="{% static 'img/coin.png' %}"><br>코인</button>
@@ -190,8 +196,11 @@
         <!-- 하단바 -->
         <div class="down-bar">
 
-            <button class="before-button">
-            <img style="height: 17; width: 10px;" src="{% static 'img/before.png' %}">이전</button>
+            <a href="{% url 'map:map_main' %}" style="text-decoration: none; color:#ffffff">
+                <button class="before-button">
+                    <img style="height: 17; width: 10px;" src="{% static 'img/before.png' %}"> 이전
+                </button>
+            </a>
 
             <button class="card">
                 <p style="font-weight: bold; position: absolute; top: 2%; right: 210px;">결제 수단 등록</p>
@@ -203,10 +212,24 @@
 
             <button class="reg">
                 <p style="font-weight: bold; position: absolute; top: 2%; right: 217px;">내 장소 등록</p>
-                <img style="height: 24px; width: 24px; position: absolute; top: 10%; right: 17px;" src="{% static 'img/plus.png' %}">
-                <img style="height: 79px; width: 72px; position: relative; top: 12%;" src="{% static 'img/place.png' %}">
-                <p style="font-weight: bold; text-align: center; position: relative; top: 4%;">자주가는 장소를 등록하고<br> 쉽게 예약을 요청하세요!</p>
+                <a href="{% url 'map:map_search' %}">
+                    <img style="height: 24px; width: 24px; position: absolute; top: 10%; right: 17px;" src="{% static 'img/plus.png' %}">
+                </a>
+                {% if stations %}
+                    <ul>
+                        {% for station in stations %}
+                            <li>
+                                <p>{{ station.name }}</p>
+                                <p>{{ station.address }}</p>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <img style="height: 79px; width: 72px; position: relative; top: 12%;" src="{% static 'img/place.png' %}">
+                    <p style="font-weight: bold; text-align: center; position: relative; top: 4%;">자주가는 장소를 등록하고<br> 쉽게 예약을 요청하세요!</p>
+                {% endif %}
             </button>
+
 
             <form style="position: absolute; top: 10%; right: 175px;" method="post" action="{% url 'profiles:my_page' %}">
                 {% csrf_token %}
