@@ -179,8 +179,12 @@
                 <img style="height: 9px; width: 4px;" src="{% static 'img/numCertificate.png' %}">
             </button>
             {% endif %}
-            <button class="button1">
-                <img style="height: 31px; width: 31px; font-weight: bold;" src="{% static 'img/mp-map.png' %}"><br>메인지도</button>
+            
+            <a href="{% url 'map:map_main' %}">
+                <button class="button1">
+                    <img style="height: 31px; width: 31px; font-weight: bold;" src="{% static 'img/mp-map.png' %}"><br>메인지도
+                </button>
+            </a>
 
             <button class="button2">
                 <img style="height: 30px; width: 30px; font-weight: bold;" src="{% static 'img/coin.png' %}"><br>코인</button>
