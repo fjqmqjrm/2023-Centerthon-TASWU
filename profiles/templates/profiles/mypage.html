@@ -164,7 +164,7 @@
             {% csrf_token %} {% if user.UserProfile.image %}
             <img class="profile" src="{{ user.UserProfile.image.url }}"/>
             {% else %}
-            <!-- 프로필 사진 등록 안 했을 때 기본 프로필 이미지 //추후 mypage.png로 바꾸기--> 
+            <!-- 프로필 사진 등록 안 했을 때 기본 프로필 이미지 --> 
             <img class="profile" src="{% static 'img/profile.png' %}">
             {% endif %}
 
