@@ -208,7 +208,9 @@
 
             <button class="reg">
                 <p style="font-weight: bold; position: absolute; top: 2%; right: 217px;">내 장소 등록</p>
-                <img style="height: 24px; width: 24px; position: absolute; top: 10%; right: 17px;" src="{% static 'img/plus.png' %}">
+                <a href="{% url 'map:map_search' %}">
+                    <img style="height: 24px; width: 24px; position: absolute; top: 10%; right: 17px;" src="{% static 'img/plus.png' %}">
+                </a>
                 {% if stations %}
                     <ul>
                         {% for station in stations %}
