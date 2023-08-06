@@ -3,6 +3,8 @@ from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from .forms import TaxiDriverForm
+from .models import UserProfile
+
 # Create your views here.
 def start_login(request):
     return render(request, 'profiles/mainlogin.html')
@@ -13,8 +15,8 @@ def custom_logout(request):
 
 @login_required
 def my_page(request):
-    user_profile = request.user.userprofile
-
+    user_profile = UserProfile.objects.get(user=request.user)
+        
     if request.method == 'POST':
         form = TaxiDriverForm(request.POST, instance=user_profile)
         if form.is_valid():
@@ -23,13 +25,14 @@ def my_page(request):
     else:
         form = TaxiDriverForm(instance=user_profile)
         
-    if 'image' in request.FILES:
-        image = request.FILES['image']
-
+    phone_number = user_profile.phone_number
+        
     context = {
         'user': request.user,
         'user_profile': user_profile,
         'form': form,
+        'phone_number': phone_number,
+        
     }
     return render(request, 'profiles/mypage.html', context)
 

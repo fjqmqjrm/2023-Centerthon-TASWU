@@ -169,8 +169,10 @@
             {% endif %}
 
 
-            {% csrf_token %} {% if user.UserProfile.phone_number %}
-            <div class="certification" style="font-size:3px; font-weight: bold;" >{{ user.UserProfile.phone_number }}
+            {% csrf_token %} 
+            {% if user_profile.phone_number %}
+            <div class="certification" style="font-size:3px; font-weight: bold;">
+                {{ user_profile.phone_number }}
             </div>
             {% else %} <!-- 전화번호 등록 안 했을 때 인증 멘트-->
             <button class="certification" style="font-size:3px; font-weight: bold;" >전화번호를 인증해주세요
