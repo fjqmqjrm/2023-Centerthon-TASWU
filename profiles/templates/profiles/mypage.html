@@ -190,8 +190,11 @@
         <!-- 하단바 -->
         <div class="down-bar">
 
-            <button class="before-button">
-            <img style="height: 17; width: 10px;" src="{% static 'img/before.png' %}">이전</button>
+            <a href="{% url 'map:map_main' %}" style="text-decoration: none; color:#ffffff">
+                <button class="before-button">
+                    <img style="height: 17; width: 10px;" src="{% static 'img/before.png' %}"> 이전
+                </button>
+            </a>
 
             <button class="card">
                 <p style="font-weight: bold; position: absolute; top: 2%; right: 210px;">결제 수단 등록</p>
