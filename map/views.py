@@ -9,12 +9,15 @@ from django.contrib.auth.decorators import login_required, permission_required
 
 def map_main(request):
     user_profile = None
+    user_stations = []
     if request.user.is_authenticated and hasattr(request.user, 'userprofile'):
         user_profile = request.user.userprofile
+        user_stations = user_profile.station_set.all()  # 현재 사용자의 연결된 Station들을 가져옴
 
     context = {
         'user': request.user,
         'user_profile': user_profile,
+        'user_stations': user_stations,
     }
     return render(request, 'map/kakao_map.html', context)
 
