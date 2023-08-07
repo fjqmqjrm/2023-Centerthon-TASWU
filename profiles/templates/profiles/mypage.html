@@ -171,7 +171,7 @@
 
             {% csrf_token %} 
             {% if user_profile.phone_number %}
-            <div class="certification" style="font-size:3px; font-weight: bold;">
+            <div class="certification" style="font-size:3px; font-weight: bold; display: flex; justify-content: center; align-items: center;">
                 {{ user_profile.phone_number }}
             </div>
             {% else %} <!-- 전화번호 등록 안 했을 때 인증 멘트-->
@@ -216,8 +216,8 @@
                     <img style="height: 24px; width: 24px; position: absolute; top: 10%; right: 17px;" src="{% static 'img/plus.png' %}">
                 </a>
                 {% if stations %}
-                    <ul>
-                        {% for station in stations %}
+                    <ul class="station-list" style="margin-top: 40px">
+                        {% for station in stations|slice:":3" %}
                             <li>
                                 <p>{{ station.name }}</p>
                                 <p>{{ station.address }}</p>
@@ -252,5 +252,8 @@
         <button type="submit">Save</button>
     </form>-->
 </body>
+
+
+
 </html>
 
