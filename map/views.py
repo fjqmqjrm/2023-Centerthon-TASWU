@@ -19,7 +19,10 @@ def map_main(request):
         'user_profile': user_profile,
         'user_stations': user_stations,
     }
-    return render(request, 'map/kakao_map.html', context)
+    if request.user.userprofile.is_taxi_driver:  # 현재 사용자의 is_taxi_driver 값을 확인
+        return render(request, 'map/taxi_driver_page.html', context)
+    else:
+        return render(request, 'map/kakao_map.html', context)
 
 
 
