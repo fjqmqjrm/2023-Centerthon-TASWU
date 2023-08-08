@@ -52,4 +52,11 @@ def station_add(request):
 
 @login_required
 def map_call(request):
+    if request.method == 'POST':
+        address = request.POST.get('address')
+        user_profile = request.user.userprofile
+        
+        # Update the user's current_location field in UserProfile model
+        user_profile.current_location = address
+        user_profile.save()
     return render(request, 'map/map_call.html')
