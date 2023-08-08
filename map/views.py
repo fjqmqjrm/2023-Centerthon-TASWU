@@ -46,9 +46,10 @@ def station_add_turn(request):
 def station_add(request):
     if request.method == 'POST':
         address = request.POST.get('address')
+        name = request.POST.get('name')
         UserProfile  = request.user.userprofile
         # Station 객체 생성과 저장
-        new_station = Station(address=address, name="승강장 이름을 설정해주세요.", UserProfile = UserProfile )
+        new_station = Station(address=address, name=name, UserProfile = UserProfile )
         new_station.save()
 
     return render(request, 'map/kakao_map.html')
