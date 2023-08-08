@@ -37,3 +37,7 @@ def my_page(request):
     }
     return render(request, 'profiles/mypage.html', context)
 
+@login_required
+def call_list(request):
+    return render(request, 'profiles/call_list.html')
+
