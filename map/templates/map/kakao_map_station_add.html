@@ -204,21 +204,23 @@
                 <div style="margin-bottom: 20px;">
                     <div style="display:flex; justify-content: space-between; margin-right: 20px;">
                         <div>
-                            <p class="search-text2" style="color: #FF6868; font-weight: bolder;">위치 검색하기</p>
+                            <p class="search-text2" style="color: #FF6868; font-weight: bolder;">위치 검색</p>
+                            <input type="text" placeholder="원하는 장소를 입력하세요" id="keyword" size="20">
+                            <div id="addressInfo" class="search1" style="margin-top: 20px; margin-left: 30px;" ></div>
                         </div>
                         <div style="padding-top:15px;">
                             <button class="btn-speak">음성</button>
                             <button class="btn-search">검색</button>
                         </div>
                     </div>
-                    <div class="search2" style="margin-top: 20px; margin-left: 30px;" ></div>
                 </div>
 
                 <div style="margin-bottom: 20px;">
-                    <p class="search-text1" style="color: #FF6868; font-weight: bolder;">선택한 위치</p>
-                    <!--<input class="search1" ></input>-->
-                    <div id="addressInfo" class="search1" style="margin-top: 20px; margin-left: 30px;" ></div>
-                    <!--<input class="search1" style="margin-top: 70px; margin-left: 30px;"></input>-->
+                    <p class="search-text1" style="color: #FF6868; font-weight: bolder;">승강장 이름</p>
+                    <input type="text" placeholder="승강장 이름을 등록하세요" id="stationName" size="20">
+                </body>
+            </html>
+            
                 </div>
 
                 <div>
@@ -297,6 +299,8 @@
             var addressInfoDiv = document.getElementById('addressInfo');
             var address = addressInfoDiv.innerText;
 
+            var name = document.getElementById('stationName').value;
+
             var form = document.createElement('form');
             form.method = 'post';
             form.action = "{% url 'map:station_add' %}";
@@ -312,12 +316,19 @@
             addressField.name = 'address';
             addressField.value = address;
 
+            var nameField = document.createElement('input');
+            nameField.type = 'hidden';
+            nameField.name = 'name';
+            nameField.value = name;
+
             form.appendChild(csrfToken);
-            form.appendChild(addressField);
+            form.appendChild(addressField);            
+            form.appendChild(nameField);
 
             document.body.appendChild(form);
             form.submit();
         }
+
     </script>
     </div>
 </body>
