@@ -50,3 +50,6 @@ def station_add(request):
 
     return render(request, 'map/kakao_map.html')
 
+@login_required
+def map_call(request):
+    return render(request, 'map/map_call.html')
