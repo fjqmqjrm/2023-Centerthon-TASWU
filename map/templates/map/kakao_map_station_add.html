@@ -4,6 +4,7 @@
 
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kakao Map API 지도</title>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=df9fbbf360a12deca34689f55c0a89ec&libraries=services"></script>
 
@@ -17,27 +18,27 @@
         #iphone-frame {
             width: 390px;
             height: 844px;
-            background: #c0c0c0;
-            justify-content: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            position: relative;
         }
 
         .top-bar {
             width: 390px;
             height: 74px;
-            background: #6A7EEC;
+            background:#6A7EEC;
             border-radius: 0 0 23px 23px;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            position: absolute;
-            z-index: 2;
         }
 
         .logo-text {
             top: 100px;
             font-weight: bolder;
             font-size: x-large;
+
         }
 
         .map-img {
@@ -50,6 +51,15 @@
             background-color: #6A7EEC;
         }
 
+        #map {
+            position: absolute;
+            top: 50px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            }
+
         .logo-img {
             width: 29px;
             height: 29px;
@@ -61,19 +71,14 @@
         }
 
         .down-bar {
+            background: #ffffff;
             width: 390px;
             height: 400px;
-            margin-top: 443.5px;
-            background: #ffffff;
             border-radius: 23px 23px 0 0;
-            position: absolute;
-            z-index: 2;
         }
 
 
         .search-text1 {
-            padding-left: 22px;
-
         }
 
         .search1 {
@@ -101,8 +106,6 @@
         }
 
         .current-location {
-            width: 329px;
-            height: 51px;
             background: #FF6868;
             box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
             border-radius: 10px;
@@ -113,29 +116,11 @@
             justify-content: center;
             align-items: center;
             border-style: none;
-            margin-left: 30px;
+            margin: 25px;
             text-decoration: none;
-
+            padding: 15px 10px 15px 10px;
         }
 
-
-        .call-button {
-            width: 329px;
-            height: 51px;
-            background: #6A7EEC;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
-            border-radius: 10px;
-            color: #ffffff;
-            font-weight: bold;
-            font-size: large;
-            text-align: center;
-            align-items: center;
-            border-style: none;
-            position: absolute;
-            top: 82%;
-            right: -140px;
-            transform: translate(-50%, -50%);
-        }
 
         .btn-speak {
             background-color: white;
@@ -156,7 +141,7 @@
 
 
         .btn-search {
-             background-color: white;
+            background-color: white;
             border: none;
             box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
             color:  #FF6868;
@@ -178,24 +163,24 @@
 <body>
     <div id="iphone-frame">
         <!-- 상단바 -->
-        <div class="top-bar">&nbsp;&nbsp;&nbsp;
-            <p class="logo-text" style="color: #ffffff;">PICK</p>
-            <p class="logo-text" style="color: #FFF176;">XI</p>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;
+        <div class="top-bar">
+            <div style="display:flex; margin-left: 20px;">
+                <p class="logo-text" style="color: #ffffff;">PICK</p>
+                <p class="logo-text" style="color: #FFF176;">XI</p>
+            </div>
 
-            <button class="map-button">
-                <img class="map-img" src="{% static 'img/map.png' %}">
-            </button>&nbsp;
+            <div style="margin-right: 20px;">
+                <button class="map-button">
+                    <img class="map-img" src="{% static 'img/map.png' %}">
+                </button>&nbsp;
+                <button class="logo-button style=display: flex; justify-content: center; align-items: center;">
+                    <a href="{% url 'profiles:my_page' %}"><img class="logo-img" src="{% static 'img/mypage.png' %}"></a>
+                </button>
+            </div>
+        </div>
 
-
-            <button class="logo-button style=display: flex; justify-content: center; align-items: center;">
-                <a href="{% url 'profiles:my_page' %}"><img class="logo-img" src="{% static 'img/mypage.png' %}"></a>
-            </button>
-
-
+        <div id="map"
+            style="width: 390px; height: 415px;">
         </div>
 
         <!-- 하단바 -->
@@ -215,7 +200,7 @@
                 </div>
 
                 <div style="margin-bottom: 20px;">
-                    <p class="search-text1" style="color: #FF6868; font-weight: bolder;">선택한 위치</p>
+                    <p class="search-text1" style="color: #FF6868; margin-left: 20px; font-weight: bolder;">선택한 위치</p>
                     <!--<input class="search1" ></input>-->
                     <div id="addressInfo" class="search1" style="margin-top: 20px; margin-left: 30px;" ></div>
                     <!--<input class="search1" style="margin-top: 70px; margin-left: 30px;"></input>-->
@@ -228,12 +213,8 @@
                 </div>
             </div>
 
-
-
         </div>
-        <div id="map"
-            style="width: 390px; height: 415px; position:absolute; z-index: 1; top: 30%; right: -195px; transform: translate(-50%, -50%);">
-        </div>
+
 
       <script>
         document.addEventListener("DOMContentLoaded", function() {
