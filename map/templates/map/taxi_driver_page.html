@@ -4,7 +4,6 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kakao Map API 지도</title>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=df9fbbf360a12deca34689f55c0a89ec&libraries=services"></script>
 
@@ -166,7 +165,7 @@
 
             <p class="search-text1" style="color: #6A7EEC; font-weight: bolder;">내 위치</p>
 
-            <button class="current-location" ><a style="text-decoration: none; color: #ffffff;" href="{% url 'map:map_call' %}">이 위치로 택시 호출하기</a></button>
+            <button class="current-location" ><a style="text-decoration: none; color: #ffffff;" href="{% url 'map:map_call' %}">택시드라이버 페이지</a></button>
 
             <!--<input class="search1" ></input>-->
             <div id="addressInfo" class="search1" style="margin-top: 70px; margin-left: 30px;" ></div>
@@ -175,12 +174,15 @@
 
 
             <p class="search-text2" style="color: #6A7EEC; font-weight: bolder;">내 근처에 택시승강장이 없어요!</p>
-
             <!-- "택시승강장 등록하기" 버튼에 주소 정보를 전달 -->
-            <button class="reg-button"><a style="text-decoration: none; color: #ffffff;"
-                 href="{% url 'map:station_add_turn' %}">택시승강장 등록하기</a></button>
-
+<!--            <button class="reg-button"><a style="text-decoration: none; color: #ffffff;"-->
+<!--                 href="{% url 'map:station_add_turn' %}">택시승강장 등록하기</a></button>-->
+            {% csrf_token %}
+            {% if user.userprofile.is_taxi_driver %}
+                 <button class="current-location" ><a style="text-decoration: none; color: #ffffff;" href="{% url 'profiles:call_list' %}">택시 호출 리스트 페이지</a></button>
+                {% endif %}
         </div>
+
         <div id="map"
             style="width: 390px; height: 415px; position:absolute; z-index: 1; top: 30%; right: -195px; transform: translate(-50%, -50%);">
         </div>
