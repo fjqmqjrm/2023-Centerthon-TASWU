@@ -41,3 +41,12 @@ def my_page(request):
 def call_list(request):
     return render(request, 'profiles/call_list.html')
 
+@login_required
+def update_profile_image(request):
+    if request.method == 'POST' and request.FILES.get('image'):
+        user_profile = UserProfile.objects.get(user=request.user)
+        user_profile.image = request.FILES['image']
+        user_profile.save()
+
+    return redirect('profiles:my_page')
+
