@@ -177,9 +177,11 @@
                 {{ user_profile.phone_number }}
             </div>
             {% else %} <!-- 전화번호 등록 안 했을 때 인증 멘트-->
-            <button class="certification" style="font-size:3px; font-weight: bold;" >전화번호를 인증해주세요
+            <a href="{% url 'profiles:phone_number' %}">
+            <button class="certification" style="font-size:3px; font-weight: bold;" >전화번호를 등록해주세요
                 <img style="height: 9px; width: 4px;" src="{% static 'img/numCertificate.png' %}">
             </button>
+            </a>
             {% endif %}
             
             <a href="{% url 'map:map_main' %}">
