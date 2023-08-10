@@ -43,5 +43,11 @@ def call_list(request):
 
 @login_required
 def phone_number(request):
+    if request.method == 'POST':
+        address = request.POST.get('address')
+        name = request.POST.get('name')
+        UserProfile  = request.user.userprofile
+        # Station 객체 생성과 저장
+        new_station = Station(address=address, name=name, UserProfile = UserProfile )
+        new_station.save()
     return render(request, 'profiles/phone_number.html')
-
