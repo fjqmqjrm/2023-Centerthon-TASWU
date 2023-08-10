@@ -234,15 +234,19 @@
                         geocoder.addressSearch(station.address, function(result, status) {
                             if (status === kakao.maps.services.Status.OK) {
                                 var stationLatLng = new kakao.maps.LatLng(result[0].y, result[0].x);
-
+                    
                                 var stationMarker = new kakao.maps.Marker({
                                     position: stationLatLng,
                                     map: map,
                                     image: stationMarkerImageObj,
                                     draggable: false // 마커 드래그 비활성화
                                 });
-
+                    
                                 // 마커를 클릭했을 때 정보 창 등을 표시하는 로직 추가 가능
+                                kakao.maps.event.addListener(stationMarker, 'click', function() {
+                                    var addressInfoDiv = document.getElementById('addressInfo');
+                                    addressInfoDiv.innerText = station.address; // 해당 마커의 주소 정보를 표시
+                                });
                             } else {
                                 console.error("주소 변환 오류:", status);
                             }
