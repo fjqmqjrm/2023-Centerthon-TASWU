@@ -41,3 +41,7 @@ def my_page(request):
 def call_list(request):
     return render(request, 'profiles/call_list.html')
 
+@login_required
+def phone_number(request):
+    return render(request, 'profiles/phone_number.html')
+
