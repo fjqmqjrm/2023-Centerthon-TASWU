@@ -162,11 +162,12 @@
         <div class="top-bar">
             <p class="user" style="color: #ffffff; font-weight: bolder; font-size: large;">{{ user.username }}님</p>
 
-            {% csrf_token %} {% if user.UserProfile.image %}
-            <img class="profile" src="{{ user.UserProfile.image.url }}"/>
+            {% csrf_token %} {% if user_profile.image %}
+            <img class="profile" id="profileImage" src="{{ user_profile.image.url }}" onclick="openImageUploader()"/>
+
             {% else %}
             <!-- 프로필 사진 등록 안 했을 때 기본 프로필 이미지 --> 
-            <img class="profile" src="{% static 'img/profile.png' %}">
+            <img class="profile" src="{% static 'img/profile.png' %}" onclick="openImageUploader()"/>
             {% endif %}
 
 
@@ -254,6 +255,42 @@
         <label for="is_taxi_driver">기사님 입니다.</label>
         <button type="submit">Save</button>
     </form>-->
+    <!-- 이미지 업로드용 폼 -->
+    <script>
+        function openImageUploader() {
+            var input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.addEventListener('change', handleImageUpload);
+            input.click();
+        }
+    </script>
+    <!-- 이미지 업로드 처리 로직 -->
+    <script>
+        function handleImageUpload(event) {
+            var file = event.target.files[0];
+            if (file) {
+                var formData = new FormData();
+                formData.append('image', file);
+
+                fetch("{% url 'profiles:update_profile_image' %}", {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        var profileImage = document.getElementById('profileImage');
+                        profileImage.src = data.image_url;
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            }
+        }
+    </script>
 </body>
 
 

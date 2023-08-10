@@ -42,6 +42,15 @@ def call_list(request):
     return render(request, 'profiles/call_list.html')
 
 @login_required
+def update_profile_image(request):
+    if request.method == 'POST' and request.FILES.get('image'):
+        user_profile = UserProfile.objects.get(user=request.user)
+        user_profile.image = request.FILES['image']
+        user_profile.save()
+
+    return redirect('profiles:my_page')
+
+@login_required
 def phone_number(request):   
     user_profile = UserProfile.objects.get(user=request.user)
     
@@ -53,3 +62,4 @@ def phone_number(request):
     else:
         form = phoneNumberForm(instance=user_profile)
     return render(request, 'profiles/phone_number.html')
+
