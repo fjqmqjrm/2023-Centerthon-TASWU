@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
-from .forms import TaxiDriverForm
+from .forms import TaxiDriverForm, phoneNumberForm
 from .models import UserProfile, Station
 
 # Create your views here.
@@ -41,3 +41,15 @@ def my_page(request):
 def call_list(request):
     return render(request, 'profiles/call_list.html')
 
+@login_required
+def phone_number(request):   
+    user_profile = UserProfile.objects.get(user=request.user)
+    
+    if request.method == 'POST':
+        form = phoneNumberForm(request.POST, instance=user_profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profiles:my_page')
+    else:
+        form = phoneNumberForm(instance=user_profile)
+    return render(request, 'profiles/phone_number.html')

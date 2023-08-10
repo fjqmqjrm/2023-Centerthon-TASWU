@@ -1,0 +1,24 @@
+<!-- phone_number.html -->
+<!DOCTYPE html>
+<html>
+    {% load static %}
+    <head>
+        <title>전화번호 등록 페이지</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style></style>
+    </head>
+    <body>
+        <form method="post" action="{% url 'profiles:phone_number' %}">
+            {% csrf_token %}
+            <p class="search-text1" style="color: #FF6868; font-weight: bolder;">전화번호 등록</p>
+            <input type="text" name="phone_number" placeholder="ex) 01012345678"  size="20">
+            <button type="submit">저장</button>
+
+            <a href="{% url 'profiles:my_page' %}" style="text-decoration: none; color:#ffffff">
+                <button class="before-button">
+                    <img style="height: 17; width: 10px;" src="{% static 'img/before.png' %}"> 이전
+                </button>
+            </a>
+        </form>
+    </body>
+</html>
