@@ -190,11 +190,17 @@
                 </button>
             </a>
 
-            <button class="button2">
-                <img style="height: 30px; width: 30px; font-weight: bold;" src="{% static 'img/coin.png' %}"><br>코인</button>
+            <a href="{% url 'profiles:coin' %}">
+                <button class="button2">
+                    <img style="height: 30px; width: 30px; font-weight: bold;" src="{% static 'img/coin.png' %}"><br>코인
+                </button>
+            </a>
 
-            <button class="button3">
-                <img style="height: 33px; width: 33px; font-weight: bold;" src="{% static 'img/review.png' %}"><br>서비스소개</button>
+            <a href="{% url 'profiles:service' %}">
+                <button class="button3">
+                    <img style="height: 33px; width: 33px; font-weight: bold;" src="{% static 'img/review.png' %}"><br>서비스소개
+                </button>
+            </a>
         </div>
         
         <!-- 하단바 -->
