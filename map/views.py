@@ -37,8 +37,16 @@ def map_search(request):
 
 @login_required
 def station_add_turn(request):
+    if request.user.is_authenticated and hasattr(request.user, 'userprofile'):
+        user_profile = request.user.userprofile
+        user_stations = user_profile.station_set.all()  # 현재 사용자의 연결된 Station들을 가져옴
 
-    return render(request, 'map/kakao_map_station_add.html')
+    context = {
+        'user': request.user,
+        'user_profile': user_profile,
+        'user_stations': user_stations,
+    }
+    return render(request, 'map/kakao_map_station_add.html',context)
 
 
 
@@ -52,6 +60,7 @@ def station_add(request):
         new_station = Station(address=address, name= name, UserProfile = UserProfile )
         new_station.save()
 
+
     return redirect('map:map_main')
 
 @login_required
@@ -59,8 +68,10 @@ def map_call(request):
     if request.method == 'POST':
         address = request.POST.get('address')
         user_profile = request.user.userprofile
-        
+
         # Update the user's current_location field in UserProfile model
         user_profile.current_location = address
         user_profile.save()
+
     return render(request, 'map/map_call.html')
+

@@ -257,6 +257,9 @@
                         <input type="text" placeholder="원하는 장소를 입력하세요" id="keyword" size="20" value="서울여대">
                         <button class="btn-speak" onclick="startListening()">음성</button>
                         <button class="btn-search" type="submit">검색</button>
+                        <!-- 새로운 버튼을 추가하고 해당 버튼을 클릭하면 redirectToNewPage 함수 호출 -->
+                        <button class="btn-search" onclick="redirectToNewPage()">선택</button>
+
                     </form>
                 </div>
             </div>
@@ -266,7 +269,7 @@
         </div>
 
         </div>
-    
+
 
     <div class="map_wrap">
         <div id="map" style="width: 390px; height: 465px; position: absolute; z-index: 1; top: -120%; right: -195px; transform: translate(-50%, -50%); overflow:hidden;"></div>
@@ -417,8 +420,18 @@
             el.innerHTML = itemStr;
             el.className = 'item';
 
+            el.onclick = function() {
+                populateInputField(places.address_name);
+            };
+
+
             return el;
         }
+        //주소를 인자로 받아 id가 keyword인 input필드 값으로 설정
+        function populateInputField(address) {
+            document.getElementById('keyword').value = address;
+        }
+
 
         // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
         function addMarker(position, idx, title) {
@@ -495,6 +508,15 @@
                 el.removeChild (el.lastChild);
             }
         }
+        var keywordValue = "{{ keyword|default:'' }}";  // 템플릿 변수를 자바스크립트 변수에 할당
+        var newUrl = "{% url 'map:station_add_turn' %}?keyword=" + encodeURIComponent(keywordValue);
+
+        function redirectToNewPage() {
+            var keyword = document.getElementById("keyword").value;
+            var newUrl = "{% url 'map:station_add_turn' %}?keyword=" + encodeURIComponent(keyword);
+            window.location.href = newUrl;
+        }
+
     </script>
     </div>
 </body>
