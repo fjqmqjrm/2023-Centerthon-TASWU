@@ -69,12 +69,13 @@
             border-radius: 23px 23px 0 0;
             position: absolute;
             z-index: 2;
+            display: flex;
         }
 
 
         .search-text1 {
-            top: 8%;
-            right: 273px;
+            top: 5%;
+            right: 255px;
             position: absolute;
             transform: translate(-50%, -50%);
         }
@@ -87,7 +88,7 @@
             border-radius: 10px;
             border-style: none;
             position: absolute;
-            top: 8%;
+            top: 5%;
             right: -130px;
             transform: translate(-50%, -50%);
         }
@@ -99,23 +100,6 @@
             transform: translate(-50%, -50%);
         }
 
-        .current-location {
-            width: 329px;
-            height: 51px;
-            background: #6A7EEC;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
-            border-radius: 10px;
-            color: #ffffff;
-            font-weight: bold;
-            font-size: large;
-            text-align: center;
-            align-items: center;
-            border-style: none;
-            position: absolute;
-            top: 45%;
-            right: -130px;
-            transform: translate(-50%, -50%);
-        }
 
 
         .reg-button {
@@ -131,10 +115,21 @@
             align-items: center;
             border-style: none;
             position: absolute;
-            top: 82%;
+            top: 85%;
             right: -130px;
             transform: translate(-50%, -50%);
         }
+
+        .taxi {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: absolute;
+            top: 140px;
+            right: 95px;
+        }
+
+
     </style>
 </head>
 
@@ -164,13 +159,16 @@
         <!-- 하단바 -->
         <div class="down-bar">
 
-            <p class="search-text1" style="color: #6A7EEC; font-weight: bolder;">내 위치</p>
-
-            <button class="current-location" >택시가 호출되었습니다.</button>
+            <p class="search-text1" style="color: #6A7EEC; font-weight: bolder;">호출 위치</p>
 
             <!--<input class="search1" ></input>-->
             <div id="addressInfo" class="search1" style="margin-top: 70px; margin-left: 30px;" ></div>
             <!--<input class="search1" style="margin-top: 70px; margin-left: 30px;"></input>-->
+
+            <div class="taxi">
+                <img src="{% static 'img/taxi-icon.png' %}">
+                <p style="color: #6A7EEC; font-weight: bold; font-size: 18px;">택시가 호출되었습니다</p>
+            </div>
 
             <!-- "택시승강장 등록하기" 버튼에 주소 정보를 전달 -->
             <a style="text-decoration: none; color: #ffffff;"

@@ -141,11 +141,11 @@
 
         .reg{
             width: 310px;
-            height: 220px;
+            height: 430px;
             background-color: #ffffff;
             border-radius: 20px;
             position: absolute;
-            top: 76%;
+            top: 59%;
             right: -115px;
             transform: translate(-50%, -50%);
             box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
@@ -163,7 +163,7 @@
             <p class="user" style="color: #ffffff; font-weight: bolder; font-size: large;">{{ user.username }}님</p>
 
             {% csrf_token %} {% if user_profile.image %}
-            <img class="profile" id="profileImage" src="{{ user_profile.image.url }}" onclick="openImageUploader()"/>
+            <img class="profile" id="profileImage" src="{{ user_profile.image.url }}" onclick="openImageUploader()" style="border-radius: 50px"/>
 
             {% else %}
             <!-- 프로필 사진 등록 안 했을 때 기본 프로필 이미지 --> 
@@ -194,7 +194,7 @@
                 <img style="height: 30px; width: 30px; font-weight: bold;" src="{% static 'img/coin.png' %}"><br>코인</button>
 
             <button class="button3">
-                <img style="height: 33px; width: 33px; font-weight: bold;" src="{% static 'img/review.png' %}"><br>안심리뷰</button>
+                <img style="height: 33px; width: 33px; font-weight: bold;" src="{% static 'img/review.png' %}"><br>서비스소개</button>
         </div>
         
         <!-- 하단바 -->
@@ -206,22 +206,16 @@
                 </button>
             </a>
 
-            <button class="card">
-                <p style="font-weight: bold; position: absolute; top: 2%; right: 210px;">결제 수단 등록</p>
-                <img style="height: 24px; width: 24px; position: absolute; top: 10%; right: 17px;" src="{% static 'img/plus.png' %}">
-                <img style="height: 84px; width: 84px; position: relative; top: 12%;" src="{% static 'img/credit-cards.png' %}">
-                <p style="font-weight: bold; text-align: center; position: relative; top: 4%;">카드를 등록하고 쉽게<br> 결제를 요청하세요!</p>
-            </button>
 
 
             <button class="reg">
                 <p style="font-weight: bold; position: absolute; top: 2%; right: 217px;">내 장소 등록</p>
                 <a href="{% url 'map:station_add_turn' %}">
-                    <img style="height: 24px; width: 24px; position: absolute; top: 10%; right: 17px;" src="{% static 'img/plus.png' %}">
+                    <img style="height: 20px; width: 20px; position: absolute; top: 5%; right: 17px;" src="{% static 'img/plus.png' %}">
                 </a>
                 {% if user_profile %}
                 <ul class="station-list" style="margin-top: 40px">
-                    {% for station in user_profile.station_set.all|slice:":3" %}
+                    {% for station in user_profile.station_set.all|slice:":5" %}
                         <li>
                             <p>{{ station.name }}</p>
                             <p>{{ station.address }}</p>
@@ -289,6 +283,8 @@
                 })
                 .catch(error => console.error('Error:', error));
             }
+
+
         }
     </script>
 </body>
