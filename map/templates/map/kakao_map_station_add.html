@@ -167,8 +167,12 @@
       <!-- 상단바 -->
       <div class="top-bar">
         <div style="display: flex; margin-left: 20px">
-          <p class="logo-text" style="color: #ffffff">PICK</p>
-          <p class="logo-text" style="color: #fff176">XI</p>
+          <p class="logo-text" style="color: #ffffff;">
+                <a href="{% url 'map:map_main' %}">PICK</a>
+            </p>
+            <p class="logo-text" style="color: #FFF176;">
+                <a href="{% url 'map:map_main' %}">XI</a>
+            </p>
         </div>
 
         <div style="margin-right: 20px">
