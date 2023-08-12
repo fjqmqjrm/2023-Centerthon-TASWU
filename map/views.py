@@ -22,6 +22,11 @@ def map_main(request):
     if request.user.userprofile.is_taxi_driver:  # 현재 사용자의 is_taxi_driver 값을 확인
         return render(request, 'map/taxi_driver_page.html', context)
     else:
+        if request.method == 'POST':            
+            user_profile.coins += 1
+            user_profile.save()
+            
+            return redirect('map:map_call')
         return render(request, 'map/kakao_map.html', context)
 
 

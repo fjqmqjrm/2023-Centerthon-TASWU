@@ -64,3 +64,11 @@ def phone_number(request):
         form = phoneNumberForm(instance=user_profile)
     return render(request, 'profiles/phone_number.html')
 
+@login_required
+def coin(request):
+    user_profile = UserProfile.objects.get(user=request.user)
+    return render(request, 'profiles/coin.html', {'coins': user_profile.coins})
+
+@login_required
+def service(request):
+    return render(request, 'profiles/service.html')
