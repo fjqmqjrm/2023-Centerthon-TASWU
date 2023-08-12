@@ -65,7 +65,8 @@ def phone_number(request):
 
 @login_required
 def coin(request):
-    return render(request, 'profiles/coin.html')
+    user_profile = UserProfile.objects.get(user=request.user)
+    return render(request, 'profiles/coin.html', {'coins': user_profile.coins})
 
 @login_required
 def service(request):
