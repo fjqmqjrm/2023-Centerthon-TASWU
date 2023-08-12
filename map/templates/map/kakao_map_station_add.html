@@ -126,6 +126,7 @@
         margin: 25px;
         text-decoration: none;
         padding: 15px 10px 15px 10px;
+        margin-top: 16px;
       }
 
       .btn-speak {
@@ -167,12 +168,12 @@
       <!-- 상단바 -->
       <div class="top-bar">
         <div style="display: flex; margin-left: 20px">
-          <p class="logo-text" style="color: #ffffff;">
-                <a href="{% url 'map:map_main' %}">PICK</a>
-            </p>
-            <p class="logo-text" style="color: #FFF176;">
-                <a href="{% url 'map:map_main' %}">XI</a>
-            </p>
+            <a href="{% url 'map:map_main' %}" class="logo-text" style="color: #ffffff; text-decoration: none;">
+                PICK
+            </a>
+            <a href="{% url 'map:map_main' %}" class="logo-text" style="color: #FFF176; text-decoration: none;">
+                XI
+            </a>
         </div>
 
         <div style="margin-right: 20px">
@@ -233,7 +234,7 @@
           <div style="margin-bottom: 20px">
             <p
               class="search-text1"
-              style="color: #ff6868; margin-left: 20px; font-weight: bolder"
+              style="color: #ff6868; margin-left: 20px; font-weight: bolder; margin-top: 0px;"
             >
               선택한 위치
             </p>
@@ -241,12 +242,14 @@
             <div
               id="addressInfo"
               class="search1"
-              style="margin-top: 20px; margin-left: 30px"
+              style="margin-top: 20px; margin-left: 30px; display: flex;
+              align-items: center;
+              justify-content: center;"
             ></div>
           </div>
 
           <div style="margin-bottom: 20px">
-            <p class="search-text1" style="color: #ff6868; font-weight: bolder">
+            <p class="search-text1" style="color: #ff6868; font-weight: bolder; margin-top: 0px;">
               승강장 이름
             </p>
             <input
@@ -260,7 +263,7 @@
           </div>
 
           <div>
-            <p class="search-text2" style="color: #ff6868; font-weight: bolder">
+            <p class="search-text2" style="color: #ff6868; font-weight: bolder; margin: 0px;">
               해당위치에 택시승강장을 등록할까요?
             </p>
             <!-- "택시승강장 등록하기" 링크에 주소 정보를 전달 -->
