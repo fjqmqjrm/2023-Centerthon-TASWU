@@ -1,235 +1,274 @@
 <!DOCTYPE html>
 <html>
-{% load static %}
+  {% load static %}
 
-<head>
+  <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kakao Map API 지도</title>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=df9fbbf360a12deca34689f55c0a89ec&libraries=services"></script>
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=df9fbbf360a12deca34689f55c0a89ec&libraries=services"
+    ></script>
 
     <style>
-        body {
-            background-color: #ffffff;
-            overflow: scroll;
-            margin:0px;
-        }
+      body {
+        background-color: #ffffff;
+        overflow: scroll;
+        margin: 0px;
+      }
 
-        #iphone-frame {
-            width: 390px;
-            height: 844px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-        }
+      #iphone-frame {
+        width: 390px;
+        height: 844px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+      }
 
-        .top-bar {
-            width: 390px;
-            height: 74px;
-            background:#6A7EEC;
-            border-radius: 0 0 23px 23px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: absolute;
-            z-index: 1;
+      .top-bar {
+        width: 390px;
+        height: 74px;
+        background: #6a7eec;
+        border-radius: 0 0 23px 23px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: absolute;
+        z-index: 1;
+      }
 
-        }
+      .logo-text {
+        top: 100px;
+        font-weight: bolder;
+        font-size: x-large;
+      }
 
-        .logo-text {
-            top: 100px;
-            font-weight: bolder;
-            font-size: x-large;
+      .map-img {
+        width: 23px;
+        height: 31px;
+      }
 
-        }
+      .map-button {
+        border: none;
+        background-color: #6a7eec;
+      }
 
-        .map-img {
-            width: 23px;
-            height: 31px;
-        }
+      map {
+        position: absolute;
+        top: 50px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+      }
 
-        .map-button {
-            border: none;
-            background-color: #6A7EEC;
-        }
+      .logo-img {
+        width: 29px;
+        height: 29px;
+      }
 
-        map {
-            position: absolute;
-            top: 50px;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: -1;
-            }
+      .logo-button {
+        border: none;
+        background-color: #6a7eec;
+      }
 
-        .logo-img {
-            width: 29px;
-            height: 29px;
-        }
+      .down-bar {
+        background: #ffffff;
+        width: 390px;
+        height: 400px;
+        border-radius: 23px 23px 0 0;
+        position: absolute;
+        z-index: 1;
+        bottom: 0px;
+      }
 
-        .logo-button {
-            border: none;
-            background-color: #6A7EEC;
-        }
+      .search-text1 {
+        margin-left: 20px;
+      }
 
-        .down-bar {
-            background: #ffffff;
-            width: 390px;
-            height: 400px;
-            border-radius: 23px 23px 0 0;
-            position: absolute;
-            z-index: 1;
-            bottom: 0px;
-        }
+      .search1 {
+        width: 326px;
+        height: 45px;
+        background: #f9f9f9;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+        border-radius: 10px;
+        border-style: none;
+        margin-top: 0px;
+      }
 
+      .search-text2 {
+        padding-left: 22px;
+      }
 
-        .search-text1 {
-            margin-left: 20px;
-        }
+      .search2 {
+        width: 326px;
+        height: 45px;
+        background: #f9f9f9;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+        border-radius: 10px;
+        border-style: none;
+        margin-top: 0px;
+      }
 
-        .search1 {
-            width: 326px;
-            height: 45px;
-            background: #F9F9F9;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
-            border-radius: 10px;
-            border-style: none;
-            margin-top:0px;
-        }
+      .current-location {
+        background: #ff6868;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+        border-radius: 10px;
+        color: #ffffff;
+        font-weight: bold;
+        font-size: large;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-style: none;
+        margin: 25px;
+        text-decoration: none;
+        padding: 15px 10px 15px 10px;
+      }
 
-        .search-text2 {
-            padding-left: 22px;
-        }
+      .btn-speak {
+        background-color: white;
+        border: none;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
+        color: #ff6868;
+        border-radius: 10px;
+        font-weight: bold;
+        padding: 3px 5px 3px 5px;
+      }
 
-        .search2 {
-            width: 326px;
-            height: 45px;
-            background: #F9F9F9;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
-            border-radius: 10px;
-            border-style: none;
-            margin-top:0px;
-        }
+      .btn-speak:hover {
+        background-color: #ff6868;
+        border: none;
+        color: white;
+      }
 
-        .current-location {
-            background: #FF6868;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
-            border-radius: 10px;
-            color: #ffffff;
-            font-weight: bold;
-            font-size: large;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-style: none;
-            margin: 25px;
-            text-decoration: none;
-            padding: 15px 10px 15px 10px;
-        }
+      .btn-search {
+        background-color: white;
+        border: none;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
+        color: #ff6868;
+        border-radius: 10px;
+        font-weight: bold;
+        padding: 3px 5px 3px 5px;
+      }
 
-
-        .btn-speak {
-            background-color: white;
-            border: none;
-            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
-            color:  #FF6868;
-            border-radius: 10px;
-            font-weight: bold;
-            padding: 3px 5px 3px 5px;
-
-        }
-
-        .btn-speak:hover {
-            background-color: #FF6868;
-            border: none;
-            color: white;
-        }
-
-
-        .btn-search {
-            background-color: white;
-            border: none;
-            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
-            color:  #FF6868;
-            border-radius: 10px;
-            font-weight: bold;
-            padding: 3px 5px 3px 5px;
-        }
-
-        .btn-search:hover {
-            background-color: #FF6868;
-            border: none;
-            color: white;
-        }
-
-
+      .btn-search:hover {
+        background-color: #ff6868;
+        border: none;
+        color: white;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="iphone-frame">
-        <!-- 상단바 -->
-        <div class="top-bar">
-            <div style="display:flex; margin-left: 20px;">
-                <p class="logo-text" style="color: #ffffff;">PICK</p>
-                <p class="logo-text" style="color: #FFF176;">XI</p>
-            </div>
+      <!-- 상단바 -->
+      <div class="top-bar">
+        <div style="display: flex; margin-left: 20px">
+          <p class="logo-text" style="color: #ffffff">PICK</p>
+          <p class="logo-text" style="color: #fff176">XI</p>
+        </div>
 
-            <div style="margin-right: 20px;">
-                <button class="map-button">
-                    <img class="map-img" src="{% static 'img/map.png' %}">
-                </button>&nbsp;
-                <button class="logo-button style=display: flex; justify-content: center; align-items: center;">
-                    <a href="{% url 'profiles:my_page' %}"><img class="logo-img" src="{% static 'img/mypage.png' %}"></a>
+        <div style="margin-right: 20px">
+          <button class="map-button">
+            <img class="map-img" src="{% static 'img/map.png' %}" /></button
+          >&nbsp;
+          <button
+            class="logo-button style=display: flex; justify-content: center; align-items: center;"
+          >
+            <a href="{% url 'profiles:my_page' %}"
+              ><img class="logo-img" src="{% static 'img/mypage.png' %}"
+            /></a>
+          </button>
+        </div>
+      </div>
+
+      <div id="map" style="width: 390px; height: 500px; z-index: 0"></div>
+
+      <!-- 하단바 -->
+      <div class="down-bar">
+        <div style="display: flex; flex-direction: column">
+          <div style="margin-bottom: 20px">
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                margin-right: 20px;
+              "
+            >
+              <div>
+                <p
+                  class="search-text2"
+                  style="color: #ff6868; font-weight: bolder"
+                >
+                  위치 검색
+                </p>
+              </div>
+              <div style="padding-top: 15px">
+                <!--<button class="btn-speak">음성</button>-->
+                <button
+                  class="btn-search"
+                  onclick="passKeywordToAddressInfo();"
+                >
+                  선택
                 </button>
+              </div>
             </div>
+            <input
+              type="text"
+              placeholder="원하는 장소를 입력하세요"
+              id="keyword"
+              size="20"
+              style="margin-left: 30px; width: 320px; height: 30px"
+            />
+            <!--<div id="addressInfo" class="search1" style="margin-top: 20px; margin-left: 30px;" ></div>-->
+          </div>
+
+          <div style="margin-bottom: 20px">
+            <p
+              class="search-text1"
+              style="color: #ff6868; margin-left: 20px; font-weight: bolder"
+            >
+              선택한 위치
+            </p>
+
+            <div
+              id="addressInfo"
+              class="search1"
+              style="margin-top: 20px; margin-left: 30px"
+            ></div>
+          </div>
+
+          <div style="margin-bottom: 20px">
+            <p class="search-text1" style="color: #ff6868; font-weight: bolder">
+              승강장 이름
+            </p>
+            <input
+              type="text"
+              placeholder="승강장 이름을 등록하세요"
+              id="stationName"
+              name="station_name"
+              size="20"
+              style="margin-left: 30px; width: 320px; height: 30px"
+            />
+          </div>
+
+          <div>
+            <p class="search-text2" style="color: #ff6868; font-weight: bolder">
+              해당위치에 택시승강장을 등록할까요?
+            </p>
+            <!-- "택시승강장 등록하기" 링크에 주소 정보를 전달 -->
+            <a
+              class="current-location"
+              href="#"
+              onclick="registerTaxiStation();"
+              >택시승강장 등록하기</a
+            >
+          </div>
         </div>
-
-        <div id="map"
-            style="width: 390px; height: 500px;  z-index: 0;">
-        </div>
-
-        <!-- 하단바 -->
-        <div class="down-bar">
-            <div style="display: flex; flex-direction: column;">
-                <div style="margin-bottom: 20px;">
-                    <div style="display:flex; justify-content: space-between; margin-right: 20px;">
-                        <div>
-                            <p class="search-text2" style="color: #FF6868; font-weight: bolder;">위치 검색</p>
-                        </div>
-                        <div style="padding-top:15px;">
-                            <!--<button class="btn-speak">음성</button>-->
-                            <button class="btn-search" onclick="passKeywordToAddressInfo();" >선택</button>
-                        </div>
-                    </div>
-                    <input type="text" placeholder="원하는 장소를 입력하세요" id="keyword" size="20"  style="margin-left: 30px; width: 320px; height: 30px;">
-                            <!--<div id="addressInfo" class="search1" style="margin-top: 20px; margin-left: 30px;" ></div>-->
-                </div>
-
-                <div style="margin-bottom: 20px;">
-
-                    <p class="search-text1" style="color: #FF6868; margin-left: 20px; font-weight: bolder;">선택한 위치</p>
-                    
-                    <div id="addressInfo" class="search1" style="margin-top: 20px; margin-left: 30px;" ></div>
-
-                </div>
-
-                <div style="margin-bottom: 20px;">
-                    <p class="search-text1" style="color: #FF6868; font-weight: bolder;">승강장 이름</p>
-                    <input type="text" placeholder="승강장 이름을 등록하세요" id="stationName" name="station_name" size="20" style="margin-left: 30px; width: 320px; height: 30px;">
-
-                </div>
-
-                <div>
-                    <p class="search-text2" style="color: #FF6868; font-weight: bolder;">해당위치에 택시승강장을 등록할까요?</p>
-                    <!-- "택시승강장 등록하기" 링크에 주소 정보를 전달 -->
-                    <a class="current-location" href="#" onclick="registerTaxiStation();">택시승강장 등록하기</a>
-                </div>
-            </div>
-
-        </div>
-
+      </div>
 
       <script>
 
@@ -263,7 +302,7 @@
                         {% for station in user_stations %}
                         {
                             address: "{{ station.address }}",
-                            // 다른 필요한 정보들도 추가 가능
+                            name: "{{ station.name }}",
                         },
                         {% endfor %}
                     ];
@@ -297,7 +336,16 @@
                                     draggable: false // 마커 드래그 비활성화
                                 });
 
-                                // 마커를 클릭했을 때 정보 창 등을 표시하는 로직 추가 가능
+                                // 역 마커를 위한 인포윈도우 생성
+                                var infowindow = new kakao.maps.InfoWindow({
+                                    content: '<div style="padding: 5px;">' + station.name + '</div>',
+                                    removable: true
+                                });
+
+                                // 마커 클릭 시 인포윈도우 열기 위한 클릭 이벤트 리스너 추가
+                                kakao.maps.event.addListener(stationMarker, 'click', function() {
+                                    infowindow.open(map, stationMarker);
+                                });
                             } else {
                                 console.error("주소 변환 오류:", status);
                             }
@@ -368,68 +416,75 @@
                 document.body.appendChild(form);
                 form.submit();
             }
-    </script>
+      </script>
 
+      <!--음성인식-->
+      <script
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"
+      ></script>
+      <script>
+        // Check if the browser supports Web Speech API
+        if (
+          "SpeechRecognition" in window ||
+          "webkitSpeechRecognition" in window
+        ) {
+          var recognition = new (window.SpeechRecognition ||
+            window.webkitSpeechRecognition)();
 
-        <!--음성인식-->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script>
-    // Check if the browser supports Web Speech API
-    if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
-        var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+          recognition.continuous = false;
+          recognition.lang = "ko";
 
-        recognition.continuous = false;
-        recognition.lang = 'ko';
+          recognition.onresult = function (event) {
+            var transcript = event.results[0][0].transcript;
+            document.getElementById("keyword").value = transcript;
+            performSearch(transcript);
+          };
 
-        recognition.onresult = function(event) {
-        var transcript = event.results[0][0].transcript;
-        document.getElementById('keyword').value = transcript;
-        performSearch(transcript);
-        };
-
-        recognition.onerror = function(event) {
-        console.error('Speech recognition error:', event.error);
-        };
-    } else {
-        console.error('Web Speech API not supported in this browser.');
-    }
-
-    function startListening() {
-        recognition.start();
-    }
-
-    function performSearch(query) {
-        // You can implement your search logic here
-        // For simplicity, let's just log the query
-        console.log('Performing search for:', query);
-    }
-    </script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var queryString = window.location.search; // 현재 URL의 쿼리 스트링을 가져옴
-            var urlParams = new URLSearchParams(queryString);
-            var keywordValue = urlParams.get('keyword'); // 키워드 파라미터 값을 가져옴
-
-            if (keywordValue) {
-                // 키워드 파라미터 값이 존재할 경우, 해당 값으로 input 요소를 채움
-                var keywordInput = document.getElementById("keyword");
-                keywordInput.value = keywordValue;
-            }
-        });
-    </script>
-    //선택 누를 시에 주소 정보로 넘겨줌
-    <script>
-        function passKeywordToAddressInfo() {
-            var keywordInput = document.getElementById("keyword");
-            var addressInfoDiv = document.getElementById('addressInfo');
-
-            // 키워드 값을 addressInfo에 설정
-            addressInfoDiv.innerText = keywordInput.value;
-
-            // 여기에서 원하는 추가 작업 수행 가능
+          recognition.onerror = function (event) {
+            console.error("Speech recognition error:", event.error);
+          };
+        } else {
+          console.error("Web Speech API not supported in this browser.");
         }
-    </script>
+
+        function startListening() {
+          recognition.start();
+        }
+
+        function performSearch(query) {
+          // You can implement your search logic here
+          // For simplicity, let's just log the query
+          console.log("Performing search for:", query);
+        }
+      </script>
+
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          var queryString = window.location.search; // 현재 URL의 쿼리 스트링을 가져옴
+          var urlParams = new URLSearchParams(queryString);
+          var keywordValue = urlParams.get("keyword"); // 키워드 파라미터 값을 가져옴
+
+          if (keywordValue) {
+            // 키워드 파라미터 값이 존재할 경우, 해당 값으로 input 요소를 채움
+            var keywordInput = document.getElementById("keyword");
+            keywordInput.value = keywordValue;
+          }
+        });
+      </script>
+      //선택 누를 시에 주소 정보로 넘겨줌
+      <script>
+        function passKeywordToAddressInfo() {
+          var keywordInput = document.getElementById("keyword");
+          var addressInfoDiv = document.getElementById("addressInfo");
+
+          // 키워드 값을 addressInfo에 설정
+          addressInfoDiv.innerText = keywordInput.value;
+
+          // 여기에서 원하는 추가 작업 수행 가능
+        }
+      </script>
     </div>
-</body>
+  </body>
 </html>

@@ -62,7 +62,7 @@ def station_add(request):
         name = request.POST.get('station_name')
         UserProfile  = request.user.userprofile
         # Station 객체 생성과 저장
-        new_station = Station(address=address, name= name, UserProfile = UserProfile )
+        new_station = Station(address=address, name=name, UserProfile = UserProfile )
         new_station.save()
 
 
