@@ -70,14 +70,6 @@
             z-index: 2;
         }
 
-
-        .search-text1{
-            top: 5%;
-            right: 138px;
-            position: absolute;
-            transform: translate(-50%, -50%);
-        }
-
         .search1{
             width: 326px;
             height: 45px;
@@ -92,7 +84,7 @@
         }
 
         .search-text2{
-            top: 29%;
+            top: 2%;
             right: 138px;
             position: absolute;
             transform: translate(-50%, -50%);
@@ -149,7 +141,7 @@
         .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
         .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
         .map_wrap {position:relative;width:100%;height:500px;}
-        #menu_wrap {position:relative;top:150px;left:0;bottom:0;width: 230px;height:230px;margin:0px 0px 0px 0px;padding:0px;overflow-y:scroll;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
+        #menu_wrap {position:relative;top:44px;left:0;bottom:0;width: 230px;height:230px;margin:0px 0px 0px 0px;padding:0px;overflow-y:scroll;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
         .bg_white {background:#fff;}
         #menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
         #menu_wrap .option{text-align: center;}
@@ -247,18 +239,14 @@
         
         <!-- 하단바 -->
         <div class="down-bar">
-
-        <p class="search-text1" style="color: #6A7EEC; font-weight: bolder;">내 근처 택시승강장</p>
-        <input class="search1"></input>
-        
         
         <p class="search-text2" style="color: #6A7EEC; font-weight: bolder;">어디로 안내할까요?</p>
 
-         <div id="menu_wrap" class="bg_white" style="width:390px;">
+         <div id="menu_wrap" class="bg_white" style="width:390px; height: 340px">
             <div class="option">
                 <div>
                     <form onsubmit="searchPlaces(); return false;">
-                        <input type="text" placeholder="원하는 장소를 입력하세요" id="keyword" size="20" value="서울여대">
+                        <input type="text" placeholder="원하는 장소를 입력하세요" id="keyword" size="20" value="서울여대" style="margin-right: 8px;">
                         <button class="btn-speak" onclick="startListening()">음성</button>
                         <button class="btn-search" type="submit">검색</button>
                         <!-- 새로운 버튼을 추가하고 해당 버튼을 클릭하면 redirectToNewPage 함수 호출 -->
