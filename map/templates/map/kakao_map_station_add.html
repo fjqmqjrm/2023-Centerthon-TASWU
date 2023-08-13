@@ -269,12 +269,18 @@
             <!-- "택시승강장 등록하기" 링크에 주소 정보를 전달 -->
             <a
               class="current-location"
+              id="current-location"
               href="#"
               onclick="registerTaxiStation();"
-              >택시승강장 등록하기</a
-            >
+              >택시승강장 등록하기</a>
           </div>
         </div>
+
+        <audio id="sound2">
+                    <source src="{% static 'audio/sound2.mp3' %}" type="audio/mpeg">
+                <!-- 다양한 오디오 포맷을 지원하는 source 요소를 추가할 수 있습니다. -->
+        </audio>
+
       </div>
 
       <script>
@@ -429,6 +435,19 @@
                 document.body.appendChild(form);
                 form.submit();
             }
+      </script>
+
+      <script>
+        current-location
+
+        const moveButton = document.getElementById('current-location');
+        const arrivalSound = document.getElementById('sound2');
+
+        moveButton.addEventListener('click', function() {
+          // 음성 재생
+          arrivalSound.play();
+         };
+
       </script>
 
       <!--음성인식-->
