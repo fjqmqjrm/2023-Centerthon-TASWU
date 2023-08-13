@@ -136,6 +136,72 @@
         right: -130px;
         transform: translate(-50%, -50%);
       }
+
+      /* info_window custom */
+      .wrap {
+        position: absolute;
+        left: 77px;
+        bottom: 90px;
+        width: 120px;
+        height: 49px;
+        margin-left: -144px;
+        text-align: left;
+        overflow: hidden;
+        font-size: 8px;
+        font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+        line-height: 1.5;
+    }
+    
+    .wrap * {
+        padding: 0;
+        margin: 0;
+    }
+    
+    .wrap .info {
+        width: 120px;
+        height: 37px;
+        border-radius: 5px;
+        overflow: hidden;
+        background: #fff;
+        border: 0;
+        box-shadow: 0 1px 2px #888;
+    }
+    
+    .info .info-content {
+        height: 37px;
+        background: #fff;
+        border-bottom: 1px solid #fff;
+        font-size: 15px;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .info .close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        color: #888;
+        width: 17px;
+        height: 17px;
+        background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');
+    }
+    
+    .info .close:hover {
+        cursor: pointer;
+    }
+    
+    .info:after {
+        content: '';
+        position: absolute;
+        margin-left: -12px;
+        left: 50%;
+        bottom: 0;
+        width: 22px;
+        height: 12px;
+        background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
+    }
     </style>
   </head>
 
@@ -266,33 +332,46 @@
                         console.log("Station Address:", station.address); // 주소 정보 출력
                         geocoder.addressSearch(station.address, function(result, status) {
                             if (status === kakao.maps.services.Status.OK) {
-                                var stationLatLng = new kakao.maps.LatLng(result[0].y, result[0].x);
+                              var stationLatLng = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-                                var stationMarker = new kakao.maps.Marker({
-                                    position: stationLatLng,
-                                    map: map,
-                                    image: stationMarkerImageObj,
-                                    draggable: false // 마커 드래그 비활성화
-                                });
+                              var stationMarker = new kakao.maps.Marker({
+                                  position: stationLatLng,
+                                  map: map,
+                                  image: stationMarkerImageObj,
+                                  draggable: false // 마커 드래그 비활성화
+                              });
 
-                                // 마커를 클릭했을 때 정보 창 등을 표시하는 로직 추가 가능
-                                kakao.maps.event.addListener(stationMarker, 'click', function() {
-                                    var addressInfoDiv = document.getElementById('addressInfo');
-                                    addressInfoDiv.innerText = station.address; // 해당 마커의 주소 정보를 표시
-                                });
+                              // 마커를 클릭했을 때 정보 창 등을 표시하는 로직 추가 가능
+                              kakao.maps.event.addListener(stationMarker, 'click', function() {
+                                  var addressInfoDiv = document.getElementById('addressInfo');
+                                  addressInfoDiv.innerText = station.address; // 해당 마커의 주소 정보를 표시
+                              });
 
-                                // 역 마커를 위한 인포윈도우 생성
-                                var infowindow = new kakao.maps.InfoWindow({
-                                    content: '<div style="padding: 5px;">' + station.name + '</div>',
-                                    removable: true
-                                });
+                              // 커스텀 오버레이에 표시할 content
+                              var content = '<div class="wrap">' + 
+                                '    <div class="info">' +
+                                '     <div class="info-content">'+ station.name +'</div>' + 
+                                '    </div>' +    
+                                '</div>';
 
-                                // 마커 클릭 시 인포윈도우 열기 위한 클릭 이벤트 리스너 추가
-                                kakao.maps.event.addListener(stationMarker, 'click', function() {
-                                    infowindow.open(map, stationMarker);
-                                });
+                              // 마커 위에 커스텀오버레이를 표시
+                              var overlay = new kakao.maps.CustomOverlay({
+                                content: content,
+                                map: map,
+                                position: stationLatLng,
+                              });
+
+                              // 마커를 클릭했을 때 커스텀 오버레이를 표시
+                              kakao.maps.event.addListener(stationMarker, 'click', function() {
+                                overlay.setMap(map);
+                              });
+
+                              // 커스텀 오버레이를 닫기 위해 호출되는 함수
+                              function closeOverlay() {
+                                overlay.setMap(null);     
+                              }
                             } else {
-                                console.error("주소 변환 오류:", status);
+                              console.error("주소 변환 오류:", status);
                             }
                         });
                     }
