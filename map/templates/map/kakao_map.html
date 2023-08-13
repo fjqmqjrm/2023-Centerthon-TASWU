@@ -168,12 +168,14 @@
     }
     
     .info .info-content {
-        padding: 8px 0 0 20px;
         height: 37px;
         background: #fff;
         border-bottom: 1px solid #fff;
         font-size: 15px;
         font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     
     .info .close {
@@ -347,7 +349,6 @@
                               var content = '<div class="wrap">' + 
                                 '    <div class="info">' +
                                 '     <div class="info-content">'+ station.name +'</div>' + 
-                                '     <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
                                 '    </div>' +    
                                 '</div>';
 
