@@ -245,16 +245,7 @@
 
         </div>
     </div>
-  <!--
 
-
-    <h2>Taxi Driver Status:</h2>
-    <form method="post" action="{% url 'profiles:my_page' %}">
-        {% csrf_token %}
-        <input type="checkbox" name="is_taxi_driver" {% if user_profile.is_taxi_driver %}checked{% endif %}>
-        <label for="is_taxi_driver">기사님 입니다.</label>
-        <button type="submit">Save</button>
-    </form>-->
     <!-- 이미지 업로드용 폼 -->
     <script>
         function openImageUploader() {
@@ -272,7 +263,7 @@
             if (file) {
                 var formData = new FormData();
                 formData.append('image', file);
-
+    
                 fetch("{% url 'profiles:update_profile_image' %}", {
                     method: 'POST',
                     body: formData,
@@ -285,17 +276,20 @@
                     if (data.success) {
                         var profileImage = document.getElementById('profileImage');
                         profileImage.src = data.image_url;
+    
+                        var imageSize = Math.min(profileImage.width, profileImage.height);
+                        profileImage.width = imageSize;
+                        profileImage.height = imageSize;
+                        profileImage.style.borderRadius = '50%';
+                        profileImage.style.objectFit = 'cover';
                     }
                 })
                 .catch(error => console.error('Error:', error));
             }
-
-
         }
     </script>
+    
 </body>
-
-
 
 </html>
 
