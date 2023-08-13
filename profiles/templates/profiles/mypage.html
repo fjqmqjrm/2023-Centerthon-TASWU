@@ -152,6 +152,11 @@
             border-style: none;
 
         }
+
+        .scroll {
+          max-height: 350px;
+          overflow-y: auto;
+        }
         
     </style>
 </head>
@@ -216,31 +221,41 @@
 
             <button class="reg">
                 <p style="font-weight: bold; position: absolute; top: 2%; right: 217px;">내 장소 등록</p>
+
                 <a href="{% url 'map:station_add_turn' %}">
                     <img style="height: 20px; width: 20px; position: absolute; top: 5%; right: 17px;" src="{% static 'img/plus.png' %}">
                 </a>
-                {% if user_profile %}
-                <ul class="station-list" style="margin-top: 40px">
-                    {% for station in user_profile.station_set.all|slice:":5" %}
-                        <li>
-                            <p>{{ station.name }}</p>
-                            <p>{{ station.address }}</p>
-                        </li>
-                    {% endfor %}
-                </ul>
-                {% else %}
-                    <img style="height: 79px; width: 72px; position: relative; top: 12%;" src="{% static 'img/place.png' %}">
-                    <p style="font-weight: bold; text-align: center; position: relative; top: 4%;">자주가는 장소를 등록하고<br> 쉽게 예약을 요청하세요!</p>
-                {% endif %}
+
+                <div class="scroll" style="margin-top: 30px;">
+                    {% if user_profile %}
+                        <ul class="station-list">
+                            {% for station in user_profile.station_set.all %}
+                            <li>
+                                <p>{{ station.name }}</p>
+                                <p>{{ station.address }}</p>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    {% else %}
+                        <img style="height: 79px; width: 72px; position: relative; top: 12%;" src="{% static 'img/place.png' %}">
+                        <p style="font-weight: bold; text-align: center; position: relative; top: 4%;">자주가는 장소를 등록하고<br> 쉽게 예약을 요청하세요!</p>
+                    {% endif %}
+                </div>
+
             </button>
 
 
-            <form style="position: absolute; top: 10%; right: 175px;" method="post" action="{% url 'profiles:my_page' %}">
+            <form style="position: absolute; top: 10%; right: 170px; display: flex;" method="post" action="{% url 'profiles:my_page' %}">
                 {% csrf_token %}
-                <input type="checkbox" name="is_taxi_driver" {% if user_profile.is_taxi_driver %}checked{% endif %}>
-                <label for="is_taxi_driver">기사님 입니다.</label>
-                <button style="color: #000000; background-color: rgba(255, 255, 255, 0.773); border-radius: 3px; 
-                border-style: none;" type="submit">저장</button>
+                <div style="margin-right: 15px;">
+                    <input type="checkbox" name="is_taxi_driver" {% if user_profile.is_taxi_driver %}checked{% endif %}>
+                    <label for="is_taxi_driver">기사님 입니다</label>
+                </div>
+                <div>
+                    <button style="color: #000000; background-color: rgba(255, 255, 255, 0.773); border-radius: 3px;
+                    border-style: none;" type="submit">저장</button>
+                </div>
+
             </form>
 
         </div>
