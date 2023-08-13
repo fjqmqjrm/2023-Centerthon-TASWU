@@ -23,3 +23,7 @@ class Station(models.Model):
     address = models.CharField(max_length=200)
     UserProfile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True)
 
+class TaxiCall(models.Model): #누가 어디서 호출했는지 택시 호출 여부를 판단 & 기사님이 생기면 수락으로 판단
+    client = models.ForeignKey(UserProfile, on_delete=models.CASCADE,related_name='taxi_calls_as_client')
+    driver = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True, related_name='taxi_calls_as_driver')
+    address = models.CharField(max_length=200)

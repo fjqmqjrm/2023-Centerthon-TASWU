@@ -2,11 +2,13 @@ from django.shortcuts import render
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.http import JsonResponse
-from profiles.models import Station
+from profiles.models import Station, TaxiCall
 from django.contrib.auth.decorators import login_required, permission_required
 # Create your views here.
 
+from django.views.decorators.csrf import csrf_exempt
 
+@csrf_exempt
 def map_main(request):
     user_profile = None
     user_stations = []
@@ -21,10 +23,16 @@ def map_main(request):
     }
     if request.user.userprofile.is_taxi_driver:  # 현재 사용자의 is_taxi_driver 값을 확인
         return render(request, 'map/taxi_driver_page.html', context)
-    else:
+    else: #코인 적립 및 택시 호출 구분
         if request.method == 'POST':            
             user_profile.coins += 1
             user_profile.save()
+            #받아온 주소값
+            address = request.POST.get('address')
+            # TaxiCall 객체 생성 및 저장
+            taxi_call = TaxiCall(client=user_profile, address=address)
+            taxi_call.save()
+
             
             return redirect('map:map_call')
         return render(request, 'map/kakao_map.html', context)

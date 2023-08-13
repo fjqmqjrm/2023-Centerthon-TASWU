@@ -239,9 +239,9 @@
 
         <form method="post" action="{% url 'map:map_main' %}">
           {% csrf_token %}
-          <button type="submit" class="current-location">
-            이 위치로 택시 호출하기
-          </button>
+        <button type="button" class="current-location"  onclick="redirectToNewPage()" >
+        이 위치로 택시 호출하기
+        </button>
         </form>
 
 
@@ -250,6 +250,7 @@
         <div
           id="addressInfo"
           class="search1"
+          name="address"
           style="margin-top: 70px; margin-left: 30px; display: flex;
           align-items: center;
           justify-content: center;"
@@ -431,6 +432,34 @@
             document.body.appendChild(form);
             form.submit();
         }
+
+        function redirectToNewPage() {
+            var addressInfoElement = document.getElementById('addressInfo');
+            var address = addressInfoElement.textContent;
+
+            // AJAX 요청으로 주소 데이터를 서버로 전송
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "{% url 'map:map_main' %}", true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    // 서버 응답 처리
+                    console.log(xhr.responseText);
+                }
+            };
+            var data = "address=" + encodeURIComponent(address);
+            xhr.send(data);
+
+            var addressInfo2 = document.getElementById("addressInfo").innerText;
+            var newUrl = "{% url 'map:map_call' %}?keyword=" + encodeURIComponent(addressInfo2);
+            window.location.href = newUrl;
+        }
+
+
+
+
+
+
 
 
 

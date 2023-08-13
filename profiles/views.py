@@ -3,7 +3,7 @@ from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from .forms import TaxiDriverForm, phoneNumberForm
-from .models import UserProfile, Station
+from .models import UserProfile, Station, TaxiCall
 from django.http import JsonResponse
 # Create your views here.
 def start_login(request):
@@ -17,6 +17,8 @@ def custom_logout(request):
 def my_page(request):
     user_profile = UserProfile.objects.get(user=request.user)
     stations = Station.objects.all()
+
+    taxi_calls = TaxiCall.objects.filter(driver=user_profile)
 
     if request.method == 'POST':
         form = TaxiDriverForm(request.POST, instance=user_profile)
@@ -34,12 +36,17 @@ def my_page(request):
         'form': form,
         'phone_number': phone_number,
         'stations': stations,
+        'taxi_calls': taxi_calls,
     }
     return render(request, 'profiles/mypage.html', context)
 
 @login_required
 def call_list(request):
-    return render(request, 'profiles/call_list.html')
+    taxi_calls = TaxiCall.objects.all()
+    context = {
+        'taxi_calls' : taxi_calls,
+    }
+    return render(request, 'profiles/call_list.html',context)
 
 @login_required
 def update_profile_image(request):
@@ -72,3 +79,18 @@ def coin(request):
 @login_required
 def service(request):
     return render(request, 'profiles/service.html')
+
+
+@login_required
+def call_accept(request):
+    if request.method == 'POST':
+        user_profile = UserProfile.objects.get(user=request.user)
+
+        selected_calls = request.POST.getlist('selected_calls')
+
+        for call_pk in selected_calls:
+            taxi_call = TaxiCall.objects.get(pk=call_pk)
+            taxi_call.driver = user_profile
+            taxi_call.save()
+
+    return redirect('profiles:call_list')

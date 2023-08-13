@@ -145,35 +145,27 @@
 
     
     <!-- 리스트 -->
-    <div class="div"> 
-        <ul id="itemList" style="margin-top: 30px; text-align: center; justify-items: center; font-size: large; border-color: #6A7EEC;">
-            <li><input style="font-weight: bolder; " type="checkbox" value="1"> &nbsp;&nbsp;&nbsp;승강장 1</li>
-            
-            <li><input style="font-weight: bolder;" type="checkbox" value="2"> &nbsp;&nbsp;&nbsp;승강장 2</li>
-         
-            <li><input style="font-weight: bolder;" type="checkbox" value="3"> &nbsp;&nbsp;&nbsp;승강장 3</li>
-        </ul>
-
-        
+    <div class="div">
+        <form id="callForm" method="post" action="{% url 'profiles:call_accept' %}">
+            {% csrf_token %}
+            <ul id="itemList" style="margin-top: 30px; text-align: center; justify-items: center; font-size: large; border-color: #6A7EEC;">
+                {% for taxi_call in taxi_calls %}
+                    {% if taxi_call.driver is None %}
+                        <li>
+                            <input style="font-weight: bolder;" type="checkbox" name="selected_calls" value="{{ taxi_call.pk }}">
+                            &nbsp;&nbsp;&nbsp;{{ taxi_call.client }} - {{ taxi_call.address }}
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <button id="acceptButton" style="font-weight: bolder;" type="submit">수락</button>
+        </form>
     </div>
-    
 
-    <button id="deleteButton" style="font-weight: bolder;">삭제</button>
 
-      
-      <script>
-        const deleteButton = document.getElementById("deleteButton");
-        const itemList = document.getElementById("itemList");
-      
-        deleteButton.addEventListener("click", function () {
-          const checkboxes = itemList.querySelectorAll("input[type='checkbox']:checked");
-      
-          checkboxes.forEach(function (checkbox) {
-            const listItem = checkbox.parentElement;
-            listItem.remove();
-          });
-        });
-      </script>
+
+
+
 
 
         <!-- 하단바 -->
