@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Taxi Call Notifications</title>
+</head>
+<body>
+    <h1>Taxi Call Notifications</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Call ID</th>
+                <th>User</th>
+                <th>Station</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for notification in TaxiCallNotification %}
+            <tr>
+                <td>{{ notification.call_id }}</td>
+                <td>{{ notification.user }}</td>
+                <td>{{ notification.Station }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

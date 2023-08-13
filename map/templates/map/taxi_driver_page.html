@@ -179,7 +179,8 @@
 <!--                 href="{% url 'map:station_add_turn' %}">택시승강장 등록하기</a></button>-->
             {% csrf_token %}
             {% if user.userprofile.is_taxi_driver %}
-                 <button class="current-location" ><a style="text-decoration: none; color: #ffffff;" href="{% url 'profiles:call_list' %}">택시 호출 리스트 페이지</a></button>
+                 <button class="current-location"  onclick="redirectToCallList()">
+                     <a style="text-decoration: none; color: #ffffff;" href="{% url 'profiles:call_list' %}">택시 호출 리스트 페이지</a></button>
                 {% endif %}
         </div>
 
@@ -188,6 +189,16 @@
         </div>
 
       <script>
+        function redirectToCallList() {
+        var addressInfoDiv = document.getElementById('addressInfo');
+        var address = addressInfoDiv.innerText;
+
+        // 'your_call_list_page_url'을 실제 호출 리스트 페이지의 URL로 바꿔주세요
+        var callListPageURL = '{% url "profiles:call_list" %}' + '?address=' + encodeURIComponent(address);
+
+        window.location.href = callListPageURL;
+        }
+
         document.addEventListener("DOMContentLoaded", function() {
         kakao.maps.load(function() {
             if (navigator.geolocation) {

@@ -3,7 +3,9 @@ from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from .forms import TaxiDriverForm
+# from .models import UserProfile, Station, TaxiCallNotification
 from .models import UserProfile, Station
+from django.views import View
 
 # Create your views here.
 def start_login(request):
@@ -40,4 +42,10 @@ def my_page(request):
 @login_required
 def call_list(request):
     return render(request, 'profiles/call_list.html')
-
+# class TaxiCallListView(View):
+#     template_name = 'profiles/notifications_list.html'  # 템플릿 파일의 경로
+#
+#     def get(self, request, *args, **kwargs):
+#         notifications = TaxiCallNotification.objects.all()
+#         context = {'notifications': notifications}
+#         return render(request, self.template_name, context)

@@ -25,3 +25,10 @@ class Station(models.Model):
     address = models.CharField(max_length=200)
     UserProfile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True)
 
+# class TaxiCallNotification(models.Model):
+#     call_id = models.AutoField(primary_key=True)
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     Station = models.ForeignKey(Station, on_delete=models.CASCADE)
+
+
+

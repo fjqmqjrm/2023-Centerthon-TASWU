@@ -164,8 +164,12 @@
         <div class="down-bar">
 
             <p class="search-text1" style="color: #6A7EEC; font-weight: bolder;">내 위치</p>
-
-            <button class="current-location" ><a style="text-decoration: none; color: #ffffff;" href="{% url 'map:map_call' %}">이 위치로 택시 호출하기</a></button>
+            <form method="post" action="{% url 'map:map_call' %}">
+                {% csrf_token %}
+                <input type="text" name="address" placeholder="Enter address">
+                <button type="submit" class="current-location"><a style="text-decoration: none; color: #ffffff;">이 위치로 택시 호출하기</a></button>
+            </form>
+<!--            <button class="current-location" ><a style="text-decoration: none; color: #ffffff;" href="{% url 'map:map_call' %}">이 위치로 택시 호출하기</a></button>-->
 
             <!--<input class="search1" ></input>-->
             <div id="addressInfo" class="search1" style="margin-top: 70px; margin-left: 30px;" ></div>

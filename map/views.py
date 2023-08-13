@@ -2,8 +2,9 @@ from django.shortcuts import render
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.http import JsonResponse
-from profiles.models import Station
+from .models import Station, TaxiCallNotification
 from django.contrib.auth.decorators import login_required, permission_required
+from django.views import View
 # Create your views here.
 
 
@@ -53,13 +54,40 @@ def station_add(request):
 
     return render(request, 'map/kakao_map.html')
 
+# @login_required
+# def map_call(request):
+#     if request.method == 'POST':
+#         address = request.POST.get('address')
+#         user_profile = request.user.userprofile
+#
+#         # Update the user's current_location field in UserProfile model
+#         user_profile.current_location = address
+#         user_profile.save()
+#     return render(request, 'map/map_call.html')
+
+
 @login_required
 def map_call(request):
     if request.method == 'POST':
         address = request.POST.get('address')
         user_profile = request.user.userprofile
-        
+
         # Update the user's current_location field in UserProfile model
         user_profile.current_location = address
+        user_profile = TaxiCallNotification()
         user_profile.save()
+        #
+        print("POST 입니다.")
+        print(user_profile)
     return render(request, 'map/map_call.html')
+
+
+
+class TaxiCallListView(View):
+    template_name = 'map/notifications_list.html'  # 템플릿 파일의 경로
+
+    def get(self, request, *args, **kwargs):
+        notifications = TaxiCallNotification.objects.all()
+        print(notifications)
+        context = {'notifications': notifications}
+        return render(request, self.template_name, context)
