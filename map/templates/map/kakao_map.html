@@ -328,48 +328,47 @@
                         console.log("Station Address:", station.address); // 주소 정보 출력
                         geocoder.addressSearch(station.address, function(result, status) {
                             if (status === kakao.maps.services.Status.OK) {
-                                var stationLatLng = new kakao.maps.LatLng(result[0].y, result[0].x);
+                              var stationLatLng = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-                                var stationMarker = new kakao.maps.Marker({
-                                    position: stationLatLng,
-                                    map: map,
-                                    image: stationMarkerImageObj,
-                                    draggable: false // 마커 드래그 비활성화
-                                });
-
-                                // 마커를 클릭했을 때 정보 창 등을 표시하는 로직 추가 가능
-                                kakao.maps.event.addListener(stationMarker, 'click', function() {
-                                    var addressInfoDiv = document.getElementById('addressInfo');
-                                    addressInfoDiv.innerText = station.address; // 해당 마커의 주소 정보를 표시
-                                });
-
-                                // 커스텀 오버레이에 표시할 컨텐츠 입니다
-                                var content = '<div class="wrap">' + 
-                                  '    <div class="info">' +
-                                  '     <div class="info-content">'+ station.name +'</div>' + 
-                                  '     <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
-                                  '    </div>' +    
-                                  '</div>';
-
-                                // 마커 위에 커스텀오버레이를 표시합니다
-                                var overlay = new kakao.maps.CustomOverlay({
-                                  content: content,
-                                  map: map,
+                              var stationMarker = new kakao.maps.Marker({
                                   position: stationLatLng,
-                                  removable: true
-                                });
+                                  map: map,
+                                  image: stationMarkerImageObj,
+                                  draggable: false // 마커 드래그 비활성화
+                              });
 
-                                // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
-                                kakao.maps.event.addListener(stationMarker, 'click', function() {
-                                  overlay.setMap(map);
-                                });
+                              // 마커를 클릭했을 때 정보 창 등을 표시하는 로직 추가 가능
+                              kakao.maps.event.addListener(stationMarker, 'click', function() {
+                                  var addressInfoDiv = document.getElementById('addressInfo');
+                                  addressInfoDiv.innerText = station.address; // 해당 마커의 주소 정보를 표시
+                              });
 
-                                // 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
-                                function closeOverlay() {
-                                  overlay.setMap(null);     
-                                }
+                              // 커스텀 오버레이에 표시할 컨텐츠 입니다
+                              var content = '<div class="wrap">' + 
+                                '    <div class="info">' +
+                                '     <div class="info-content">'+ station.name +'</div>' + 
+                                '     <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+                                '    </div>' +    
+                                '</div>';
+
+                              // 마커 위에 커스텀오버레이를 표시합니다
+                              var overlay = new kakao.maps.CustomOverlay({
+                                content: content,
+                                map: map,
+                                position: stationLatLng,
+                              });
+
+                              // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+                              kakao.maps.event.addListener(stationMarker, 'click', function() {
+                                overlay.setMap(map);
+                              });
+
+                              // 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
+                              function closeOverlay() {
+                                overlay.setMap(null);     
+                              }
                             } else {
-                                console.error("주소 변환 오류:", status);
+                              console.error("주소 변환 오류:", status);
                             }
                         });
                     }
