@@ -254,8 +254,8 @@
                             }
                         });
                     }
-
-                    var addressInfoDiv = document.getElementById('addressInfo');
+                    //현재 위치 반영 부분은 여기선 필요 없어서 주석처리 했습니다.
+                    /*var addressInfoDiv = document.getElementById('addressInfo');
                     geocoder.coord2Address(longitude, latitude, function(result, status) {
                         if (status === kakao.maps.services.Status.OK) {
                             var address = result[0].address.address_name;
@@ -264,7 +264,7 @@
                             console.error("주소 변환 오류:", status);
                             addressInfoDiv.innerText = '주소 변환 오류';
                         }
-                    });
+                    });*/
 
                     kakao.maps.event.addListener(marker, 'dragend', function() {
                         var latlng = marker.getPosition();
@@ -319,7 +319,23 @@
 
         };
 
+
+
+
     </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          var queryString = window.location.search; // 현재 URL의 쿼리 스트링을 가져옴
+          var urlParams = new URLSearchParams(queryString);
+          var keywordValue = urlParams.get("keyword"); // 키워드 파라미터 값을 가져옴
+
+          if (keywordValue) {
+            // 키워드 파라미터 값이 존재할 경우, 해당 값으로 input 요소를 채움
+            var addressInfo = document.getElementById("addressInfo");
+            addressInfo.innerText = keywordValue;
+          }
+        });
+     </script>
     </div>
 </body>
 </html>

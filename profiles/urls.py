@@ -10,4 +10,5 @@ urlpatterns = [
     path('phone_number/', views.phone_number, name='phone_number'),
     path('coin/', views.coin, name='coin'),
     path('service/', views.service, name='service'),
+    path('accept/', views.call_accept, name='call_accept'),
     ]
