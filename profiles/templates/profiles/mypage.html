@@ -181,9 +181,11 @@
 
             {% csrf_token %} 
             {% if user_profile.phone_number %}
-            <div class="certification" style="font-size:15px; font-weight: bold; display: flex; justify-content: center; align-items: center;">
-                {{ user_profile.phone_number }}
-            </div>
+            <a href="{% url 'profiles:phone_number' %}">
+                <div class="certification" style="text-decoration: none; color:#000000; font-size:15px; font-weight: bold; display: flex; justify-content: center; align-items: center;">
+                    {{ user_profile.phone_number }}
+                </div>
+            </a>
             {% else %} <!-- 전화번호 등록 안 했을 때 인증 멘트-->
             <a href="{% url 'profiles:phone_number' %}">
             <button class="certification" style="font-size:3px; font-weight: bold;" >전화번호를 등록해주세요
@@ -213,19 +215,13 @@
         
         <!-- 하단바 -->
         <div class="down-bar">
-
             <a href="{% url 'map:map_main' %}" style="text-decoration: none; color:#ffffff">
                 <button class="before-button">
                     <img style="height: 17; width: 10px;" src="{% static 'img/before.png' %}"> 메인
                 </button>
             </a>
 
-
-
             <button class="reg">
-
-
-
                 {% if user_profile.is_taxi_driver %}
                 <p style="font-weight: bold; position: absolute; top: 2%; right: 217px;">호출 수락 내역</p>
                 <a href="{% url 'map:station_add_turn' %}">
@@ -248,25 +244,21 @@
                     {% if user_profile %}
                         <ul class="station-list">
                             {% for station in user_profile.station_set.all %}
-                            <li>
-                                <p>{{ station.name }}</p>
-                                <p>{{ station.address }}</p>
-                            </li>
+                            <div>
+                                <li>
+                                    <p>{{ station.name }}</p>
+                                    <p>{{ station.address }}</p>
+                                </li>
+                            </div>
                         {% endfor %}
                         </ul>
                     {% else %}
                         <img style="height: 79px; width: 72px; position: relative; top: 12%;" src="{% static 'img/place.png' %}">
                         <p style="font-weight: bold; text-align: center; position: relative; top: 4%;">자주가는 장소를 등록하고<br> 쉽게 예약을 요청하세요!</p>
                     {% endif %}
-
-
                 </div>
                 {% endif %}
-
-
-
             </button>
-
 
             <form style="position: absolute; top: 10%; right: 170px; display: flex;" method="post" action="{% url 'profiles:my_page' %}">
                 {% csrf_token %}

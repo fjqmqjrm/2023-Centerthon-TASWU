@@ -32,12 +32,9 @@ def map_main(request):
             # TaxiCall 객체 생성 및 저장
             taxi_call = TaxiCall(client=user_profile, address=address)
             taxi_call.save()
-
             
             return redirect('map:map_call')
         return render(request, 'map/kakao_map.html', context)
-
-
 
 def custom_logout(request):
     logout(request)
@@ -46,22 +43,18 @@ def custom_logout(request):
 def map_search(request):
     return render(request, 'map/map_search.html')
 
-
-
 @login_required
 def station_add_turn(request):
     if request.user.is_authenticated and hasattr(request.user, 'userprofile'):
         user_profile = request.user.userprofile
-        user_stations = user_profile.station_set.all()  # 현재 사용자의 연결된 Station들을 가져옴
+        user_stations = user_profile.station_set.all()  # 현재 사용자의 연결된 Station들을 가져옴           
 
     context = {
         'user': request.user,
         'user_profile': user_profile,
         'user_stations': user_stations,
     }
-    return render(request, 'map/kakao_map_station_add.html',context)
-
-
+    return render(request, 'map/kakao_map_station_add.html', context)
 
 @login_required
 def station_add(request):
@@ -69,12 +62,12 @@ def station_add(request):
         address = request.POST.get('address')
         name = request.POST.get('station_name')
         UserProfile  = request.user.userprofile
+        UserProfile.coins -= 2
+        UserProfile.save()
         # Station 객체 생성과 저장
         new_station = Station(address=address, name=name, UserProfile = UserProfile )
         new_station.save()
-
-
-    return redirect('map:map_main')
+        return redirect('map:map_main')
 
 @login_required
 def map_call(request):

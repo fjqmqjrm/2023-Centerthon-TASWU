@@ -148,16 +148,16 @@
         text-align: left;
         overflow: hidden;
         font-size: 8px;
-        font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+        font-family: "Malgun Gothic", dotum, "돋움", sans-serif;
         line-height: 1.5;
-    }
-    
-    .wrap * {
+      }
+
+      .wrap * {
         padding: 0;
         margin: 0;
-    }
-    
-    .wrap .info {
+      }
+
+      .wrap .info {
         width: 120px;
         height: 37px;
         border-radius: 5px;
@@ -165,9 +165,9 @@
         background: #fff;
         border: 0;
         box-shadow: 0 1px 2px #888;
-    }
-    
-    .info .info-content {
+      }
+
+      .info .info-content {
         height: 37px;
         background: #fff;
         border-bottom: 1px solid #fff;
@@ -176,32 +176,32 @@
         display: flex;
         justify-content: center;
         align-items: center;
-    }
-    
-    .info .close {
+      }
+
+      .info .close {
         position: absolute;
         top: 10px;
         right: 10px;
         color: #888;
         width: 17px;
         height: 17px;
-        background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');
-    }
-    
-    .info .close:hover {
+        background: url("https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png");
+      }
+
+      .info .close:hover {
         cursor: pointer;
-    }
-    
-    .info:after {
-        content: '';
+      }
+
+      .info:after {
+        content: "";
         position: absolute;
         margin-left: -12px;
         left: 50%;
         bottom: 0;
         width: 22px;
         height: 12px;
-        background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
-    }
+        background: url("https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png");
+      }
     </style>
   </head>
 
@@ -239,21 +239,27 @@
 
         <form method="post" action="{% url 'map:map_main' %}">
           {% csrf_token %}
-        <button type="button" class="current-location"  onclick="redirectToNewPage()" >
-        이 위치로 택시 호출하기
-        </button>
+          <button
+            type="button"
+            class="current-location"
+            onclick="redirectToNewPage()"
+          >
+            이 위치로 택시 호출하기
+          </button>
         </form>
-
-
 
         <!--<input class="search1" ></input>-->
         <div
           id="addressInfo"
           class="search1"
           name="address"
-          style="margin-top: 70px; margin-left: 30px; display: flex;
-          align-items: center;
-          justify-content: center;"
+          style="
+            margin-top: 70px;
+            margin-left: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          "
         ></div>
         <!--<input class="search1" style="margin-top: 70px; margin-left: 30px;"></input>-->
 
@@ -284,7 +290,6 @@
       ></div>
 
       <script>
-
         document.addEventListener("DOMContentLoaded", function() {
         kakao.maps.load(function() {
             if (navigator.geolocation) {
@@ -349,10 +354,10 @@
                               });
 
                               // 커스텀 오버레이에 표시할 content
-                              var content = '<div class="wrap">' + 
+                              var content = '<div class="wrap">' +
                                 '    <div class="info">' +
-                                '     <div class="info-content">'+ station.name +'</div>' + 
-                                '    </div>' +    
+                                '     <div class="info-content">'+ station.name +'</div>' +
+                                '    </div>' +
                                 '</div>';
 
                               // 마커 위에 커스텀오버레이를 표시
@@ -369,7 +374,7 @@
 
                               // 커스텀 오버레이를 닫기 위해 호출되는 함수
                               function closeOverlay() {
-                                overlay.setMap(null);     
+                                overlay.setMap(null);
                               }
                             } else {
                               console.error("주소 변환 오류:", status);
@@ -454,15 +459,6 @@
             var newUrl = "{% url 'map:map_call' %}?keyword=" + encodeURIComponent(addressInfo2);
             window.location.href = newUrl;
         }
-
-
-
-
-
-
-
-
-
       </script>
     </div>
   </body>
