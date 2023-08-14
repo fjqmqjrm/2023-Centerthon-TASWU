@@ -126,7 +126,7 @@
         margin: 25px;
         text-decoration: none;
         padding: 15px 10px 15px 10px;
-        margin-top: 16px;
+        margin-top: 2px;
       }
 
       .btn-speak {
@@ -280,7 +280,7 @@
               <div>
                 <p
                   class="search-text2"
-                  style="color: #ff6868; font-weight: bolder"
+                  style="color: #ff6868; font-weight: bolder;"
                 >
                   위치 검색
                 </p>
@@ -300,7 +300,8 @@
               placeholder="원하는 장소를 입력하세요"
               id="keyword"
               size="20"
-              style="margin-left: 30px; width: 320px; height: 30px"
+              style="margin-left: 30px; width: 320px; height: 30px; border-radius: 10px; background: #f9f9f9;
+              box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4); border-style: none; width: 326px;height: 45px;"
             />
             <!--<div id="addressInfo" class="search1" style="margin-top: 20px; margin-left: 30px;" ></div>-->
           </div>
@@ -344,17 +345,12 @@
               id="stationName"
               name="station_name"
               size="20"
-              style="margin-left: 30px; width: 320px; height: 30px"
+              style="margin-left: 30px; width: 320px; height: 30px; border-radius: 10px; background: #f9f9f9;
+              box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4); border-style: none; width: 326px;height: 45px;"
             />
           </div>
 
           <div>
-            <p
-              class="search-text2"
-              style="color: #ff6868; font-weight: bolder; margin: 0px"
-            >
-              해당위치에 택시승강장을 등록할까요?
-            </p>
             <!-- "택시승강장 등록하기" 링크에 주소 정보를 전달 -->
             <form method="post" action="{% url 'map:station_add' %}">
               {% csrf_token %}

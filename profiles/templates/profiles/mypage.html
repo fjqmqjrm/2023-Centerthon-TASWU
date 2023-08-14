@@ -223,7 +223,7 @@
 
             <button class="reg">
                 {% if user_profile.is_taxi_driver %}
-                <p style="font-weight: bold; position: absolute; top: 2%; right: 217px;">호출 수락 내역</p>
+                <p style="font-weight: bold; position: absolute; top: 2%; right: 165px; font-size: 17px; white-space: nowrap;">호출 수락 내역</p>
                 <a href="{% url 'map:station_add_turn' %}">
                     <img style="height: 20px; width: 20px; position: absolute; top: 5%; right: 17px;" src="{% static 'img/plus.png' %}">
                 </a>
