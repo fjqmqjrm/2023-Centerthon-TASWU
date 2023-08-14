@@ -358,7 +358,7 @@
             <!-- "택시승강장 등록하기" 링크에 주소 정보를 전달 -->
             <form method="post" action="{% url 'map:station_add' %}">
               {% csrf_token %}
-              <button
+              <a
                 class="current-location"
                 id="current-location"
                 href="#"
@@ -366,7 +366,7 @@
                 type="submit"
               >
                 택시승강장 등록하기
-              </button>
+              </a>
             </form>
           </div>
         </div>
