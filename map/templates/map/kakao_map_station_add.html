@@ -172,16 +172,16 @@
         text-align: left;
         overflow: hidden;
         font-size: 8px;
-        font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+        font-family: "Malgun Gothic", dotum, "돋움", sans-serif;
         line-height: 1.5;
-    }
-    
-    .wrap * {
+      }
+
+      .wrap * {
         padding: 0;
         margin: 0;
-    }
-    
-    .wrap .info {
+      }
+
+      .wrap .info {
         width: 120px;
         height: 37px;
         border-radius: 5px;
@@ -189,9 +189,9 @@
         background: #fff;
         border: 0;
         box-shadow: 0 1px 2px #888;
-    }
-    
-    .info .info-content {
+      }
+
+      .info .info-content {
         height: 37px;
         background: #fff;
         border-bottom: 1px solid #fff;
@@ -200,32 +200,32 @@
         display: flex;
         justify-content: center;
         align-items: center;
-    }
-    
-    .info .close {
+      }
+
+      .info .close {
         position: absolute;
         top: 10px;
         right: 10px;
         color: #888;
         width: 17px;
         height: 17px;
-        background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');
-    }
-    
-    .info .close:hover {
+        background: url("https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png");
+      }
+
+      .info .close:hover {
         cursor: pointer;
-    }
-    
-    .info:after {
-        content: '';
+      }
+
+      .info:after {
+        content: "";
         position: absolute;
         margin-left: -12px;
         left: 50%;
         bottom: 0;
         width: 22px;
         height: 12px;
-        background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
-    }
+        background: url("https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png");
+      }
     </style>
   </head>
 
@@ -234,12 +234,20 @@
       <!-- 상단바 -->
       <div class="top-bar">
         <div style="display: flex; margin-left: 20px">
-            <a href="{% url 'map:map_main' %}" class="logo-text" style="color: #ffffff; text-decoration: none;">
-                PICK
-            </a>
-            <a href="{% url 'map:map_main' %}" class="logo-text" style="color: #FFF176; text-decoration: none;">
-                XI
-            </a>
+          <a
+            href="{% url 'map:map_main' %}"
+            class="logo-text"
+            style="color: #ffffff; text-decoration: none"
+          >
+            PICK
+          </a>
+          <a
+            href="{% url 'map:map_main' %}"
+            class="logo-text"
+            style="color: #fff176; text-decoration: none"
+          >
+            XI
+          </a>
         </div>
 
         <div style="margin-right: 20px">
@@ -300,7 +308,12 @@
           <div style="margin-bottom: 20px">
             <p
               class="search-text1"
-              style="color: #ff6868; margin-left: 20px; font-weight: bolder; margin-top: 0px;"
+              style="
+                color: #ff6868;
+                margin-left: 20px;
+                font-weight: bolder;
+                margin-top: 0px;
+              "
             >
               선택한 위치
             </p>
@@ -308,14 +321,21 @@
             <div
               id="addressInfo"
               class="search1"
-              style="margin-top: 20px; margin-left: 30px; display: flex;
-              align-items: center;
-              justify-content: center;"
+              style="
+                margin-top: 20px;
+                margin-left: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
             ></div>
           </div>
 
           <div style="margin-bottom: 20px">
-            <p class="search-text1" style="color: #ff6868; font-weight: bolder; margin-top: 0px;">
+            <p
+              class="search-text1"
+              style="color: #ff6868; font-weight: bolder; margin-top: 0px"
+            >
               승강장 이름
             </p>
             <input
@@ -329,27 +349,32 @@
           </div>
 
           <div>
-            <p class="search-text2" style="color: #ff6868; font-weight: bolder; margin: 0px;">
+            <p
+              class="search-text2"
+              style="color: #ff6868; font-weight: bolder; margin: 0px"
+            >
               해당위치에 택시승강장을 등록할까요?
             </p>
             <!-- "택시승강장 등록하기" 링크에 주소 정보를 전달 -->
-            <form method="post" action="{% url 'profiles:coin' %}">
+            <form method="post" action="{% url 'map:station_add' %}">
               {% csrf_token %}
-              <a
+              <button
                 class="current-location"
                 id="current-location"
                 href="#"
                 onclick="registerTaxiStation();"
-                >택시승강장 등록하기</a>
-              </form>
+                type="submit"
+              >
+                택시승강장 등록하기
+              </button>
+            </form>
           </div>
         </div>
 
         <audio id="sound2">
-                    <source src="{% static 'audio/sound2.mp3' %}" type="audio/mpeg">
-                <!-- 다양한 오디오 포맷을 지원하는 source 요소를 추가할 수 있습니다. -->
+          <source src="{% static 'audio/sound2.mp3' %}" type="audio/mpeg" />
+          <!-- 다양한 오디오 포맷을 지원하는 source 요소를 추가할 수 있습니다. -->
         </audio>
-
       </div>
 
       <script>
@@ -426,10 +451,10 @@
 
 
                               // 커스텀 오버레이에 표시할 content
-                              var content = '<div class="wrap">' + 
+                              var content = '<div class="wrap">' +
                                 '    <div class="info">' +
-                                '     <div class="info-content">'+ station.name +'</div>' + 
-                                '    </div>' +    
+                                '     <div class="info-content">'+ station.name +'</div>' +
+                                '    </div>' +
                                 '</div>';
 
                               // 역 마커를 위한 인포윈도우 생성
@@ -446,7 +471,7 @@
 
                               // 커스텀 오버레이를 닫기 위해 호출되는 함수
                               function closeOverlay() {
-                                overlay.setMap(null);     
+                                overlay.setMap(null);
                               }
                             } else {
                                 console.error("주소 변환 오류:", status);
@@ -530,7 +555,6 @@
           // 음성 재생
           arrivalSound.play();
          };
-
       </script>
 
       <!--음성인식-->
