@@ -181,9 +181,11 @@
 
             {% csrf_token %} 
             {% if user_profile.phone_number %}
-            <div class="certification" style="font-size:15px; font-weight: bold; display: flex; justify-content: center; align-items: center;">
-                {{ user_profile.phone_number }}
-            </div>
+            <a href="{% url 'profiles:phone_number' %}">
+                <div class="certification" style="text-decoration: none; color:#000000; font-size:15px; font-weight: bold; display: flex; justify-content: center; align-items: center;">
+                    {{ user_profile.phone_number }}
+                </div>
+            </a>
             {% else %} <!-- 전화번호 등록 안 했을 때 인증 멘트-->
             <a href="{% url 'profiles:phone_number' %}">
             <button class="certification" style="font-size:3px; font-weight: bold;" >전화번호를 등록해주세요
