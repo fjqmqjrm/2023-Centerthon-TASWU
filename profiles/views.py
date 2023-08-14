@@ -74,6 +74,8 @@ def phone_number(request):
 @login_required
 def coin(request):
     user_profile = UserProfile.objects.get(user=request.user)
+    user_profile.coins -= 2
+    user_profile.save()
     return render(request, 'profiles/coin.html', {'coins': user_profile.coins})
 
 @login_required
