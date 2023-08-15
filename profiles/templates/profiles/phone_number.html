@@ -169,5 +169,18 @@
             </a>
         </div>
 
+
+        <audio id="sound7">
+          <source src="{% static 'audio/sound7.mp3' %}" type="audio/mpeg" />
+          <!-- 다양한 오디오 포맷을 지원하는 source 요소를 추가할 수 있습니다. -->
+        </audio>
     </body>
+    <script>
+        window.onload = function() {
+         const arrivalSound = document.getElementById('sound7');
+
+          // 음성 재생
+          arrivalSound.play();
+          };
+    </script>
 </html>

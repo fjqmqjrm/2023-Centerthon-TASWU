@@ -250,6 +250,11 @@
           </a>
         </div>
 
+        <audio id="sound3">
+          <source src="{% static 'audio/sound3.mp3' %}" type="audio/mpeg" />
+          <!-- 다양한 오디오 포맷을 지원하는 source 요소를 추가할 수 있습니다. -->
+        </audio>
+
         <div style="margin-right: 20px">
           <button class="map-button">
             <img class="map-img" src="{% static 'img/map.png' %}" /></button
@@ -367,13 +372,18 @@
           </div>
         </div>
 
-        <audio id="sound2">
-          <source src="{% static 'audio/sound2.mp3' %}" type="audio/mpeg" />
-          <!-- 다양한 오디오 포맷을 지원하는 source 요소를 추가할 수 있습니다. -->
-        </audio>
+
       </div>
 
+
       <script>
+
+         window.onload = function() {
+         const arrivalSound = document.getElementById('sound3');
+
+          // 음성 재생
+          arrivalSound.play();
+          };
 
         document.addEventListener("DOMContentLoaded", function() {
         kakao.maps.load(function() {
@@ -539,19 +549,13 @@
                 document.body.appendChild(form);
                 form.submit();
             }
+
+
+
+
       </script>
 
-      <script>
-        current-location
 
-        const moveButton = document.getElementById('current-location');
-        const arrivalSound = document.getElementById('sound2');
-
-        moveButton.addEventListener('click', function() {
-          // 음성 재생
-          arrivalSound.play();
-         };
-      </script>
 
       <!--음성인식-->
       <script
@@ -559,6 +563,7 @@
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
         crossorigin="anonymous"
       ></script>
+
       <script>
         // Check if the browser supports Web Speech API
         if (
@@ -618,8 +623,13 @@
           addressInfoDiv.innerText = keywordInput.value;
 
           // 여기에서 원하는 추가 작업 수행 가능
+
+
         }
       </script>
+
+
+
     </div>
   </body>
 </html>
