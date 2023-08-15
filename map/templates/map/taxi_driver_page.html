@@ -211,7 +211,11 @@
                         position: new kakao.maps.LatLng(latitude, longitude),
                         map: map,
                         image: markerImage,
-                        draggable: true
+                        draggable: true,
+                        zIndex: 2
+                    });
+
+                    marker.setMap(map);
                     });
 
                     // user_stations에 해당하는 마커들을 추가하는 부분
