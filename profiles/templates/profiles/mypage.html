@@ -59,7 +59,7 @@
         .user{
             position: relative;
             margin-top: -60%;
-            right: -75px;
+            right: -67px;
             transform: translate(-50%, -50%);
         }
 
@@ -72,6 +72,18 @@
             transform: translate(-50%, -50%);
         }
 
+        #showFormButton {
+            width:144px;
+            height:28px;
+            background-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+            border-style: none;
+            border-radius: 50px;
+            font-weight: bold;
+            position: relative;
+            left: 23px;
+
+        }
 
         .certification{
             width:144px;
@@ -87,11 +99,11 @@
         }
 
         .button1{
-            width:106px;
+            width:97px;
             height:80px;
             position: absolute;
             top: 25%;
-            right: 210px;
+            right: 205px;
             transform: translate(-50%, -50%);
             background-color: rgba(255, 255, 255, 0.25);
             box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
@@ -101,11 +113,11 @@
         }
 
         .button2{
-            width:106px;
+            width:97px;
             height:80px;
             position: absolute;
             top: 25%;
-            right: 90px;
+            right: 97px;
             transform: translate(-50%, -50%);
             background-color: rgba(255, 255, 255, 0.25);
             box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
@@ -115,11 +127,11 @@
         }
 
         .button3{
-            width:106px;
+            width:97px;
             height:80px;
             position: absolute;
             top: 25%;
-            right: -30px;
+            right: -10px;
             transform: translate(-50%, -50%);
             background-color: rgba(255, 255, 255, 0.25);
             box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
@@ -157,11 +169,13 @@
         }
 
         .scroll1 {
+          margin-top: 40px;
           max-height: 350px;
           overflow-y: auto;
         }
 
         .scroll2 {
+          margin-top: 30px;
           max-height: 350px;
           overflow-y: auto;
         }
@@ -256,8 +270,8 @@
 
                             {% for taxi_call in taxi_calls %}
                             <li>
-                                <p style="font-size: 16px; font-weight: bolder; disply: flex; justify-content:left; margin-right: 150px;">{{ taxi_call.client }}</p>
-                                <p style="font-size: 14px;disply: flex; justify-content:left; margin-right: 100px; white-space: nowrap;">{{ taxi_call.address }}</p>
+                                <p style="font-size: 16px; font-weight: bolder; disply: flex; justify-content:left; margin-right: 215px;">{{ taxi_call.client }}</p>
+                                <p style="font-size: 14px;disply: flex; justify-content:left; margin-right: 100px; white-space: nowrap; margin-bottom: 30px;">{{ taxi_call.address }}</p>
                             </li>
                             {% endfor %}
                 </ol>
@@ -296,9 +310,8 @@
                 </div>
                 {% endif %}
             </button>
-            <div style="position : absolute; top: 10%; right: 240px; display: flex;">
-            <button id="showFormButton" style="color: #000000; background-color: rgba(255, 255, 255, 0.773); border-radius: 3px;
-            border-style: none; font-weight: bold;">기사님 인증하기</button>
+            <div style="position : absolute; top: 10%; right: 230px; display: flex;">
+            <button id="showFormButton">기사님 인증하기</button>
             </div>
 
 
