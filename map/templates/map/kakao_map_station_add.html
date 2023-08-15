@@ -280,7 +280,7 @@
               <div>
                 <p
                   class="search-text2"
-                  style="color: #ff6868; font-weight: bolder;"
+                  style="color: #ff6868; font-weight: bolder"
                 >
                   위치 검색
                 </p>
@@ -300,8 +300,17 @@
               placeholder="원하는 장소를 입력하세요"
               id="keyword"
               size="20"
-              style="margin-left: 30px; width: 320px; height: 30px; border-radius: 10px; background: #f9f9f9;
-              box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4); border-style: none; width: 326px;height: 45px;"
+              style="
+                margin-left: 30px;
+                width: 320px;
+                height: 30px;
+                border-radius: 10px;
+                background: #f9f9f9;
+                box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+                border-style: none;
+                width: 326px;
+                height: 45px;
+              "
             />
             <!--<div id="addressInfo" class="search1" style="margin-top: 20px; margin-left: 30px;" ></div>-->
           </div>
@@ -345,8 +354,17 @@
               id="stationName"
               name="station_name"
               size="20"
-              style="margin-left: 30px; width: 320px; height: 30px; border-radius: 10px; background: #f9f9f9;
-              box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4); border-style: none; width: 326px;height: 45px;"
+              style="
+                margin-left: 30px;
+                width: 320px;
+                height: 30px;
+                border-radius: 10px;
+                background: #f9f9f9;
+                box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+                border-style: none;
+                width: 326px;
+                height: 45px;
+              "
             />
           </div>
 
@@ -511,6 +529,13 @@
 
                 var stationNameInput = document.getElementById('stationName');
                 var station_name = stationNameInput.value;  // 승강장 이름 값 가져오기
+
+                var coins = {{ user_profile.coins }};  // 유저 프로필의 코인 값 가져오기
+
+                if (coins <= 1) {
+                    alert('코인이 부족하여 승강장을 등록할 수 없습니다.');
+                    return;  // 등록 중지
+                }
 
                 var form = document.createElement('form');
                 form.method = 'post';
