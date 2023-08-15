@@ -174,9 +174,13 @@
             <ul id="itemList" style="margin-top: 30px; text-align: center; justify-items: center; font-size: large; border-color: #6A7EEC;">
                 {% for taxi_call in taxi_calls %}
                     {% if taxi_call.driver is None %}
-                        <li style="font-size: 16px; margin-bottom: 10px;">
-                            <input style="font-weight: bolder;" type="checkbox" name="selected_calls" value="{{ taxi_call.pk }}">
-                            &nbsp;&nbsp;&nbsp;{{ taxi_call.client }} - {{ taxi_call.address }}
+                        <li style="font-size: 16px; margin-bottom: 5px; margin-top: 5px;">
+                            <div style="display: flex;">
+                                <input style="font-weight: bolder;" type="checkbox" name="selected_calls" value="{{ taxi_call.pk }}">
+                                <p style="color: #6A7EEC; font-weight: bold;">&nbsp;{{ taxi_call.client }} &nbsp</p>
+                                <p>{{ taxi_call.address }}</p>
+                            </div>
+
                         </li>
                     {% endif %}
                 {% endfor %}
