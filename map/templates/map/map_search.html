@@ -246,7 +246,14 @@
             <div class="option">
                 <div>
                     <form onsubmit="searchPlaces(); return false;">
-                        <input type="text" placeholder="원하는 장소를 입력하세요" id="keyword" size="20" value="서울여대" style="margin-right: 8px;">
+                        <input type="text" placeholder="원하는 장소를 입력하세요" id="keyword" size="20" value="서울여대" 
+                        style="margin-right: 8px; 
+                        width: 160px;
+                        height: 30px;
+                        background: #f9f9f9;
+                        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+                        border-radius: 10px;
+                        border-style: none;">
                         <button class="btn-speak" onclick="startListening()">음성</button>
                         <button class="btn-search" type="submit">검색</button>
                         <!-- 새로운 버튼을 추가하고 해당 버튼을 클릭하면 redirectToNewPage 함수 호출 -->

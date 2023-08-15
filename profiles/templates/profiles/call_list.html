@@ -82,47 +82,29 @@
             margin-top: 50%;
         }
 
-        #deleteButton{
-            margin-top: 80%;
-            background-color: #6A7EEC;
-            border-radius: 10px;
-            border-style: none;
-            color: #ffffff;
-            margin-left: 85%;
-            font-size: large;
-            position: relative;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            width: 73px;
-            height:37px;
 
-        }
 
         .div-box{
             width: 300px;
-            height: 500px;
-            background-color: #ffffff;
-            border-color: #6A7EEC;
-            z-index: 2;
+            height: 400px;
+            background-color: #eeeeee;
             border-radius: 15px;
-            box-shadow: 0px 2px 4px rgb(0, 0, 0, 0.4);
+            box-shadow: 0px 2px 4px rgb(0, 0, 0, 0.8);
             display: flex;
             justify-content: center;
             align-items: center;
-            border: 2px solid #6A7EEC;
-            max-height: 350px;
             overflow-y: auto;
         }
 
         #acceptButton {
             background-color: #6A7EEC;
             color: #ffffff;
-            width: 295px;
+            width: 300px;
             height: 40px;
             border-radius: 10px;
             border-style: none;
             font-weight: bold;
-            margin-top: 30px;
+            margin-top: 35px;
         }
 
         #acceptButton:hover {
@@ -136,8 +118,20 @@
 
     <!-- 상단바 -->
     <div class="top-bar">&nbsp;&nbsp;&nbsp;
-        <p class="logo-text" style="color: #ffffff;">PICK</p>
-        <p class="logo-text" style="color: #FFF176;">XI</p>
+        <a
+        href="{% url 'map:map_main' %}"
+        class="logo-text"
+        style="color: #ffffff; text-decoration: none"
+      >
+        PICK
+      </a>
+      <a
+        href="{% url 'map:map_main' %}"
+        class="logo-text"
+        style="color: #fff176; text-decoration: none"
+      >
+        XI
+      </a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -161,32 +155,34 @@
         <form id="callForm" method="post" action="{% url 'profiles:call_accept' %}">
             <p style="font-size: 20px; font-weight: bold; text-align: center;"> 택시 호출 리스트</p>
 
-            <div style="display: flex; flex-direction: column; align-items: center;">
-
             <div class="div-box">
             {% csrf_token %}
-            <ul id="itemList" style="margin-top: 30px; text-align: center; justify-items: center; font-size: large; border-color: #6A7EEC;">
+            <ul id="itemList" style="margin-top: 10px; text-align: center; justify-items: center; font-size: large; border-color: #6A7EEC;">
                 {% for taxi_call in taxi_calls %}
                     {% if taxi_call.driver is None %}
                         <li style="font-size: 16px; margin-bottom: 5px; margin-top: 5px;">
                             <div style="display: flex;">
                                 <input style="font-weight: bolder;" type="checkbox" name="selected_calls" value="{{ taxi_call.pk }}">
+
                                 <p style="color: #6A7EEC; font-weight: bold;">&nbsp;{{ taxi_call.client }} &nbsp</p>
                                 <a href="#" onclick="navigateToDestination('{{ taxi_call.address }}'); return false;">
                                     <p>{{ taxi_call.address }}</p>
                                 </a>
+=======
+                           
                             </div>
 
                         </li>
                     {% endif %}
                 {% endfor %}
-            </ul>
+                
+                <div>
+                
             </div>
+        </ul>
+    </div>
+        <button id="acceptButton" type="submit">수락</button>
 
-            <div>
-                <button id="acceptButton" type="submit">수락</button>
-            </div>
-            </div>
 
         </form>
     </div>

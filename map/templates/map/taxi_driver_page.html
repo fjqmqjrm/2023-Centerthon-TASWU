@@ -66,8 +66,8 @@
 
         .down-bar {
             width: 390px;
-            height: 400px;
-            margin-top: 443.5px;
+            height: 300px;
+            margin-top: 140%;
             background: #ffffff;
             border-radius: 23px 23px 0 0;
             position: absolute;
@@ -76,7 +76,7 @@
 
 
         .search-text1 {
-            top: 8%;
+            top: 10%;
             right: 273px;
             position: absolute;
             transform: translate(-50%, -50%);
@@ -90,7 +90,7 @@
             border-radius: 10px;
             border-style: none;
             position: absolute;
-            top: 8%;
+            top: 10%;
             right: -130px;
             transform: translate(-50%, -50%);
         }
@@ -115,7 +115,7 @@
             align-items: center;
             border-style: none;
             position: absolute;
-            top: 45%;
+            top: 80%;
             right: -130px;
             transform: translate(-50%, -50%);
         }
@@ -138,7 +138,7 @@
             align-items: center;
             border-style: none;
             position: absolute;
-            top: 82%;
+            top: 90%;
             right: -130px;
             transform: translate(-50%, -50%);
         }
@@ -201,6 +201,7 @@
         <!--            <button class="reg-button"><a style="text-decoration: none; color: #ffffff;"-->
         <!--                 href="{% url 'map:station_add_turn' %}">택시승강장 등록하기</a></button>-->
         {% csrf_token %} {% if user.userprofile.is_taxi_driver %}
+        <p style="font-weight: bolder; color: #6a7eec; text-align: center; margin-top: 45% ;">호출 리스트를 확인하시겠어요?</p>
         <button class="current-location">
           <a
             style="text-decoration: none; color: #ffffff"
@@ -215,7 +216,7 @@
         id="map"
         style="
           width: 390px;
-          height: 415px;
+          height: 100%;
           position: absolute;
           z-index: 1;
           top: 30%;
