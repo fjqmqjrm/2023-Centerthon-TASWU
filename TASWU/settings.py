@@ -121,6 +121,11 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 
+SOCIAL_AUTH_KAKAO_KEY = 'b845e3d56c706e34aae7cf1715837b61'
+SOCIAL_AUTH_KAKAO_SECRET = 'V4n3xkd0qIMSQYOsxlFUeOasZPglIlP4'
+SOCIAL_AUTH_KAKAO_CALLBACK_URL = 'http://127.0.0.1:8000/accounts/kakao/login/callback/'
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 

@@ -95,7 +95,7 @@
             transform: translate(-50%, -50%);
             width: 73px;
             height:37px;
-            
+
         }
 
         .div-box{
@@ -113,7 +113,7 @@
             max-height: 350px;
             overflow-y: auto;
         }
-        
+
         #acceptButton {
             background-color: #6A7EEC;
             color: #ffffff;
@@ -155,7 +155,7 @@
 
     </div>
 
-    
+
     <!-- 리스트 -->
     <div style="display: flex; justify-content: center;">
         <form id="callForm" method="post" action="{% url 'profiles:call_accept' %}">
@@ -172,7 +172,9 @@
                             <div style="display: flex;">
                                 <input style="font-weight: bolder;" type="checkbox" name="selected_calls" value="{{ taxi_call.pk }}">
                                 <p style="color: #6A7EEC; font-weight: bold;">&nbsp;{{ taxi_call.client }} &nbsp</p>
-                                <p>{{ taxi_call.address }}</p>
+                                <a href="#" onclick="navigateToDestination('{{ taxi_call.address }}'); return false;">
+                                    <p>{{ taxi_call.address }}</p>
+                                </a>
                             </div>
 
                         </li>
@@ -198,7 +200,24 @@
             </a>
         </div>
 
+
+
     </div>
+
+<script>
+    function navigateToDestination(address) {
+        var baseURL = 'https://m.map.kakao.com/actions/searchView?';
+        var query = 'q=' + encodeURIComponent(address);
+        var wxEnc = 'MOMMMP'; // wxEnc 값
+        var wyEnc = 'QNLRUQS'; // wyEnc 값
+        var level = 4; // 지도 줌 레벨 값
+        var destinationURL = baseURL + query + '&wxEnc=' + wxEnc + '&wyEnc=' + wyEnc + '&lvl=' + level;
+
+        // 주소를 길찾기 페이지로 이동
+        window.location.href = destinationURL;
+
+    }
+</script>
 
 </body>
 </html>
