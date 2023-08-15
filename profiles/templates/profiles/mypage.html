@@ -88,7 +88,7 @@
 
         .button1{
             width:106px;
-            height:75px;
+            height:80px;
             position: absolute;
             top: 25%;
             right: 210px;
@@ -102,7 +102,7 @@
 
         .button2{
             width:106px;
-            height:75px;
+            height:80px;
             position: absolute;
             top: 25%;
             right: 90px;
@@ -116,7 +116,7 @@
 
         .button3{
             width:106px;
-            height:75px;
+            height:80px;
             position: absolute;
             top: 25%;
             right: -30px;
@@ -156,7 +156,12 @@
 
         }
 
-        .scroll {
+        .scroll1 {
+          max-height: 350px;
+          overflow-y: auto;
+        }
+
+        .scroll2 {
           max-height: 350px;
           overflow-y: auto;
         }
@@ -240,36 +245,39 @@
             </a>
 
             <button class="reg">
+                <!-- 기사님 -->
                 {% if user_profile.is_taxi_driver %}
                 <p style="font-weight: bold; position: absolute; top: 2%; right: 165px; font-size: 17px; white-space: nowrap;">호출 수락 내역</p>
                 <a href="{% url 'map:station_add_turn' %}">
                     <img style="height: 20px; width: 20px; position: absolute; top: 5%; right: 17px;" src="{% static 'img/plus.png' %}">
                 </a>
-                <ul>
+                <ol class="scroll1">
                             {% for taxi_call in taxi_calls %}
                             <li>
-                                <p>{{ taxi_call.client }}</p>
-                                <p>{{ taxi_call.address }}</p>
+                                <p style="font-size: 16px; font-weight: bolder; disply: flex; justify-content:left; margin-right: 150px;">{{ taxi_call.client }}</p>
+                                <p style="font-size: 14px;disply: flex; justify-content:left; margin-right: 100px; white-space: nowrap;">{{ taxi_call.address }}</p>
                             </li>
                             {% endfor %}
-                </ul>
+                </ol>
+
+                <!-- 사용자 -->
                 {% else %}
-                <p style="font-weight: bold; position: absolute; top: 2%; right: 217px;">내 장소 등록</p>
+                <p style="font-weight: bold; position: absolute; top: 2%; right: 185px; font-size: 17px; white-space: nowrap;">내 장소 등록</p>
                 <a href="{% url 'map:station_add_turn' %}">
                     <img style="height: 20px; width: 20px; position: absolute; top: 5%; right: 17px;" src="{% static 'img/plus.png' %}">
                 </a>
-                <div class="scroll" style="margin-top: 30px;">
+                <div class="scroll2">
                     {% if user_profile %}
                         <form method="post" action="{% url 'profiles:delete_stations' %}">
                             {% csrf_token %}
                             <ul class="station-list">
                                 {% for station in user_profile.station_set.all %}
                                 <div style="disply: flex; justify-content:left;">
-                                    <div style="display: flex; justify-content: space-between; margin-right: 40px; font-size: 17px;">
+                                    <div style="display: flex; justify-content: space-between; margin-right: 40px; font-size: 16px;">
                                         <p style="font-weight: bold;">{{ station.name }}</p>
                                         <input type="checkbox" name="stations_to_delete" value="{{ station.id }}">
                                     </div>
-                                    <div style="disply: flex; justify-content:left; margin-right: 100px;">
+                                    <div style="disply: flex; justify-content:left; margin-right: 100px; white-space: nowrap; font-size: 14px;">
                                       <p>{{ station.address }}</p>
                                     </div>
                                 </div>
