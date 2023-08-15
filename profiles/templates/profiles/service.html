@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
-{% load static %}
+  {% load static %}
 
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>service 소개</title>
@@ -79,10 +79,9 @@
       color: white;
       font-weight: bold;
       }
-
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div id="iphone-frame">
       <!-- 상단바 -->
       <div class="top-bar">
@@ -118,7 +117,7 @@
       </div>
 
       <div class="service-img">
-        <div style="position: relative; left: 45px;">
+        <div style="position: relative; left: 45px">
           <img src="{% static 'img/service1.png' %}" />
         </div>
         <div>
@@ -129,15 +128,19 @@
       <br />
 
       <div class="down-bar">
-            <a href="{% url 'profiles:my_page' %}" style="text-decoration: none; color:#ffffff">
-                <button class="before-btn">
-                    <img style="height: 17; width: 10px;" src="{% static 'img/before.png' %}"> 돌아가기
-                </button>
-            </a>
+        <a
+          href="{% url 'profiles:my_page' %}"
+          style="text-decoration: none; color: #ffffff"
+        >
+          <button class="before-btn">
+            <img
+              style="height: 17; width: 10px"
+              src="{% static 'img/before.png' %}"
+            />
+            이전
+          </button>
+        </a>
       </div>
-
-
     </div>
-</body>
+  </body>
 </html>
-

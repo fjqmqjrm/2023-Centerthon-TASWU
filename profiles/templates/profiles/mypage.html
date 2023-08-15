@@ -1,6 +1,6 @@
 <!-- mypage.html -->
 <!DOCTYPE html>
-<html>
+<html xmlns:display="http://www.w3.org/1999/xhtml">
 {% load static %}
 <head>
     <title>마이페이지</title>
@@ -248,10 +248,12 @@
                 <!-- 기사님 -->
                 {% if user_profile.is_taxi_driver %}
                 <p style="font-weight: bold; position: absolute; top: 2%; right: 165px; font-size: 17px; white-space: nowrap;">호출 수락 내역</p>
+
                 <a href="{% url 'map:station_add_turn' %}">
                     <img style="height: 20px; width: 20px; position: absolute; top: 5%; right: 17px;" src="{% static 'img/plus.png' %}">
                 </a>
                 <ol class="scroll1">
+
                             {% for taxi_call in taxi_calls %}
                             <li>
                                 <p style="font-size: 16px; font-weight: bolder; disply: flex; justify-content:left; margin-right: 150px;">{{ taxi_call.client }}</p>
@@ -262,11 +264,13 @@
 
                 <!-- 사용자 -->
                 {% else %}
+
                 <p style="font-weight: bold; position: absolute; top: 2%; right: 185px; font-size: 17px; white-space: nowrap;">내 장소 등록</p>
                 <a href="{% url 'map:station_add_turn' %}">
                     <img style="height: 20px; width: 20px; position: absolute; top: 5%; right: 17px;" src="{% static 'img/plus.png' %}">
                 </a>
                 <div class="scroll2">
+
                     {% if user_profile %}
                         <form method="post" action="{% url 'profiles:delete_stations' %}">
                             {% csrf_token %}
@@ -292,7 +296,13 @@
                 </div>
                 {% endif %}
             </button>
+            <div style="position : absolute; top: 10%; right: 240px; display: flex;">
+            <button id="showFormButton" style="color: #000000; background-color: rgba(255, 255, 255, 0.773); border-radius: 3px;
+            border-style: none; font-weight: bold;">기사님 인증하기</button>
+            </div>
 
+
+            <div id="formWrapper" style= "display: none;">
             <form style="position: absolute; top: 10%; right: 170px; display: flex;" method="post" action="{% url 'profiles:my_page' %}">
                 {% csrf_token %}
                 <div style="margin-right: 15px;">
@@ -301,13 +311,12 @@
                 </div>
                 <div>
                     <button style="color: #000000; background-color: rgba(255, 255, 255, 0.773); border-radius: 3px;
-                    border-style: none;" type="submit">저장</button>
+                    border-style: none; font-weight: bold;" type="submit">저장</button>
                 </div>
 
             </form>
-
+                </div>
         </div>
-    </div>
 
 
     <!-- 이미지 업로드용 폼 -->
@@ -352,7 +361,42 @@
             }
         }
     </script>
-    
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var openAuthModalBtn = document.getElementById("openAuthModalBtn");
+            var authModal = document.getElementById("authModal");
+            var authCheckbox = document.getElementById("authCheckbox");
+            var authConfirmBtn = document.getElementById("authConfirmBtn");
+            var authCancelBtn = document.getElementById("authCancelBtn");
+
+            openAuthModalBtn.addEventListener("click", function() {
+                authModal.style.display = "block";
+            });
+
+            authConfirmBtn.addEventListener("click", function() {
+                if (authCheckbox.checked) {
+                    // 여기에 인증 확인되었을 때의 로직 추가
+                    // 예를 들어, 서버에 인증 요청을 보내거나 다른 작업 수행
+                    // 인증이 확인되면 모달을 닫을 수 있습니다.
+                    authModal.style.display = "none";
+                } else {
+                    // 체크박스가 선택되지 않았을 경우 처리
+                    // 메시지를 표시하거나 다른 동작을 수행할 수 있습니다.
+                }
+            });
+
+            authCancelBtn.addEventListener("click", function() {
+                authModal.style.display = "none";
+            });
+        });
+    </script>
+    <script>
+    document.getElementById("showFormButton").addEventListener("click", function() {
+        document.getElementById("showFormButton").style.display = "none"; // 기사님 인증하기 버튼 숨기기
+        document.getElementById("formWrapper").style.display = "block"; // 양식 표시
+    });
+    </script>
 </body>
 
 </html>
