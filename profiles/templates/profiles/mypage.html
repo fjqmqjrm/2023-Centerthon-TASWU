@@ -242,16 +242,19 @@
                 </a>
                 <div class="scroll" style="margin-top: 30px;">
                     {% if user_profile %}
-                        <ul class="station-list">
-                            {% for station in user_profile.station_set.all %}
-                            <div>
+                        <form method="post" action="{% url 'profiles:delete_stations' %}">
+                            {% csrf_token %}
+                            <ul class="station-list">
+                                {% for station in user_profile.station_set.all %}
                                 <li>
+                                    <input type="checkbox" name="stations_to_delete" value="{{ station.id }}">
                                     <p>{{ station.name }}</p>
                                     <p>{{ station.address }}</p>
                                 </li>
-                            </div>
-                        {% endfor %}
-                        </ul>
+                                {% endfor %}
+                            </ul>
+                            <button type="submit">삭제</button>
+                        </form>
                     {% else %}
                         <img style="height: 79px; width: 72px; position: relative; top: 12%;" src="{% static 'img/place.png' %}">
                         <p style="font-weight: bold; text-align: center; position: relative; top: 4%;">자주가는 장소를 등록하고<br> 쉽게 예약을 요청하세요!</p>
