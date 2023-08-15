@@ -245,7 +245,7 @@
                 <a href="{% url 'map:station_add_turn' %}">
                     <img style="height: 20px; width: 20px; position: absolute; top: 5%; right: 17px;" src="{% static 'img/plus.png' %}">
                 </a>
-                <ul class="station-list">
+                <ul>
                             {% for taxi_call in taxi_calls %}
                             <li>
                                 <p>{{ taxi_call.client }}</p>
@@ -264,12 +264,12 @@
                             {% csrf_token %}
                             <ul class="station-list">
                                 {% for station in user_profile.station_set.all %}
-                                <div style="flex;">
-                                    <div style="display: flex; justify-content: space-between; margin-right: 40px;">
+                                <div style="disply: flex; justify-content:left;">
+                                    <div style="display: flex; justify-content: space-between; margin-right: 40px; font-size: 17px;">
                                         <p style="font-weight: bold;">{{ station.name }}</p>
                                         <input type="checkbox" name="stations_to_delete" value="{{ station.id }}">
                                     </div>
-                                    <div>
+                                    <div style="disply: flex; justify-content:left; margin-right: 100px;">
                                       <p>{{ station.address }}</p>
                                     </div>
                                 </div>
