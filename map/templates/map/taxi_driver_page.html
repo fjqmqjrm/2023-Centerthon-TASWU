@@ -12,130 +12,136 @@
     ></script>
 
     <style>
-      body {
-        background-color: #e9e9e9;
-        overflow: scroll;
-        margin: 0px;
-      }
+        body {
+            background-color: #e9e9e9;
+            overflow: scroll;
+            margin: 0px;
+        }
 
-      #iphone-frame {
-        width: 390px;
-        height: 844px;
-        background: #c0c0c0;
-        position: relative;
-        justify-content: center;
-        align-items: center;
-      }
+        #iphone-frame {
+            width: 390px;
+            height: 844px;
+            background: #c0c0c0;
+            position: relative;
+            justify-content: center;
+            align-items: center;
+        }
 
-      .top-bar {
-        width: 390px;
-        height: 74px;
-        background: #6a7eec;
-        border-radius: 0 0 23px 23px;
-        display: flex;
-        align-items: center;
-        position: absolute;
-        z-index: 2;
-      }
+        .top-bar {
+            width: 390px;
+            height: 74px;
+            background: #6A7EEC;
+            border-radius: 0 0 23px 23px;
+            display: flex;
+            align-items: center;
+            position: absolute;
+            z-index: 2;
+        }
 
-      .logo-text {
-        top: 100px;
-        font-weight: bolder;
-        font-size: x-large;
-      }
+        .logo-text {
+            top: 100px;
+            font-weight: bolder;
+            font-size: x-large;
+        }
 
-      .map-img {
-        width: 23px;
-        height: 31px;
-      }
+        .map-img {
+            width: 23px;
+            height: 31px;
+        }
 
-      .map-button {
-        border: none;
-        background-color: #6a7eec;
-      }
+        .map-button {
+            border: none;
+            background-color: #6A7EEC;
+        }
 
-      .logo-img {
-        width: 29px;
-        height: 29px;
-      }
+        .logo-img {
+            width: 29px;
+            height: 29px;
+        }
 
-      .logo-button {
-        border: none;
-        background-color: #6a7eec;
-      }
+        .logo-button {
+            border: none;
+            background-color: #6A7EEC;
+        }
 
-      .down-bar {
-        width: 390px;
-        height: 400px;
-        margin-top: 443.5px;
-        background: #ffffff;
-        border-radius: 23px 23px 0 0;
-        position: absolute;
-        z-index: 2;
-      }
+        .down-bar {
+            width: 390px;
+            height: 400px;
+            margin-top: 443.5px;
+            background: #ffffff;
+            border-radius: 23px 23px 0 0;
+            position: absolute;
+            z-index: 2;
+        }
 
-      .search-text1 {
-        top: 8%;
-        right: 273px;
-        position: absolute;
-        transform: translate(-50%, -50%);
-      }
 
-      .search1 {
-        width: 326px;
-        height: 45px;
-        background: #f9f9f9;
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
-        border-radius: 10px;
-        border-style: none;
-        position: absolute;
-        top: 8%;
-        right: -130px;
-        transform: translate(-50%, -50%);
-      }
+        .search-text1 {
+            top: 8%;
+            right: 273px;
+            position: absolute;
+            transform: translate(-50%, -50%);
+        }
 
-      .search-text2 {
-        top: 65%;
-        right: -25px;
-        position: absolute;
-        transform: translate(-50%, -50%);
-      }
+        .search1 {
+            width: 326px;
+            height: 45px;
+            background: #F9F9F9;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            border-style: none;
+            position: absolute;
+            top: 8%;
+            right: -130px;
+            transform: translate(-50%, -50%);
+        }
 
-      .current-location {
-        width: 329px;
-        height: 51px;
-        background: #6a7eec;
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
-        border-radius: 10px;
-        color: #ffffff;
-        font-weight: bold;
-        font-size: large;
-        text-align: center;
-        align-items: center;
-        border-style: none;
-        position: absolute;
-        top: 55%;
-        right: -130px;
-        transform: translate(-50%, -50%);
-      }
+        .search-text2 {
+            top: 65%;
+            right: -25px;
+            position: absolute;
+            transform: translate(-50%, -50%);
+        }
 
-      .reg-button {
-        width: 329px;
-        height: 51px;
-        background: #6a7eec;
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
-        border-radius: 10px;
-        color: #ffffff;
-        font-weight: bold;
-        font-size: large;
-        text-align: center;
-        align-items: center;
-        border-style: none;
-        position: absolute;
-        top: 82%;
-        right: -130px;
-        transform: translate(-50%, -50%);
-      }
+        .current-location {
+            width: 329px;
+            height: 51px;
+            background: #6A7EEC;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: large;
+            text-align: center;
+            align-items: center;
+            border-style: none;
+            position: absolute;
+            top: 45%;
+            right: -130px;
+            transform: translate(-50%, -50%);
+        }
+
+        .current-location:hover {
+        background-color: #495CBF;
+        }
+
+
+        .reg-button {
+            width: 329px;
+            height: 51px;
+            background: #6A7EEC;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: large;
+            text-align: center;
+            align-items: center;
+            border-style: none;
+            position: absolute;
+            top: 82%;
+            right: -130px;
+            transform: translate(-50%, -50%);
+        }
     </style>
   </head>
 
