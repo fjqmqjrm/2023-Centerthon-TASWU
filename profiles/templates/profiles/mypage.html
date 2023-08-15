@@ -1,6 +1,6 @@
 <!-- mypage.html -->
 <!DOCTYPE html>
-<html>
+<html xmlns:display="http://www.w3.org/1999/xhtml">
 {% load static %}
 <head>
     <title>마이페이지</title>
@@ -284,7 +284,13 @@
                 </div>
                 {% endif %}
             </button>
+            <div style="position : absolute; top: 10%; right: 240px; display: flex;">
+            <button id="showFormButton" style="color: #000000; background-color: rgba(255, 255, 255, 0.773); border-radius: 3px;
+            border-style: none;">기사님 인증하기</button>
+            </div>
 
+
+            <div id="formWrapper" style= "display: none;">
             <form style="position: absolute; top: 10%; right: 170px; display: flex;" method="post" action="{% url 'profiles:my_page' %}">
                 {% csrf_token %}
                 <div style="margin-right: 15px;">
@@ -297,9 +303,8 @@
                 </div>
 
             </form>
-
+                </div>
         </div>
-    </div>
 
 
     <!-- 이미지 업로드용 폼 -->
@@ -344,7 +349,42 @@
             }
         }
     </script>
-    
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var openAuthModalBtn = document.getElementById("openAuthModalBtn");
+            var authModal = document.getElementById("authModal");
+            var authCheckbox = document.getElementById("authCheckbox");
+            var authConfirmBtn = document.getElementById("authConfirmBtn");
+            var authCancelBtn = document.getElementById("authCancelBtn");
+
+            openAuthModalBtn.addEventListener("click", function() {
+                authModal.style.display = "block";
+            });
+
+            authConfirmBtn.addEventListener("click", function() {
+                if (authCheckbox.checked) {
+                    // 여기에 인증 확인되었을 때의 로직 추가
+                    // 예를 들어, 서버에 인증 요청을 보내거나 다른 작업 수행
+                    // 인증이 확인되면 모달을 닫을 수 있습니다.
+                    authModal.style.display = "none";
+                } else {
+                    // 체크박스가 선택되지 않았을 경우 처리
+                    // 메시지를 표시하거나 다른 동작을 수행할 수 있습니다.
+                }
+            });
+
+            authCancelBtn.addEventListener("click", function() {
+                authModal.style.display = "none";
+            });
+        });
+    </script>
+    <script>
+    document.getElementById("showFormButton").addEventListener("click", function() {
+        document.getElementById("showFormButton").style.display = "none"; // 기사님 인증하기 버튼 숨기기
+        document.getElementById("formWrapper").style.display = "block"; // 양식 표시
+    });
+    </script>
 </body>
 
 </html>

@@ -205,17 +205,6 @@
                     };
                     var map = new kakao.maps.Map(mapContainer, mapOptions);
 
-                    var imageSrc = "/static/img/marker_red.png";
-                    var imageSize = new kakao.maps.Size(23, 31);
-                    var imageOption = { offset: new kakao.maps.Point(20, 90) };
-                    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
-
-                    var marker = new kakao.maps.Marker({
-                        position: new kakao.maps.LatLng(latitude, longitude),
-                        map: map,
-                        image: markerImage,
-                        draggable: true
-                    });
 
                     // user_stations에 해당하는 마커들을 추가하는 부분
                     var stations = [
@@ -233,6 +222,37 @@
                     var stationMarkerImageObj = new kakao.maps.MarkerImage(stationMarkerImage, stationMarkerSize, stationMarkerOption);
 
                     var geocoder = new kakao.maps.services.Geocoder();
+
+                    // 호출 주소 정보를 가져옴
+                    var addressInfoDiv = document.getElementById('addressInfo');
+                    var call_address = addressInfoDiv.innerText;
+                    var stationMarkerImage = "/static/img/marker_call.png"; // 새로운 마커 이미지 경로
+                    var stationMarkerSize = new kakao.maps.Size(23, 31);
+                    var stationMarkerOption = { offset: new kakao.maps.Point(20, 90) };
+                    var stationMarkerImageObj = new kakao.maps.MarkerImage(stationMarkerImage, stationMarkerSize, stationMarkerOption);
+
+                    var geocoder = new kakao.maps.services.Geocoder();
+
+                    geocoder.addressSearch(call_address, function(result, status) {
+                    if (status === kakao.maps.services.Status.OK) {
+                        var stationLatLng = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                        var stationMarker = new kakao.maps.Marker({
+                            position: stationLatLng,
+                            map: map,
+                            image: stationMarkerImageObj,
+                            draggable: false // 마커 드래그 비활성화
+                        });
+
+                        // 마커를 클릭했을 때 정보 창 등을 표시하는 로직 추가 가능
+                    } else {
+                        console.error("주소 변환 오류:", status);
+                    }
+                });
+
+
+
+
 
                     for (let i = 0; i < stations.length; i++) {
                         let station = stations[i];
