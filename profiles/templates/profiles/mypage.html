@@ -205,7 +205,11 @@
 
         <!-- 상단바 -->
         <div class="top-bar">
+            {% if user_profile.is_taxi_driver %}
+            <p class="user" style="color: #ffffff; font-weight: bolder; font-size: large;">{{ user.username }} 기사님</p>
+            {% else %}
             <p class="user" style="color: #ffffff; font-weight: bolder; font-size: large;">{{ user.username }}님</p>
+            {% endif %}
 
             {% csrf_token %} {% if user_profile.image %}
             <img class="profile" id="profileImage" src="{{ user_profile.image.url }}" onclick="openImageUploader()" style="border-radius: 50px"/>
