@@ -269,6 +269,11 @@
 
     </div>
 
+        <audio id="sound4">
+          <source src="{% static 'audio/sound4.mp3' %}" type="audio/mpeg" />
+          <!-- 다양한 오디오 포맷을 지원하는 source 요소를 추가할 수 있습니다. -->
+        </audio>
+
 
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=df9fbbf360a12deca34689f55c0a89ec&libraries=services"></script>
@@ -509,6 +514,13 @@
             window.location.href = newUrl;
         }
 
+
+         window.onload = function() {
+         const arrivalSound = document.getElementById('sound4');
+
+          // 음성 재생
+          arrivalSound.play();
+          };
     </script>
     </div>
 </body>
