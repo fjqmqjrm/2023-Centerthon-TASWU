@@ -5,19 +5,169 @@
     <head>
         <title>전화번호 등록 페이지</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <style></style>
+        <style>
+            body {
+                background-color: #e9e9e9;
+                overflow: scroll;
+                margin: 0px;
+            }
+    
+            #iphone-frame {
+                width: 390px;
+                height: 844px;
+                background: #ffffff;
+                position: relative;
+                justify-content: center;
+                align-items: center;
+            }
+    
+            .top-bar {
+                width: 390px;
+                height: 74px;
+                background: #6A7EEC;
+                border-radius: 0 0 23px 23px;
+                display: flex;
+                align-items: center;
+                position: absolute;
+                z-index: 2;
+            }
+    
+            .logo-text {
+                top: 100px;
+                font-weight: bolder;
+                font-size: x-large;
+            }
+    
+            .map-img {
+                width: 23px;
+                height: 31px;
+            }
+    
+            .map-button {
+                border: none;
+                background-color: #6A7EEC;
+            }
+    
+            .logo-img {
+                width: 29px;
+                height: 29px;
+            }
+    
+            .logo-button {
+                border: none;
+                background-color: #6A7EEC;
+            }
+    
+            .before-button{
+                width: 390px;
+                height: 51px;
+                background: #6A7EEC;
+                border-radius: 10px;
+                color: #ffffff;
+                font-weight: bold;
+                font-size: large;
+                text-align: center;
+                align-items: center;
+                border-style: none;
+                position: absolute;
+                top: 97%;
+                right: -195px;
+                transform: translate(-50%, -50%);
+                border-radius: 23px 23px 0 0;
+            }
+
+            .phone{
+                position: absolute;
+                top: 25%;
+                left: 50%; 
+                transform: translate(-50%, -50%);
+            }
+
+            .text{
+                font-weight: bolder;
+                position: absolute;
+                top: 40%;
+                margin-left: 110px;
+                white-space: nowrap;
+                transform: translate(-50%, -50%);
+            }
+    
+            ul {
+                list-style-type: none;
+                padding: 0;
+                margin-top: 50%;
+            }
+    
+            .div{
+                width: 300px;
+                height: 400px;
+                background-color: #ffffff;
+                border-color: #6A7EEC;
+                z-index: 2;
+                border-radius: 15px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                box-shadow: 0px 2px 4px rgb(0, 0, 0, 0.4);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 2px solid #6A7EEC;
+            }
+    
+        </style>
     </head>
-    <body>
+<body>
+    <div id="iphone-frame">
+
+        <!-- 상단바 -->
+        <div class="top-bar">&nbsp;&nbsp;&nbsp;
+            <p class="logo-text" style="color: #ffffff;">PICK</p>
+            <p class="logo-text" style="color: #FFF176;">XI</p>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;
+    
+            <button class="map-button">
+                <img class="map-img" src="{% static 'img/map.png' %}">
+            </button>&nbsp;
+    
+    
+            <button class="logo-button" style="display: flex; justify-content: center; align-items: center;">
+                <a href="{% url 'profiles:my_page' %}"><img class="logo-img" src="{% static 'img/mypage.png' %}"></a>
+            </button>
+    
+    
+        </div>
+        
+        <div class="div">
+        <img class="phone" style="height: 100px; width: 100px;" src="{% static 'img/phone.png' %}">    
         <form method="post" action="{% url 'profiles:phone_number' %}">
             {% csrf_token %}
-            <p class="search-text1" style="color: #FF6868; font-weight: bolder;">전화번호 등록</p>
-            <input type="text" name="phone_number" placeholder="ex) 01012345678"  size="20">
-            <button type="submit">저장</button>
+            
+            <p class="text">전화번호를 입력해주세요!</p>
+            <br><br><br><br><br><br><br><br>
+            <input type="text" style="height: 35px; width: 223px; border-radius: 10px; background: #f9f9f9;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4); border-style: none;" name="phone_number" placeholder="ex) 01012345678"  size="20px"><br><br>
+            <button type="submit"
+            style="background-color: #6A7EEC; color: #ffffff; width: 230px; height: 40px; border-radius: 10px; border-style: none; font-weight: bold;">
+                저장</button>
         </form>
-        <a href="{% url 'profiles:my_page' %}" style="text-decoration: none; color:#ffffff">
-            <button class="before-button">
-                <img style="height: 17; width: 10px;" src="{% static 'img/before.png' %}"> 이전
-            </button>
-        </a>
+
+
+
+        </div>
+        
+        <!-- 하단바 -->
+        <div class="down-bar">
+            <a href="{% url 'profiles:my_page' %}" style="text-decoration: none; color:#ffffff">
+                <button class="before-button">
+                    <img style="height: 17; width: 10px;" src="{% static 'img/before.png' %}"> 이전
+                </button>
+            </a>
+        </div>
+
     </body>
 </html>
