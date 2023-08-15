@@ -116,6 +116,25 @@
             border: 2px solid #6A7EEC;
         }
 
+        .scrollable-container {
+            max-height: 300px; 
+            overflow-y: auto; 
+        }
+        
+        #acceptButton {
+            background-color: #6A7EEC;
+            color: #ffffff;
+            width: 230px;
+            height: 40px;
+            border-radius: 10px;
+            border-style: none;
+            font-weight: bold;
+            position: fixed;
+            bottom: 20px; 
+            left: calc(50% - 115px);
+            z-index: 5; 
+        }
+
 
     </style>
 </head>
@@ -158,15 +177,9 @@
                     {% endif %}
                 {% endfor %}
             </ul>
-            <button id="acceptButton" style="font-weight: bolder;" type="submit">수락</button>
+            <button id="acceptButton" id="acceptButton" type="submit">수락</button>
         </form>
     </div>
-
-
-
-
-
-
 
         <!-- 하단바 -->
         <div class="down-bar">
