@@ -1,192 +1,222 @@
 <!DOCTYPE html>
 <html>
-{% load static %}
+  {% load static %}
 
-<head>
+  <head>
     <meta charset="utf-8" />
     <title>Kakao Map API 지도</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=df9fbbf360a12deca34689f55c0a89ec&libraries=services"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=df9fbbf360a12deca34689f55c0a89ec&libraries=services"
+    ></script>
 
     <style>
-        body {
-            background-color: #e9e9e9;
-            overflow: scroll;
-            margin: 0px;
-        }
+      body {
+        background-color: #e9e9e9;
+        overflow: scroll;
+        margin: 0px;
+      }
 
-        #iphone-frame {
-            width: 390px;
-            height: 844px;
-            background: #c0c0c0;
-            position: relative;
-            justify-content: center;
-            align-items: center;
-        }
+      #iphone-frame {
+        width: 390px;
+        height: 844px;
+        background: #c0c0c0;
+        position: relative;
+        justify-content: center;
+        align-items: center;
+      }
 
-        .top-bar {
-            width: 390px;
-            height: 74px;
-            background: #6A7EEC;
-            border-radius: 0 0 23px 23px;
-            display: flex;
-            align-items: center;
-            position: absolute;
-            z-index: 2;
-        }
+      .top-bar {
+        width: 390px;
+        height: 74px;
+        background: #6a7eec;
+        border-radius: 0 0 23px 23px;
+        display: flex;
+        align-items: center;
+        position: absolute;
+        z-index: 2;
+      }
 
-        .logo-text {
-            top: 100px;
-            font-weight: bolder;
-            font-size: x-large;
-        }
+      .logo-text {
+        top: 100px;
+        font-weight: bolder;
+        font-size: x-large;
+      }
 
-        .map-img {
-            width: 23px;
-            height: 31px;
-        }
+      .map-img {
+        width: 23px;
+        height: 31px;
+      }
 
-        .map-button {
-            border: none;
-            background-color: #6A7EEC;
-        }
+      .map-button {
+        border: none;
+        background-color: #6a7eec;
+      }
 
-        .logo-img {
-            width: 29px;
-            height: 29px;
-        }
+      .logo-img {
+        width: 29px;
+        height: 29px;
+      }
 
-        .logo-button {
-            border: none;
-            background-color: #6A7EEC;
-        }
+      .logo-button {
+        border: none;
+        background-color: #6a7eec;
+      }
 
-        .down-bar {
-            width: 390px;
-            height: 400px;
-            margin-top: 443.5px;
-            background: #ffffff;
-            border-radius: 23px 23px 0 0;
-            position: absolute;
-            z-index: 2;
-        }
+      .down-bar {
+        width: 390px;
+        height: 400px;
+        margin-top: 443.5px;
+        background: #ffffff;
+        border-radius: 23px 23px 0 0;
+        position: absolute;
+        z-index: 2;
+      }
 
+      .search-text1 {
+        top: 8%;
+        right: 273px;
+        position: absolute;
+        transform: translate(-50%, -50%);
+      }
 
-        .search-text1 {
-            top: 8%;
-            right: 273px;
-            position: absolute;
-            transform: translate(-50%, -50%);
-        }
+      .search1 {
+        width: 326px;
+        height: 45px;
+        background: #f9f9f9;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+        border-radius: 10px;
+        border-style: none;
+        position: absolute;
+        top: 8%;
+        right: -130px;
+        transform: translate(-50%, -50%);
+      }
 
-        .search1 {
-            width: 326px;
-            height: 45px;
-            background: #F9F9F9;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
-            border-radius: 10px;
-            border-style: none;
-            position: absolute;
-            top: 8%;
-            right: -130px;
-            transform: translate(-50%, -50%);
-        }
+      .search-text2 {
+        top: 65%;
+        right: -25px;
+        position: absolute;
+        transform: translate(-50%, -50%);
+      }
 
-        .search-text2 {
-            top: 65%;
-            right: -25px;
-            position: absolute;
-            transform: translate(-50%, -50%);
-        }
+      .current-location {
+        width: 329px;
+        height: 51px;
+        background: #6a7eec;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+        border-radius: 10px;
+        color: #ffffff;
+        font-weight: bold;
+        font-size: large;
+        text-align: center;
+        align-items: center;
+        border-style: none;
+        position: absolute;
+        top: 55%;
+        right: -130px;
+        transform: translate(-50%, -50%);
+      }
 
-        .current-location {
-            width: 329px;
-            height: 51px;
-            background: #6A7EEC;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
-            border-radius: 10px;
-            color: #ffffff;
-            font-weight: bold;
-            font-size: large;
-            text-align: center;
-            align-items: center;
-            border-style: none;
-            position: absolute;
-            top: 45%;
-            right: -130px;
-            transform: translate(-50%, -50%);
-        }
-
-
-        .reg-button {
-            width: 329px;
-            height: 51px;
-            background: #6A7EEC;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
-            border-radius: 10px;
-            color: #ffffff;
-            font-weight: bold;
-            font-size: large;
-            text-align: center;
-            align-items: center;
-            border-style: none;
-            position: absolute;
-            top: 82%;
-            right: -130px;
-            transform: translate(-50%, -50%);
-        }
+      .reg-button {
+        width: 329px;
+        height: 51px;
+        background: #6a7eec;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+        border-radius: 10px;
+        color: #ffffff;
+        font-weight: bold;
+        font-size: large;
+        text-align: center;
+        align-items: center;
+        border-style: none;
+        position: absolute;
+        top: 82%;
+        right: -130px;
+        transform: translate(-50%, -50%);
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="iphone-frame">
-        <!-- 상단바 -->
-        <div class="top-bar">&nbsp;&nbsp;&nbsp;
-            <p class="logo-text" style="color: #ffffff;">PICK</p>
-            <p class="logo-text" style="color: #FFF176;">XI</p>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;
+      <!-- 상단바 -->
+      <div class="top-bar">
+        &nbsp;&nbsp;&nbsp;
+        <p class="logo-text" style="color: #ffffff">PICK</p>
+        <p class="logo-text" style="color: #fff176">XI</p>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;
 
-            <button class="map-button">
-                <img class="map-img" src="{% static 'img/map.png' %}">
-            </button>&nbsp;
+        <button class="map-button">
+          <img class="map-img" src="{% static 'img/map.png' %}" /></button
+        >&nbsp;
 
+        <button
+          class="logo-button"
+          style="display: flex; justify-content: center; align-items: center"
+        >
+          <a href="{% url 'profiles:my_page' %}"
+            ><img class="logo-img" src="{% static 'img/mypage.png' %}"
+          /></a>
+        </button>
+      </div>
 
-            <button class="logo-button" style="display: flex; justify-content: center; align-items: center;">
-                <a href="{% url 'profiles:my_page' %}"><img class="logo-img" src="{% static 'img/mypage.png' %}"></a>
-            </button>
+      <!-- 하단바 -->
+      <div class="down-bar">
+        <p class="search-text1" style="color: #6a7eec; font-weight: bolder">
+          내 위치
+        </p>
 
+        <button class="current-location">
+          <a
+            style="text-decoration: none; color: #ffffff"
+            href="{% url 'map:map_call' %}"
+            >택시드라이버 페이지</a
+          >
+        </button>
 
-        </div>
+        <div
+          id="addressInfo"
+          class="search1"
+          style="
+          margin-top: 70px;
+          margin-left: 30px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        "
+        ></div>
 
-        <!-- 하단바 -->
-        <div class="down-bar">
+        <!-- "택시승강장 등록하기" 버튼에 주소 정보를 전달 -->
+        <!--            <button class="reg-button"><a style="text-decoration: none; color: #ffffff;"-->
+        <!--                 href="{% url 'map:station_add_turn' %}">택시승강장 등록하기</a></button>-->
+        {% csrf_token %} {% if user.userprofile.is_taxi_driver %}
+        <button class="current-location">
+          <a
+            style="text-decoration: none; color: #ffffff"
+            href="{% url 'profiles:call_list' %}"
+            >택시 호출 리스트 페이지</a
+          >
+        </button>
+        {% endif %}
+      </div>
 
-            <p class="search-text1" style="color: #6A7EEC; font-weight: bolder;">내 위치</p>
-
-            <button class="current-location" ><a style="text-decoration: none; color: #ffffff;" href="{% url 'map:map_call' %}">택시드라이버 페이지</a></button>
-
-            <!--<input class="search1" ></input>-->
-            <div id="addressInfo" class="search1" style="margin-top: 70px; margin-left: 30px;" ></div>
-            <!--<input class="search1" style="margin-top: 70px; margin-left: 30px;"></input>-->
-
-
-
-
-            <!-- "택시승강장 등록하기" 버튼에 주소 정보를 전달 -->
-<!--            <button class="reg-button"><a style="text-decoration: none; color: #ffffff;"-->
-<!--                 href="{% url 'map:station_add_turn' %}">택시승강장 등록하기</a></button>-->
-            {% csrf_token %}
-            {% if user.userprofile.is_taxi_driver %}
-                 <button class="current-location" ><a style="text-decoration: none; color: #ffffff;" href="{% url 'profiles:call_list' %}">택시 호출 리스트 페이지</a></button>
-                {% endif %}
-        </div>
-
-        <div id="map"
-            style="width: 390px; height: 415px; position:absolute; z-index: 1; top: 30%; right: -195px; transform: translate(-50%, -50%);">
-        </div>
+      <div
+        id="map"
+        style="
+          width: 390px;
+          height: 415px;
+          position: absolute;
+          z-index: 1;
+          top: 30%;
+          right: -195px;
+          transform: translate(-50%, -50%);
+        "
+      ></div>
 
       <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -216,7 +246,6 @@
                     });
 
                     marker.setMap(map);
-                    });
 
                     // user_stations에 해당하는 마커들을 추가하는 부분
                     var stations = [
@@ -240,18 +269,18 @@
                         console.log("Station Address:", station.address); // 주소 정보 출력
                         geocoder.addressSearch(station.address, function(result, status) {
                             if (status === kakao.maps.services.Status.OK) {
-                                var stationLatLng = new kakao.maps.LatLng(result[0].y, result[0].x);
+                              var stationLatLng = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-                                var stationMarker = new kakao.maps.Marker({
-                                    position: stationLatLng,
-                                    map: map,
-                                    image: stationMarkerImageObj,
-                                    draggable: false // 마커 드래그 비활성화
-                                });
+                              var stationMarker = new kakao.maps.Marker({
+                                  position: stationLatLng,
+                                  map: map,
+                                  image: stationMarkerImageObj,
+                                  draggable: false // 마커 드래그 비활성화
+                              });
 
                                 // 마커를 클릭했을 때 정보 창 등을 표시하는 로직 추가 가능
                             } else {
-                                console.error("주소 변환 오류:", status);
+                              console.error("주소 변환 오류:", status);
                             }
                         });
                     }
@@ -311,7 +340,8 @@
             document.body.appendChild(form);
             form.submit();
         }
-    </script>
+
+      </script>
     </div>
-</body>
+  </body>
 </html>
