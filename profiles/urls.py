@@ -11,4 +11,5 @@ urlpatterns = [
     path('coin/', views.coin, name='coin'),
     path('service/', views.service, name='service'),
     path('accept/', views.call_accept, name='call_accept'),
+    path('delete_stations/', views.delete_stations, name='delete_stations'),
     ]

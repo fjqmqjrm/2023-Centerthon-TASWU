@@ -94,3 +94,11 @@ def call_accept(request):
             taxi_call.save()
 
     return redirect('profiles:call_list')
+
+
+def delete_stations(request):
+    if request.method == 'POST':
+        station_ids_to_delete = request.POST.getlist('stations_to_delete')
+        Station.objects.filter(id__in=station_ids_to_delete).delete()
+    return redirect('profiles:my_page')
+# Replace 'profile' with the appropriate URL name
