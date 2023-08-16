@@ -1,299 +1,453 @@
 <!DOCTYPE html>
 <html>
-{% load static %}
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% load static %}
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>stt로 검색하기</title>
     <style>
+      body {
+        background-color: #e9e9e9;
+        overflow: scroll;
+        margin: 0px;
+      }
 
-        body {
-            background-color: #e9e9e9;
-            overflow: scroll;
-            margin: 0px;
-        }
+      #iphone-frame {
+        width: 390px;
+        height: 844px;
+        background: #c0c0c0;
 
-        #iphone-frame {
-            width: 390px;
-            height: 844px;
-            background: #c0c0c0;
+        position: relative;
+        justify-content: center;
+        align-items: center;
+      }
 
-            position: relative;
-            justify-content: center;
-            align-items: center;
-        }
+      .top-bar {
+        width: 390px;
+        height: 74px;
+        background: #6a7eec;
+        border-radius: 0 0 23px 23px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        z-index: 2;
+      }
 
-        .top-bar{
-            width: 390px;
-            height: 74px;
-            background:#6A7EEC;
-            border-radius: 0 0 23px 23px;
-            display: flex;
-            align-items: center;
-            position: relative;
-            z-index: 2;
-        }
+      .logo-text {
+        top: 100px;
+        font-weight: bolder;
+        font-size: x-large;
+      }
 
-        .logo-text{
-            top: 100px;
-            font-weight: bolder;
-            font-size: x-large;
-        }
+      .map-img {
+        width: 23px;
+        height: 31px;
+      }
 
-        .map-img{
-            width: 23px;
-            height: 31px;
-        }
+      .map-button {
+        border: none;
+        background-color: #6a7eec;
+      }
 
-        .map-button{
-            border: none;
-            background-color: #6A7EEC;
-        }
+      .logo-img {
+        width: 29px;
+        height: 29px;
+      }
 
-        .logo-img{
-            width: 29px;
-            height: 29px;
-        }
+      .logo-button {
+        border: none;
+        background-color: #6a7eec;
+      }
 
-        .logo-button{
-            border: none;
-            background-color: #6A7EEC;
-        }
+      .down-bar {
+        width: 390px;
+        height: 400px;
+        margin-top: 370px;
+        background: #ffffff;
+        border-radius: 23px 23px 0 0;
+        position: relative;
+        z-index: 2;
+      }
 
-        .down-bar{
-            width: 390px;
-            height: 400px;
-            margin-top: 370px;
-            background:#ffffff;
-            border-radius: 23px 23px 0 0;
-            position: relative;
-            z-index: 2;
-        }
+      .search1 {
+        width: 326px;
+        height: 45px;
+        background: #f9f9f9;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+        border-radius: 10px;
+        border-style: none;
+        position: absolute;
+        top: 20%;
+        right: -140px;
+        transform: translate(-50%, -50%);
+      }
 
-        .search1{
-            width: 326px;
-            height: 45px;
-            background:#F9F9F9;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
-            border-radius: 10px;
-            border-style: none;
-            position: absolute;
-            top: 20%;
-            right: -140px;
-            transform: translate(-50%, -50%);
-        }
+      .search-text2 {
+        top: 2%;
+        right: 138px;
+        position: absolute;
+        transform: translate(-50%, -50%);
+      }
 
-        .search-text2{
-            top: 2%;
-            right: 138px;
-            position: absolute;
-            transform: translate(-50%, -50%);
-        }
+      .btn-speak {
+        background-color: white;
+        border: none;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
+        color: #6a7eec;
+        border-radius: 10px;
+        font-weight: bold;
+        padding: 3px 5px 3px 5px;
+      }
 
-        .btn-speak {
-            background-color: white;
-            border: none;
-            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
-            color:  #6A7EEC;
-            border-radius: 10px;
-            font-weight: bold;
-            padding: 3px 5px 3px 5px;
+      .btn-speak:hover {
+        background-color: #6a7eec;
+        border: none;
+        color: white;
+      }
 
-        }
+      .btn-search {
+        background-color: white;
+        border: none;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
+        color: #6a7eec;
+        border-radius: 10px;
+        font-weight: bold;
+        padding: 3px 5px 3px 5px;
+      }
 
-        .btn-speak:hover {
-            background-color: #6A7EEC;
-            border: none;
-            color: white;
-        }
+      .btn-search:hover {
+        background-color: #6a7eec;
+        border: none;
+        color: white;
+      }
 
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
 
-        .btn-search {
-             background-color: white;
-            border: none;
-            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
-            color:  #6A7EEC;
-            border-radius: 10px;
-            font-weight: bold;
-            padding: 3px 5px 3px 5px;
-        }
-
-        .btn-search:hover {
-            background-color: #6A7EEC;
-            border: none;
-            color: white;
-        }
-
-
-        ::-webkit-scrollbar {
-        width: 6px; 
-        }
-
-        ::-webkit-scrollbar-thumb {
+      ::-webkit-scrollbar-thumb {
         background-color: #888;
-        border-radius: 3px; 
-        }
+        border-radius: 3px;
+      }
 
-        ::-webkit-scrollbar-thumb:hover {
-        background-color: #555; 
-        }
+      ::-webkit-scrollbar-thumb:hover {
+        background-color: #555;
+      }
 
-        .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
-        .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
-        .map_wrap {position:relative;width:100%;height:500px;}
-        #menu_wrap {position:relative;top:44px;left:0;bottom:0;width: 230px;height:230px;margin:0px 0px 0px 0px;padding:0px;overflow-y:scroll;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
-        .bg_white {background:#fff;}
-        #menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
-        #menu_wrap .option{text-align: center;}
-        #menu_wrap .option p {margin:10px 0;}
-        #menu_wrap .option button {margin-left:5px;}
-        #placesList li {list-style: none;}
-        #placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
-        #placesList .item span {display: block;margin-top:4px;}
-        #placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
-        #placesList .item .info{padding:10px 0 10px 55px;}
-        #placesList .info .gray {color:#8a8a8a;}
-        #placesList .info .jibun {padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
-        #placesList .info .tel {color:#009900;}
-        #placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
-        #placesList .item .marker_1 {background-position: 0 -10px;}
-        #placesList .item .marker_2 {background-position: 0 -56px;}
-        #placesList .item .marker_3 {background-position: 0 -102px}
-        #placesList .item .marker_4 {background-position: 0 -148px;}
-        #placesList .item .marker_5 {background-position: 0 -194px;}
-        #placesList .item .marker_6 {background-position: 0 -240px;}
-        #placesList .item .marker_7 {background-position: 0 -286px;}
-        #placesList .item .marker_8 {background-position: 0 -332px;}
-        #placesList .item .marker_9 {background-position: 0 -378px;}
-        #placesList .item .marker_10 {background-position: 0 -423px;}
-        #placesList .item .marker_11 {background-position: 0 -470px;}
-        #placesList .item .marker_12 {background-position: 0 -516px;}
-        #placesList .item .marker_13 {background-position: 0 -562px;}
-        #placesList .item .marker_14 {background-position: 0 -608px;}
-        #placesList .item .marker_15 {background-position: 0 -654px;}
-        #pagination {margin:10px auto;text-align: center;}
-        #pagination a {display:inline-block;margin-right:10px;}
-        #pagination .on {font-weight: bold; cursor: default;color:#777;}
-
+      .map_wrap,
+      .map_wrap * {
+        margin: 0;
+        padding: 0;
+        font-family: "Malgun Gothic", dotum, "돋움", sans-serif;
+        font-size: 12px;
+      }
+      .map_wrap a,
+      .map_wrap a:hover,
+      .map_wrap a:active {
+        color: #000;
+        text-decoration: none;
+      }
+      .map_wrap {
+        position: relative;
+        width: 100%;
+        height: 500px;
+      }
+      #menu_wrap {
+        position: relative;
+        top: 44px;
+        left: 0;
+        bottom: 0;
+        width: 230px;
+        height: 230px;
+        margin: 0px 0px 0px 0px;
+        padding: 0px;
+        overflow-y: scroll;
+        background: rgba(255, 255, 255, 0.7);
+        z-index: 1;
+        font-size: 12px;
+        border-radius: 10px;
+      }
+      .bg_white {
+        background: #fff;
+      }
+      #menu_wrap hr {
+        display: block;
+        height: 1px;
+        border: 0;
+        border-top: 2px solid #5f5f5f;
+        margin: 3px 0;
+      }
+      #menu_wrap .option {
+        text-align: center;
+      }
+      #menu_wrap .option p {
+        margin: 10px 0;
+      }
+      #menu_wrap .option button {
+        margin-left: 5px;
+      }
+      #placesList li {
+        list-style: none;
+      }
+      #placesList .item {
+        position: relative;
+        border-bottom: 1px solid #888;
+        overflow: hidden;
+        cursor: pointer;
+        min-height: 65px;
+      }
+      #placesList .item span {
+        display: block;
+        margin-top: 4px;
+      }
+      #placesList .item h5,
+      #placesList .item .info {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      #placesList .item .info {
+        padding: 10px 0 10px 55px;
+      }
+      #placesList .info .gray {
+        color: #8a8a8a;
+      }
+      #placesList .info .jibun {
+        padding-left: 26px;
+        background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png)
+          no-repeat;
+      }
+      #placesList .info .tel {
+        color: #009900;
+      }
+      #placesList .item .markerbg {
+        float: left;
+        position: absolute;
+        width: 36px;
+        height: 37px;
+        margin: 10px 0 0 10px;
+        background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png)
+          no-repeat;
+      }
+      #placesList .item .marker_1 {
+        background-position: 0 -10px;
+      }
+      #placesList .item .marker_2 {
+        background-position: 0 -56px;
+      }
+      #placesList .item .marker_3 {
+        background-position: 0 -102px;
+      }
+      #placesList .item .marker_4 {
+        background-position: 0 -148px;
+      }
+      #placesList .item .marker_5 {
+        background-position: 0 -194px;
+      }
+      #placesList .item .marker_6 {
+        background-position: 0 -240px;
+      }
+      #placesList .item .marker_7 {
+        background-position: 0 -286px;
+      }
+      #placesList .item .marker_8 {
+        background-position: 0 -332px;
+      }
+      #placesList .item .marker_9 {
+        background-position: 0 -378px;
+      }
+      #placesList .item .marker_10 {
+        background-position: 0 -423px;
+      }
+      #placesList .item .marker_11 {
+        background-position: 0 -470px;
+      }
+      #placesList .item .marker_12 {
+        background-position: 0 -516px;
+      }
+      #placesList .item .marker_13 {
+        background-position: 0 -562px;
+      }
+      #placesList .item .marker_14 {
+        background-position: 0 -608px;
+      }
+      #placesList .item .marker_15 {
+        background-position: 0 -654px;
+      }
+      #pagination {
+        margin: 10px auto;
+        text-align: center;
+      }
+      #pagination a {
+        display: inline-block;
+        margin-right: 10px;
+      }
+      #pagination .on {
+        font-weight: bold;
+        cursor: default;
+        color: #777;
+      }
     </style>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
     <script>
-    // Check if the browser supports Web Speech API
-    if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
-        var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    
+      // Check if the browser supports Web Speech API
+      if (
+        "SpeechRecognition" in window ||
+        "webkitSpeechRecognition" in window
+      ) {
+        var recognition = new (window.SpeechRecognition ||
+          window.webkitSpeechRecognition)();
+
         recognition.continuous = false;
-        recognition.lang = 'ko';
-    
-        recognition.onresult = function(event) {
-        var transcript = event.results[0][0].transcript;
-        document.getElementById('keyword').value = transcript;
-        performSearch(transcript);
+        recognition.lang = "ko";
+
+        recognition.onresult = function (event) {
+          var transcript = event.results[0][0].transcript;
+          document.getElementById("keyword").value = transcript;
+          performSearch(transcript);
         };
-    
-        recognition.onerror = function(event) {
-        console.error('Speech recognition error:', event.error);
+
+        recognition.onerror = function (event) {
+          console.error("Speech recognition error:", event.error);
         };
-    } else {
-        console.error('Web Speech API not supported in this browser.');
-    }
-    
-    function startListening() {
+      } else {
+        console.error("Web Speech API not supported in this browser.");
+      }
+
+      function startListening() {
         recognition.start();
-    }
-    
-    function performSearch(query) {
+      }
+
+      function performSearch(query) {
         // You can implement your search logic here
         // For simplicity, let's just log the query
-        console.log('Performing search for:', query);
-    }
+        console.log("Performing search for:", query);
+      }
     </script>
-</head>
-<body>
-
+  </head>
+  <body>
     <div id="iphone-frame">
+      <!-- 상단바 -->
+      <div class="top-bar">
+        &nbsp;&nbsp;&nbsp;
+        <a
+          href="{% url 'map:map_main' %}"
+          class="logo-text"
+          style="color: #ffffff; text-decoration: none"
+        >
+          PICK
+        </a>
+        <a
+          href="{% url 'map:map_main' %}"
+          class="logo-text"
+          style="color: #fff176; text-decoration: none"
+        >
+          XI
+        </a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;
 
-        <!-- 상단바 -->
-        <div class="top-bar">&nbsp;&nbsp;&nbsp;
-            <a href="{% url 'map:map_main' %}" class="logo-text" style="color: #ffffff; text-decoration: none;">
-                PICK
-            </a>
-            <a href="{% url 'map:map_main' %}" class="logo-text" style="color: #FFF176; text-decoration: none;">
-                XI
-            </a>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;
+        <button class="map-button">
+          <img class="map-img" src="{% static 'img/map.png' %}" /></button
+        >&nbsp;
 
-            <button class="map-button">
-            <img class="map-img" src="{% static 'img/map.png' %}">
-            </button>&nbsp;
-           
+        <button
+          class="logo-button style=display: flex; justify-content: center; align-items: center;"
+        >
+          <a href="{% url 'profiles:my_page' %}"
+            ><img class="logo-img" src="{% static 'img/mypage.png' %}"
+          /></a>
+        </button>
+      </div>
 
-            <button class="logo-button style=display: flex; justify-content: center; align-items: center;">
-                <a href="{% url 'profiles:my_page' %}"><img class="logo-img" src="{% static 'img/mypage.png' %}"></a>
-            </button>
+      <!-- 하단바 -->
+      <div class="down-bar">
+        <p class="search-text2" style="color: #6a7eec; font-weight: bolder">
+          어디로 안내할까요?
+        </p>
 
-        </div>
-        
-        <!-- 하단바 -->
-        <div class="down-bar">
-        
-        <p class="search-text2" style="color: #6A7EEC; font-weight: bolder;">어디로 안내할까요?</p>
-
-         <div id="menu_wrap" class="bg_white" style="width:390px; height: 340px">
-            <div class="option">
-                <div>
-                    <form onsubmit="searchPlaces(); return false;">
-                        <input type="text" placeholder="원하는 장소를 입력하세요" id="keyword" size="20" value="서울여대" 
-                        style="margin-right: 8px; 
-                        width: 160px;
-                        height: 30px;
-                        background: #f9f9f9;
-                        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
-                        border-radius: 10px;
-                        border-style: none;">
-                        <button class="btn-speak" onclick="startListening()">음성</button>
-                        <button class="btn-search" type="submit">검색</button>
-                        <!-- 새로운 버튼을 추가하고 해당 버튼을 클릭하면 redirectToNewPage 함수 호출 -->
-                        <button class="btn-search" onclick="redirectToNewPage()">선택</button>
-
-                    </form>
-                </div>
+        <div
+          id="menu_wrap"
+          class="bg_white"
+          style="width: 390px; height: 340px"
+        >
+          <div class="option">
+            <div>
+              <form onsubmit="searchPlaces(); return false;">
+                <input
+                  type="text"
+                  placeholder="원하는 장소를 입력하세요"
+                  id="keyword"
+                  size="20"
+                  value="서울여대"
+                  style="
+                    margin-right: 8px;
+                    width: 160px;
+                    height: 30px;
+                    background: #f9f9f9;
+                    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+                    border-radius: 10px;
+                    border-style: none;
+                  "
+                />
+                <button class="btn-speak" onclick="startListening()">
+                  음성
+                </button>
+                <button class="btn-search" type="submit">검색</button>
+                <!-- 새로운 버튼을 추가하고 해당 버튼을 클릭하면 redirectToNewPage 함수 호출 -->
+                <button class="btn-search" onclick="redirectToNewPage()">
+                  선택
+                </button>
+              </form>
             </div>
-            <hr>
-            <ul id="placesList"></ul>
-            <div id="pagination"></div>
+          </div>
+          <hr />
+          <ul id="placesList"></ul>
+          <div id="pagination"></div>
         </div>
+      </div>
 
-        </div>
+      <div class="map_wrap">
+        <div
+          id="map"
+          style="
+            width: 390px;
+            height: 465px;
+            position: absolute;
+            z-index: 1;
+            top: -120%;
+            right: -195px;
+            transform: translate(-50%, -50%);
+            overflow: hidden;
+          "
+        ></div>
+      </div>
 
+      <audio id="sound4">
+        <source src="{% static 'audio/sound4.mp3' %}" type="audio/mpeg" />
+        <!-- 다양한 오디오 포맷을 지원하는 source 요소를 추가할 수 있습니다. -->
+      </audio>
 
-    <div class="map_wrap">
-        <div id="map" style="width: 390px; height: 465px; position: absolute; z-index: 1; top: -120%; right: -195px; transform: translate(-50%, -50%); overflow:hidden;"></div>
+      <script
+        type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c411c5d5c991d1be92513b82a5067de4"
+      ></script>
 
-
-    </div>
-
-        <audio id="sound4">
-          <source src="{% static 'audio/sound4.mp3' %}" type="audio/mpeg" />
-          <!-- 다양한 오디오 포맷을 지원하는 source 요소를 추가할 수 있습니다. -->
-        </audio>
-
-
-    <script type="text/javascript"
-            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=df9fbbf360a12deca34689f55c0a89ec&libraries=services"></script>
-
-    <script>
+      <script>
         // 마커를 담을 배열입니다
         var markers = [];
 
-        var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-            mapOption = {
-                center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-                level: 3 // 지도의 확대 레벨
-            };
+        var mapContainer = document.getElementById("map"), // 지도를 표시할 div
+          mapOption = {
+            center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+            level: 3, // 지도의 확대 레벨
+          };
 
         // 지도를 생성합니다
         var map = new kakao.maps.Map(mapContainer, mapOption);
@@ -302,233 +456,240 @@
         var ps = new kakao.maps.services.Places();
 
         // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
-        var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+        var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
 
         // 키워드로 장소를 검색합니다
         searchPlaces();
 
         // 키워드 검색을 요청하는 함수입니다
         function searchPlaces() {
+          var keyword = document.getElementById("keyword").value;
 
-            var keyword = document.getElementById('keyword').value;
-
-            /*if (!keyword.replace(/^\s+|\s+$/g, '')) {
+          /*if (!keyword.replace(/^\s+|\s+$/g, '')) {
                 //alert('키워드를 입력해주세요!');
                 //return false;
             }*/
 
-            // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
-            ps.keywordSearch( keyword, placesSearchCB);
+          // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
+          ps.keywordSearch(keyword, placesSearchCB);
         }
 
         // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
         function placesSearchCB(data, status, pagination) {
-            if (status === kakao.maps.services.Status.OK) {
+          if (status === kakao.maps.services.Status.OK) {
+            // 정상적으로 검색이 완료됐으면
+            // 검색 목록과 마커를 표출합니다
+            displayPlaces(data);
 
-                // 정상적으로 검색이 완료됐으면
-                // 검색 목록과 마커를 표출합니다
-                displayPlaces(data);
-
-                // 페이지 번호를 표출합니다
-                displayPagination(pagination);
-
-            } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
-
-                alert('검색 결과가 존재하지 않습니다.');
-                return;
-
-            } else if (status === kakao.maps.services.Status.ERROR) {
-
-                alert('검색 결과 중 오류가 발생했습니다.');
-                return;
-
-            }
+            // 페이지 번호를 표출합니다
+            displayPagination(pagination);
+          } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+            alert("검색 결과가 존재하지 않습니다.");
+            return;
+          } else if (status === kakao.maps.services.Status.ERROR) {
+            alert("검색 결과 중 오류가 발생했습니다.");
+            return;
+          }
         }
 
         // 검색 결과 목록과 마커를 표출하는 함수입니다
         function displayPlaces(places) {
-
-            var listEl = document.getElementById('placesList'),
-            menuEl = document.getElementById('menu_wrap'),
+          var listEl = document.getElementById("placesList"),
+            menuEl = document.getElementById("menu_wrap"),
             fragment = document.createDocumentFragment(),
             bounds = new kakao.maps.LatLngBounds(),
-            listStr = '';
+            listStr = "";
 
-            // 검색 결과 목록에 추가된 항목들을 제거합니다
-            removeAllChildNods(listEl);
+          // 검색 결과 목록에 추가된 항목들을 제거합니다
+          removeAllChildNods(listEl);
 
-            // 지도에 표시되고 있는 마커를 제거합니다
-            removeMarker();
+          // 지도에 표시되고 있는 마커를 제거합니다
+          removeMarker();
 
-            for ( var i=0; i<places.length; i++ ) {
+          for (var i = 0; i < places.length; i++) {
+            // 마커를 생성하고 지도에 표시합니다
+            var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
+              marker = addMarker(placePosition, i),
+              itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
 
-                // 마커를 생성하고 지도에 표시합니다
-                var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
-                    marker = addMarker(placePosition, i),
-                    itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
+            // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+            // LatLngBounds 객체에 좌표를 추가합니다
+            bounds.extend(placePosition);
 
-                // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
-                // LatLngBounds 객체에 좌표를 추가합니다
-                bounds.extend(placePosition);
+            // 마커와 검색결과 항목에 mouseover 했을때
+            // 해당 장소에 인포윈도우에 장소명을 표시합니다
+            // mouseout 했을 때는 인포윈도우를 닫습니다
+            (function (marker, title) {
+              kakao.maps.event.addListener(marker, "mouseover", function () {
+                displayInfowindow(marker, title);
+              });
 
-                // 마커와 검색결과 항목에 mouseover 했을때
-                // 해당 장소에 인포윈도우에 장소명을 표시합니다
-                // mouseout 했을 때는 인포윈도우를 닫습니다
-                (function(marker, title) {
-                    kakao.maps.event.addListener(marker, 'mouseover', function() {
-                        displayInfowindow(marker, title);
-                    });
+              kakao.maps.event.addListener(marker, "mouseout", function () {
+                infowindow.close();
+              });
 
-                    kakao.maps.event.addListener(marker, 'mouseout', function() {
-                        infowindow.close();
-                    });
+              itemEl.onmouseover = function () {
+                displayInfowindow(marker, title);
+              };
 
-                    itemEl.onmouseover =  function () {
-                        displayInfowindow(marker, title);
-                    };
+              itemEl.onmouseout = function () {
+                infowindow.close();
+              };
+            })(marker, places[i].place_name);
 
-                    itemEl.onmouseout =  function () {
-                        infowindow.close();
-                    };
-                })(marker, places[i].place_name);
+            fragment.appendChild(itemEl);
+          }
 
-                fragment.appendChild(itemEl);
-            }
+          // 검색결과 항목들을 검색결과 목록 Element에 추가합니다
+          listEl.appendChild(fragment);
+          menuEl.scrollTop = 0;
 
-            // 검색결과 항목들을 검색결과 목록 Element에 추가합니다
-            listEl.appendChild(fragment);
-            menuEl.scrollTop = 0;
-
-            // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-            map.setBounds(bounds);
+          // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+          map.setBounds(bounds);
         }
 
         // 검색결과 항목을 Element로 반환하는 함수입니다
         function getListItem(index, places) {
+          var el = document.createElement("li"),
+            itemStr =
+              '<span class="markerbg marker_' +
+              (index + 1) +
+              '"></span>' +
+              '<div class="info">' +
+              "   <h5>" +
+              places.place_name +
+              "</h5>";
 
-            var el = document.createElement('li'),
-            itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
-                        '<div class="info">' +
-                        '   <h5>' + places.place_name + '</h5>';
+          if (places.road_address_name) {
+            itemStr +=
+              "    <span>" +
+              places.road_address_name +
+              "</span>" +
+              '   <span class="jibun gray">' +
+              places.address_name +
+              "</span>";
+          } else {
+            itemStr += "    <span>" + places.address_name + "</span>";
+          }
 
-            if (places.road_address_name) {
-                itemStr += '    <span>' + places.road_address_name + '</span>' +
-                            '   <span class="jibun gray">' +  places.address_name  + '</span>';
-            } else {
-                itemStr += '    <span>' +  places.address_name  + '</span>';
-            }
+          itemStr +=
+            '  <span class="tel">' + places.phone + "</span>" + "</div>";
 
-            itemStr += '  <span class="tel">' + places.phone  + '</span>' +
-                        '</div>';
+          el.innerHTML = itemStr;
+          el.className = "item";
 
-            el.innerHTML = itemStr;
-            el.className = 'item';
+          el.onclick = function () {
+            populateInputField(places.address_name);
+          };
 
-            el.onclick = function() {
-                populateInputField(places.address_name);
-            };
-
-
-            return el;
+          return el;
         }
         //주소를 인자로 받아 id가 keyword인 input필드 값으로 설정
         function populateInputField(address) {
-            document.getElementById('keyword').value = address;
+          document.getElementById("keyword").value = address;
         }
-
 
         // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
         function addMarker(position, idx, title) {
-            var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
-                imageSize = new kakao.maps.Size(36, 37),  // 마커 이미지의 크기
-                imgOptions =  {
-                    spriteSize : new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
-                    spriteOrigin : new kakao.maps.Point(0, (idx*46)+10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
-                    offset: new kakao.maps.Point(13, 37) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
-                },
-                markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
-                    marker = new kakao.maps.Marker({
-                    position: position, // 마커의 위치
-                    image: markerImage
-                });
+          var imageSrc =
+              "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png", // 마커 이미지 url, 스프라이트 이미지를 씁니다
+            imageSize = new kakao.maps.Size(36, 37), // 마커 이미지의 크기
+            imgOptions = {
+              spriteSize: new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
+              spriteOrigin: new kakao.maps.Point(0, idx * 46 + 10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
+              offset: new kakao.maps.Point(13, 37), // 마커 좌표에 일치시킬 이미지 내에서의 좌표
+            },
+            markerImage = new kakao.maps.MarkerImage(
+              imageSrc,
+              imageSize,
+              imgOptions
+            ),
+            marker = new kakao.maps.Marker({
+              position: position, // 마커의 위치
+              image: markerImage,
+            });
 
-            marker.setMap(map); // 지도 위에 마커를 표출합니다
-            markers.push(marker);  // 배열에 생성된 마커를 추가합니다
+          marker.setMap(map); // 지도 위에 마커를 표출합니다
+          markers.push(marker); // 배열에 생성된 마커를 추가합니다
 
-            return marker;
+          return marker;
         }
 
         // 지도 위에 표시되고 있는 마커를 모두 제거합니다
         function removeMarker() {
-            for ( var i = 0; i < markers.length; i++ ) {
-                markers[i].setMap(null);
-            }
-            markers = [];
+          for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(null);
+          }
+          markers = [];
         }
 
         // 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
         function displayPagination(pagination) {
-            var paginationEl = document.getElementById('pagination'),
-                fragment = document.createDocumentFragment(),
-                i;
+          var paginationEl = document.getElementById("pagination"),
+            fragment = document.createDocumentFragment(),
+            i;
 
-            // 기존에 추가된 페이지번호를 삭제합니다
-            while (paginationEl.hasChildNodes()) {
-                paginationEl.removeChild (paginationEl.lastChild);
+          // 기존에 추가된 페이지번호를 삭제합니다
+          while (paginationEl.hasChildNodes()) {
+            paginationEl.removeChild(paginationEl.lastChild);
+          }
+
+          for (i = 1; i <= pagination.last; i++) {
+            var el = document.createElement("a");
+            el.href = "#";
+            el.innerHTML = i;
+
+            if (i === pagination.current) {
+              el.className = "on";
+            } else {
+              el.onclick = (function (i) {
+                return function () {
+                  pagination.gotoPage(i);
+                };
+              })(i);
             }
 
-            for (i=1; i<=pagination.last; i++) {
-                var el = document.createElement('a');
-                el.href = "#";
-                el.innerHTML = i;
-
-                if (i===pagination.current) {
-                    el.className = 'on';
-                } else {
-                    el.onclick = (function(i) {
-                        return function() {
-                            pagination.gotoPage(i);
-                        }
-                    })(i);
-                }
-
-                fragment.appendChild(el);
-            }
-            paginationEl.appendChild(fragment);
+            fragment.appendChild(el);
+          }
+          paginationEl.appendChild(fragment);
         }
 
         // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
         // 인포윈도우에 장소명을 표시합니다
         function displayInfowindow(marker, title) {
-            var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
+          var content =
+            '<div style="padding:5px;z-index:1;">' + title + "</div>";
 
-            infowindow.setContent(content);
-            infowindow.open(map, marker);
+          infowindow.setContent(content);
+          infowindow.open(map, marker);
         }
 
-         // 검색결과 목록의 자식 Element를 제거하는 함수입니다
+        // 검색결과 목록의 자식 Element를 제거하는 함수입니다
         function removeAllChildNods(el) {
-            while (el.hasChildNodes()) {
-                el.removeChild (el.lastChild);
-            }
+          while (el.hasChildNodes()) {
+            el.removeChild(el.lastChild);
+          }
         }
-        var keywordValue = "{{ keyword|default:'' }}";  // 템플릿 변수를 자바스크립트 변수에 할당
-        var newUrl = "{% url 'map:station_add_turn' %}?keyword=" + encodeURIComponent(keywordValue);
+        var keywordValue = "{{ keyword|default:'' }}"; // 템플릿 변수를 자바스크립트 변수에 할당
+        var newUrl =
+          "{% url 'map:station_add_turn' %}?keyword=" +
+          encodeURIComponent(keywordValue);
 
         function redirectToNewPage() {
-            var keyword = document.getElementById("keyword").value;
-            var newUrl = "{% url 'map:station_add_turn' %}?keyword=" + encodeURIComponent(keyword);
-            window.location.href = newUrl;
+          var keyword = document.getElementById("keyword").value;
+          var newUrl =
+            "{% url 'map:station_add_turn' %}?keyword=" +
+            encodeURIComponent(keyword);
+          window.location.href = newUrl;
         }
 
-
-         window.onload = function() {
-         const arrivalSound = document.getElementById('sound4');
+        window.onload = function () {
+          const arrivalSound = document.getElementById("sound4");
 
           // 음성 재생
           arrivalSound.play();
-          };
-    </script>
+        };
+      </script>
     </div>
-</body>
+  </body>
 </html>
