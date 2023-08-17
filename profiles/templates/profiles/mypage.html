@@ -165,25 +165,17 @@
             transform: translate(-50%, -50%);
             box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
             border-style: none;
+            overflow-y: auto;
 
-        }
-
-        .scroll1 {
-          margin-top: 40px;
-          max-height: 350px;
-          overflow-y: auto;
-        }
-
-        .scroll2 {
-          margin-top: 30px;
-          max-height: 350px;
-          overflow-y: auto;
         }
 
         .delete {
+        width: 295px;
+        height: 47px;
         position: relative;
         top: 345px;
         left: 290px;
+
         border:none;
         background-color: #6A7EEC;
         color: white;
@@ -205,7 +197,11 @@
 
         <!-- 상단바 -->
         <div class="top-bar">
+            {% if user_profile.is_taxi_driver %}
+            <p class="user" style="color: #ffffff; font-weight: bolder; font-size: large;">{{ user.username }} 기사님</p>
+            {% else %}
             <p class="user" style="color: #ffffff; font-weight: bolder; font-size: large;">{{ user.username }}님</p>
+            {% endif %}
 
             {% csrf_token %} {% if user_profile.image %}
             <img class="profile" id="profileImage" src="{{ user_profile.image.url }}" onclick="openImageUploader()" style="border-radius: 50px"/>
@@ -264,9 +260,9 @@
                 <p style="font-weight: bold; position: absolute; top: 2%; right: 165px; font-size: 17px; white-space: nowrap;">호출 수락 내역</p>
 
                 <a href="{% url 'map:station_add_turn' %}">
-                    <img style="height: 20px; width: 20px; position: absolute; top: 5%; right: 17px;" src="{% static 'img/plus.png' %}">
+                    <img style="height: 20px; width: 20px; position: relative; left: 40%; top: 5%;" src="{% static 'img/plus.png' %}">
                 </a>
-                <ol class="scroll1">
+                <ol>
 
                             {% for taxi_call in taxi_calls %}
                             <li>
@@ -283,13 +279,13 @@
                 <a href="{% url 'map:station_add_turn' %}">
                     <img style="height: 20px; width: 20px; position: absolute; top: 5%; right: 17px;" src="{% static 'img/plus.png' %}">
                 </a>
-                <div class="scroll2">
-
+      
                     {% if user_profile %}
                         <form method="post" action="{% url 'profiles:delete_stations' %}">
                             {% csrf_token %}
                             <ul class="station-list">
                                 {% for station in user_profile.station_set.all %}
+
                                 <div style="disply: flex; background-color: #EEEEEE; margin-bottom: 10px; flex-direction: raw;">
 
                                     <div>
@@ -304,10 +300,12 @@
 
                                     <div>
                                         <input type="checkbox" name="stations_to_delete" value="{{ station.id }}">
+
                                     </div>
 
                                 </div>
                                 {% endfor %}
+                                </li>
                             </ul>
                             <button type="submit" class="delete">삭제</button>
                         </form>
@@ -315,25 +313,29 @@
                         <img style="height: 79px; width: 72px; position: relative; top: 12%;" src="{% static 'img/place.png' %}">
                         <p style="font-weight: bold; text-align: center; position: relative; top: 4%;">자주가는 장소를 등록하고<br> 쉽게 예약을 요청하세요!</p>
                     {% endif %}
-                </div>
+                
                 {% endif %}
             </button>
 
+
             <div style="position : absolute; top: 29%; right: 230px; display: flex;">
                 <button id="showFormButton">기사님 인증하기</button>
+
             </div>
 
 
             <div id="formWrapper" style= "display: none;">
+
             <form style="position : absolute; top: 30%; right: 100px; display: flex;" method="post" action="{% url 'profiles:my_page' %}">
                 {% csrf_token %}
                 <div style="margin-right: 20px; color: white; font-weight: bold;">
+
                     <input type="checkbox" name="is_taxi_driver" {% if user_profile.is_taxi_driver %}checked{% endif %}>
                     <label for="is_taxi_driver">기사님 입니다</label>
                 </div>
                 <div>
                     <button style="color: #000000; background-color: rgba(255, 255, 255, 0.773); border-radius: 3px;
-                    border-style: none; font-weight: bold;" type="submit">저장</button>
+                    border-style: none; font-weight: bold; position : relative; left: 130%;" type="submit">저장</button>
                 </div>
 
             </form>
