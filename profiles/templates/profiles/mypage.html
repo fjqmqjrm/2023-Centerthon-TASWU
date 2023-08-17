@@ -1,6 +1,6 @@
 <!-- mypage.html -->
 <!DOCTYPE html>
-<html xmlns:display="http://www.w3.org/1999/xhtml">
+<html xmlns:display="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
 {% load static %}
 <head>
     <title>마이페이지</title>
@@ -193,6 +193,7 @@
 
     </style>
 </head>
+
 <body>
     <div id="iphone-frame">
 
@@ -208,12 +209,12 @@
             <img class="profile" id="profileImage" src="{{ user_profile.image.url }}" onclick="openImageUploader()" style="border-radius: 50px"/>
 
             {% else %}
-            <!-- 프로필 사진 등록 안 했을 때 기본 프로필 이미지 --> 
+            <!-- 프로필 사진 등록 안 했을 때 기본 프로필 이미지 -->
             <img class="profile" src="{% static 'img/profile.png' %}" onclick="openImageUploader()"/>
             {% endif %}
 
 
-            {% csrf_token %} 
+            {% csrf_token %}
             {% if user_profile.phone_number %}
             <a href="{% url 'profiles:phone_number' %}">
                 <div class="certification" style="text-decoration: none; color:#000000; font-size:15px; font-weight: bold; display: flex; justify-content: center; align-items: center;">
@@ -227,7 +228,7 @@
             </button>
             </a>
             {% endif %}
-            
+
             <a href="{% url 'map:map_main' %}">
                 <button class="button1">
                     <img style="height: 31px; width: 31px;" src="{% static 'img/mp-map.png' %}"><br>메인지도
@@ -246,7 +247,7 @@
                 </button>
             </a>
         </div>
-        
+
         <!-- 하단바 -->
         <div class="down-bar">
             <a href="{% url 'map:map_main' %}" style="text-decoration: none; color:#ffffff">
@@ -258,16 +259,16 @@
             <button class="reg">
                 <!-- 기사님 -->
                 {% if user_profile.is_taxi_driver %}
-                <p style="font-weight: bold; position: absolute; top: 2%; right: 165px; font-size: 17px; white-space: nowrap;">호출 수락 내역</p>
+                <p style="font-weight: bold; font-size: 17px; white-space: nowrap;">호출 수락 내역</p>
 
-                <a href="{% url 'map:station_add_turn' %}">
-                    <img style="height: 20px; width: 20px; position: relative; left: 40%; top: 5%;" src="{% static 'img/plus.png' %}">
-                </a>
                 <ol>
                             {% for taxi_call in taxi_calls %}
-                            <li>
-                                <p style="font-size: 16px; font-weight: bolder; disply: flex; justify-content:left; position: relative; right:110px;">{{ taxi_call.client }}</p>
-                                <p style="font-size: 14px;disply: flex; justify-content:left; margin-right: 100px; white-space: nowrap; margin-bottom: 30px;">{{ taxi_call.address }}</p>
+                            <li style="background-color: #EEEEEE; border-radius: 10px; margin-right: 20px;">
+                                <div>
+                                    <p style="font-size: 16px; font-weight: bolder; disply: flex; justify-content:left;">{{ taxi_call.client }}</p>
+                                    <p style="font-size: 14px;disply: flex; justify-content:left;  white-space: nowrap; margin-right:10px; margin-bottom: 10px;">{{ taxi_call.address }}</p>
+                                </div>
+
                             </li>
                             {% endfor %}
                 </ol>
@@ -279,12 +280,13 @@
                 <a href="{% url 'map:station_add_turn' %}">
                     <img style="height: 20px; width: 20px; position: absolute; top: 5%; right: 17px;" src="{% static 'img/plus.png' %}">
                 </a>
-      
+
                     {% if user_profile %}
                         <form method="post" action="{% url 'profiles:delete_stations' %}">
                             {% csrf_token %}
                             <ul class="station-list" style=" margin-top: 40px; max-height: 350px; overflow-y: auto;">
                                 {% for station in user_profile.station_set.all %}
+
 
                                 <div style="disply: flex; height: 90px; background-color: #EEEEEE; margin-bottom: 10px; width: 270px; border-radius: 10px; margin-left: -10%;">
 
@@ -298,10 +300,12 @@
                                         <input style="width: 20px; height: 20px; position: relative; margin-right: -80%; margin-top:-15%;" 
                                         type="checkbox" name="stations_to_delete" value="{{ station.id }}">
                                         <p style="position: relative; margin-top: -5%; text-align: left; margin-left: 23%;">{{ station.address }}</p>
+
                                     </div>
+
                                 </div>
                                 {% endfor %}
-                                </li>
+
                             </ul>
                             <button type="submit" class="delete">삭제</button>
                         </form>
@@ -309,13 +313,14 @@
                         <img style="height: 79px; width: 72px; position: relative; top: 12%;" src="{% static 'img/place.png' %}">
                         <p style="font-weight: bold; text-align: center; position: relative; top: 4%;">자주가는 장소를 등록하고<br> 쉽게 예약을 요청하세요!</p>
                     {% endif %}
-                
+
                 {% endif %}
             </button>
 
 
             <div style="position : absolute; top: 29%; right: 230px; display: flex;">
                 <button id="showFormButton">기사님 인증하기</button>
+
             </div>
 
 
@@ -335,8 +340,11 @@
 
             </form>
             </div>
+
         </div>
 
+
+        </div>
 
     <!-- 이미지 업로드용 폼 -->
     <script>
@@ -355,7 +363,7 @@
             if (file) {
                 var formData = new FormData();
                 formData.append('image', file);
-    
+
                 fetch("{% url 'profiles:update_profile_image' %}", {
                     method: 'POST',
                     body: formData,
@@ -368,7 +376,7 @@
                     if (data.success) {
                         var profileImage = document.getElementById('profileImage');
                         profileImage.src = data.image_url;
-    
+
                         var imageSize = Math.min(profileImage.width, profileImage.height);
                         profileImage.width = imageSize;
                         profileImage.height = imageSize;
@@ -416,7 +424,6 @@
         document.getElementById("formWrapper").style.display = "block"; // 양식 표시
     });
     </script>
-</body>
 
+    </body>
 </html>
-
