@@ -78,37 +78,50 @@
 
         ul {
             list-style-type: none;
-            padding: 0;
-            margin-top: 50%;
         }
 
-
+        .scroll{
+            margin-top: 5px;
+        }
 
         .div-box{
-            width: 300px;
-            height: 400px;
-            background-color: #eeeeee;
+            width: 330px;
+            height: 479px;
+            background-color: #ffffff;
             border-radius: 15px;
             box-shadow: 0px 2px 4px rgb(0, 0, 0, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
             overflow-y: auto;
         }
 
         #acceptButton {
             background-color: #6A7EEC;
             color: #ffffff;
-            width: 300px;
-            height: 40px;
+            width: 330px;
+            height: 48px;
             border-radius: 10px;
             border-style: none;
-            font-weight: bold;
+            font-weight: bolder;
+            font-size: 18px;
             margin-top: 35px;
         }
 
         #acceptButton:hover {
-        background-color: #495CBF;
+            background-color: #495CBF;
+        }
+
+        .address{
+            text-decoration: none;
+            transition: color 0.3s;
+            text-decoration: none; 
+            color: #484848;
+            position: relative; 
+            text-align: left;
+            right:-8px;
+            overflow: hidden; text-overflow: ellipsis;
+        }
+            
+        .address:hover{
+            color: #495CBF;
         }
 
     </style>
@@ -153,34 +166,38 @@
     <!-- 리스트 -->
     <div style="display: flex; justify-content: center;">
         <form id="callForm" method="post" action="{% url 'profiles:call_accept' %}">
-            <p style="font-size: 20px; font-weight: bold; text-align: center;"> 택시 호출 리스트</p>
+            <p style="font-size: 20px; font-weight: bold; text-align: center; margin-top: -25px"> 택시 호출 리스트</p>
 
             <div class="div-box">
-            {% csrf_token %}
-            <ul id="itemList" style="margin-top: 10px; text-align: center; justify-items: center; font-size: large; border-color: #6A7EEC;">
+                {% csrf_token %}
+                <ul id="itemList" style="margin-top: 10px; text-align: center; justify-items: center; font-size: large;">
                 {% for taxi_call in taxi_calls %}
                     {% if taxi_call.driver is None %}
-                        <li style="font-size: 16px; margin-bottom: 5px; margin-top: 5px;">
-                            <div style="display: flex;">
-                                <input style="font-weight: bolder;" type="checkbox" name="selected_calls" value="{{ taxi_call.pk }}">
-
-                                <p style="color: #6A7EEC; font-weight: bold;">&nbsp;{{ taxi_call.client }} &nbsp</p>
-                                <a href="#" onclick="navigateToDestination('{{ taxi_call.address }}'); return false;">
-                                    <p>{{ taxi_call.address }}</p>
-                                </a>
-
-                           
+                    <li style="font-size: 16px; margin-bottom: 5px; margin-top: 5px;">
+                         <div style="width: 315px; height: 100px; background-color: #e8e8e8; border-radius: 10px; margin-top: 7px; display: flex; align-items: center;
+                         position: relative; right: 11%;">
+                             
+                            <img style="height: 42px; width: 42px; margin-left: 15px;" src="{% static 'img/profile.png' %}"> 
+                            <div style="flex-direction: column; flex-grow: 1;">
+                                <p style="color: #000000; font-weight: bold; white-space: nowrap; position: relative; left:-35%;">{{ taxi_call.client }}</p>
+                                <p class="address" href="#"
+                                onclick="navigateToDestination('{{ taxi_call.address }}'); return false;">{{ taxi_call.address }}</p>
                             </div>
-
-                        </li>
+                            <div>
+                                <input style="width: 20px; height: 20px; font-weight: bolder; flex-shrink: 0; margin-right: 8px;" type="checkbox" name="selected_calls" value="{{ taxi_call.pk }}">
+                            </div>
+                             
+                         </div>        
+                     </li>
                     {% endif %}
                 {% endfor %}
                 
                 <div>
                 
             </div>
-        </ul>
+            </ul>
     </div>
+
         <button id="acceptButton" type="submit">수락</button>
 
 
