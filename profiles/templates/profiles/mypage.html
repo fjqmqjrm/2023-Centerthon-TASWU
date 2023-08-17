@@ -1,6 +1,6 @@
 <!-- mypage.html -->
 <!DOCTYPE html>
-<html xmlns:display="http://www.w3.org/1999/xhtml">
+<html xmlns:display="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
 {% load static %}
 <head>
     <title>마이페이지</title>
@@ -11,6 +11,10 @@
             background-color: #e9e9e9;
             overflow: scroll;
             margin:0px;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         #iphone-frame {
@@ -58,7 +62,7 @@
 
         .user{
             position: relative;
-            margin-top: -60%;
+            margin-top: -57%;
             left: 20%;
             transform: translate(-50%, -50%);
         }
@@ -68,20 +72,20 @@
             width: 90px;
             top: 10%;
             position: absolute;
-            right: -20px;
+            right: -10px;
             transform: translate(-50%, -50%);
         }
 
         #showFormButton {
-            width:144px;
-            height:28px;
-            background-color: rgba(255, 255, 255, 0.5);
+            width:310px;
+            height:35px;
+            background-color: rgba(255, 255, 255, 0.25);
             box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
             border-style: none;
-            border-radius: 50px;
+            border-radius: 10px;
             font-weight: bold;
             position: relative;
-            left: 23px;
+            left: 190px;
 
         }
 
@@ -89,7 +93,7 @@
             width:144px;
             height:28px;
             position: absolute;
-            top: 16%;
+            top: 13%;
             right: 135px;
             transform: translate(-50%, -50%);
             background-color: rgba(255, 255, 255, 0.5);
@@ -102,7 +106,7 @@
             width:97px;
             height:80px;
             position: absolute;
-            top: 25%;
+            top: 22%;
             right: 205px;
             transform: translate(-50%, -50%);
             background-color: rgba(255, 255, 255, 0.25);
@@ -116,7 +120,7 @@
             width:97px;
             height:80px;
             position: absolute;
-            top: 25%;
+            top: 22%;
             right: 97px;
             transform: translate(-50%, -50%);
             background-color: rgba(255, 255, 255, 0.25);
@@ -130,7 +134,7 @@
             width:97px;
             height:80px;
             position: absolute;
-            top: 25%;
+            top: 22%;
             right: -10px;
             transform: translate(-50%, -50%);
             background-color: rgba(255, 255, 255, 0.25);
@@ -160,7 +164,7 @@
             background-color: #ffffff;
             border-radius: 20px;
             position: absolute;
-            top: 59%;
+            top: 61%;
             right: -115px;
             transform: translate(-50%, -50%);
             box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
@@ -168,45 +172,38 @@
 
         }
 
-        .scroll1 {
-          margin-top: 40px;
-          max-height: 350px;
-          overflow-y: auto;
-        }
-
-        .scroll2 {
-          margin-top: 30px;
-          max-height: 350px;
-          overflow-y: auto;
-        }
-
         .delete {
-        position: relative;
-        top: 330px;
-        left: 290px;
-        border:none;
-        background-color: #6A7EEC;
-        color: white;
-        font-size: 17px;
-        font-weight: bold;
-        padding: 5px 10px 5px 10px;
-        border-radius: 10px;
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+            width: 300px;
+            height: 40px;
+            position: relative;
+            top: 340px;
+            left: 42px;
+            border:none;
+            background-color: #6A7EEC;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            padding: 5px 10px 5px 10px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
         }
 
         .delete:hover {
-        background-color: #495CBF;
+            background-color: #495CBF;
         }
+
+
 
     </style>
 </head>
+
 <body>
     <div id="iphone-frame">
 
         <!-- 상단바 -->
         <div class="top-bar">
             {% if user_profile.is_taxi_driver %}
-            <p class="user" style="color: #ffffff; font-weight: bolder; font-size: large;">{{ user.username }} 기사님</p>
+            <p class="user" style="color: #ffffff; font-weight: bolder; font-size: large;position: relative; left: 25%;">{{ user.username }} 기사님</p>
             {% else %}
             <p class="user" style="color: #ffffff; font-weight: bolder; font-size: large;">{{ user.username }}님</p>
             {% endif %}
@@ -215,12 +212,12 @@
             <img class="profile" id="profileImage" src="{{ user_profile.image.url }}" onclick="openImageUploader()" style="border-radius: 50px"/>
 
             {% else %}
-            <!-- 프로필 사진 등록 안 했을 때 기본 프로필 이미지 --> 
+            <!-- 프로필 사진 등록 안 했을 때 기본 프로필 이미지 -->
             <img class="profile" src="{% static 'img/profile.png' %}" onclick="openImageUploader()"/>
             {% endif %}
 
 
-            {% csrf_token %} 
+            {% csrf_token %}
             {% if user_profile.phone_number %}
             <a href="{% url 'profiles:phone_number' %}">
                 <div class="certification" style="text-decoration: none; color:#000000; font-size:15px; font-weight: bold; display: flex; justify-content: center; align-items: center;">
@@ -234,7 +231,7 @@
             </button>
             </a>
             {% endif %}
-            
+
             <a href="{% url 'map:map_main' %}">
                 <button class="button1">
                     <img style="height: 31px; width: 31px;" src="{% static 'img/mp-map.png' %}"><br>메인지도
@@ -253,7 +250,7 @@
                 </button>
             </a>
         </div>
-        
+
         <!-- 하단바 -->
         <div class="down-bar">
             <a href="{% url 'map:map_main' %}" style="text-decoration: none; color:#ffffff">
@@ -265,17 +262,16 @@
             <button class="reg">
                 <!-- 기사님 -->
                 {% if user_profile.is_taxi_driver %}
-                <p style="font-weight: bold; position: absolute; top: 2%; right: 165px; font-size: 17px; white-space: nowrap;">호출 수락 내역</p>
-
-                <a href="{% url 'map:station_add_turn' %}">
-                    <img style="height: 20px; width: 20px; position: absolute; top: 5%; right: 17px;" src="{% static 'img/plus.png' %}">
-                </a>
-                <ol class="scroll1">
-
+                <p style="font-weight: bold; font-size: 17px; white-space: nowrap;">호출 수락 내역</p>
+                
+                <ol style="margin-top:15px; max-height: 350px; overflow-y: auto;">
                             {% for taxi_call in taxi_calls %}
-                            <li>
-                                <p style="font-size: 16px; font-weight: bolder; disply: flex; justify-content:left; position: relative; right:110px;">{{ taxi_call.client }}</p>
-                                <p style="font-size: 14px;disply: flex; justify-content:left; margin-right: 100px; white-space: nowrap; margin-bottom: 30px;">{{ taxi_call.address }}</p>
+                            <li style="background-color: #EEEEEE; border-radius: 10px; margin-right: 20px;">
+                                <div>
+                                    <p style="font-size: 16px; font-weight: bolder; disply: flex; justify-content:left;">{{ taxi_call.client }}</p>
+                                    <p style="font-size: 14px;disply: flex; justify-content:left;  white-space: nowrap; margin-right:10px; margin-bottom: 10px;">{{ taxi_call.address }}</p>
+                                </div>
+
                             </li>
                             {% endfor %}
                 </ol>
@@ -283,27 +279,34 @@
                 <!-- 사용자 -->
                 {% else %}
 
-                <p style="font-weight: bold; position: absolute; top: 2%; right: 185px; font-size: 17px; white-space: nowrap;">내 장소 등록</p>
+                <p style="font-weight: bold; position: absolute; top: 1%; right: 185px; font-size: 17px; white-space: nowrap;">내 장소 등록</p>
                 <a href="{% url 'map:station_add_turn' %}">
                     <img style="height: 20px; width: 20px; position: absolute; top: 5%; right: 17px;" src="{% static 'img/plus.png' %}">
                 </a>
-                <div class="scroll2">
 
                     {% if user_profile %}
                         <form method="post" action="{% url 'profiles:delete_stations' %}">
                             {% csrf_token %}
-                            <ul class="station-list">
+                            <ul class="station-list" style=" margin-top: 40px; max-height: 350px; overflow-y: auto;">
                                 {% for station in user_profile.station_set.all %}
-                                <div style="disply: flex; justify-content:left;">
-                                    <div style="display: flex; justify-content: space-between; margin-right: 40px; font-size: 16px;">
-                                        <p style="font-weight: bold;">{{ station.name }}</p>
-                                        <input type="checkbox" name="stations_to_delete" value="{{ station.id }}">
+
+                                <div style="disply: flex; height: 90px; background-color: #EEEEEE; margin-bottom: 10px; width: 270px; border-radius: 10px; margin-left: -10%;">
+
+                                    <div>
+                                        <img src="{% static 'img/station_marker.png' %}"
+                                        style="width: 28.75px; height: 40px; position: relative; left: -37%; margin-top: 10%;">
                                     </div>
-                                    <div style="disply: flex; justify-content:left; margin-right: 100px; white-space: nowrap; font-size: 14px;">
-                                      <p>{{ station.address }}</p>
+
+                                    <div>
+                                        <p style="font-weight: bold; position: relative; margin-top: -20%; text-align: left; margin-left: 23%;">{{ station.name }}</p>
+                                        <input style="width: 20px; height: 20px; position: relative; margin-right: -80%; margin-top:-15%;" 
+                                        type="checkbox" name="stations_to_delete" value="{{ station.id }}">
+                                        <p style="position: relative; margin-top: -5%; text-align: left; margin-left: 23%;">{{ station.address }}</p>
                                     </div>
+
                                 </div>
                                 {% endfor %}
+
                             </ul>
                             <button type="submit" class="delete">삭제</button>
                         </form>
@@ -311,30 +314,38 @@
                         <img style="height: 79px; width: 72px; position: relative; top: 12%;" src="{% static 'img/place.png' %}">
                         <p style="font-weight: bold; text-align: center; position: relative; top: 4%;">자주가는 장소를 등록하고<br> 쉽게 예약을 요청하세요!</p>
                     {% endif %}
-                </div>
+
                 {% endif %}
             </button>
-            <div style="position : absolute; top: 10%; right: 230px; display: flex;">
-            <button id="showFormButton">기사님 인증하기</button>
+
+
+            <div style="position : absolute; top: 29%; right: 230px; display: flex;">
+                <button style="font-weight: bolder;" id="showFormButton">기사님 인증하기</button>
+
             </div>
 
 
             <div id="formWrapper" style= "display: none;">
-            <form style="position: absolute; top: 10%; right: 170px; display: flex;" method="post" action="{% url 'profiles:my_page' %}">
+
+            <form style="position : absolute; top: 30%; right: 100px; display: flex;" method="post" action="{% url 'profiles:my_page' %}">
                 {% csrf_token %}
-                <div style="margin-right: 15px;">
+                <div style="margin-right: 20px; color: white; font-weight: bold;">
                     <input type="checkbox" name="is_taxi_driver" {% if user_profile.is_taxi_driver %}checked{% endif %}>
                     <label for="is_taxi_driver">기사님 입니다</label>
                 </div>
+
                 <div>
                     <button style="color: #000000; background-color: rgba(255, 255, 255, 0.773); border-radius: 3px;
-                    border-style: none; font-weight: bold;" type="submit">저장</button>
+                    border-style: none; font-weight: bold; position : relative; left: 130%;" type="submit">저장</button>
                 </div>
 
             </form>
-                </div>
+            </div>
+
         </div>
 
+
+        </div>
 
     <!-- 이미지 업로드용 폼 -->
     <script>
@@ -353,7 +364,7 @@
             if (file) {
                 var formData = new FormData();
                 formData.append('image', file);
-    
+
                 fetch("{% url 'profiles:update_profile_image' %}", {
                     method: 'POST',
                     body: formData,
@@ -366,7 +377,7 @@
                     if (data.success) {
                         var profileImage = document.getElementById('profileImage');
                         profileImage.src = data.image_url;
-    
+
                         var imageSize = Math.min(profileImage.width, profileImage.height);
                         profileImage.width = imageSize;
                         profileImage.height = imageSize;
@@ -414,7 +425,6 @@
         document.getElementById("formWrapper").style.display = "block"; // 양식 표시
     });
     </script>
-</body>
 
+    </body>
 </html>
-

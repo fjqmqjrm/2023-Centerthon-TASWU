@@ -10,6 +10,11 @@
             background-color: #e9e9e9;
             overflow: scroll;
             margin: 0px;
+
+            height: 100%; /* 뷰포트 높이를 100%로 설정 */
+             display: flex;
+             justify-content: center; /* 가로 가운데 정렬 */
+             align-items: center; /* 세로 가운데 정렬 */
         }
 
         #iphone-frame {
@@ -179,11 +184,11 @@
                              
 
                             {% csrf_token %} {% if taxi_call.client.image %}
-                            <img style="height: 42px; width: 42px; margin-left: 15px;" src="{{ taxi_call.client.image.url }}" >
+                            <img style="height: 42px; width: 42px; margin-left: 15px; border-radius: 50%;" src="{{ taxi_call.client.image.url }}" >
 
                             {% else %}
                             <!-- 프로필 사진 등록 안 했을 때 기본 프로필 이미지 -->
-                            <img style="height: 42px; width: 42px; margin-left: 15px;" src="{% static 'img/profile.png' %}">
+                            <img style="height: 42px; width: 42px; margin-left: 15px; border-radius: 50%;" src="{% static 'img/profile.png' %}">
                             {% endif %}
 
                             <div style="flex-direction: column; flex-grow: 1;">
