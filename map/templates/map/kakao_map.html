@@ -6,6 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kakao Map API 지도</title>
+    <script defer src="https://cdn.swygbro.com/public/widget/swyg-widget.js"></script>
     <script
       type="text/javascript"
       src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fc41df168f7cfb2ea655c2baae9a7ad1&libraries=services"
@@ -301,9 +302,18 @@
         "
       ></div>
 
-      <script>
+      <script type="text/javascript">
+        function loadScript(src, callback) {
+          var script = document.createElement("script");
+          script.type = "text/javascript";
+          script.src = src;
+          script.onload = callback;
+          document.head.appendChild(script);
+        }
+
         document.addEventListener("DOMContentLoaded", function() {
-        kakao.maps.load(function() {
+        loadScript("//dapi.kakao.com/v2/maps/sdk.js?appkey=fc41df168f7cfb2ea655c2baae9a7ad1&libraries=services", function() {
+
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {
                     var latitude = position.coords.latitude;
