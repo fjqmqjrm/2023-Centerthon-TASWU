@@ -58,9 +58,9 @@
 
         .user{
             position: relative;
-            margin-top: -57%;
-            left: 20%;
-            transform: translate(-50%, -50%);
+            margin-top: -60%;
+            margin-left: 40px;
+
         }
 
         .profile{
@@ -258,17 +258,16 @@
             <button class="reg">
                 <!-- 기사님 -->
                 {% if user_profile.is_taxi_driver %}
-                <p style="font-weight: bold; position: absolute; top: 2%; right: 165px; font-size: 17px; white-space: nowrap;">호출 수락 내역</p>
+                <p style="font-weight: bold; font-size: 17px; white-space: nowrap;">호출 수락 내역</p>
 
-                <a href="{% url 'map:station_add_turn' %}">
-                    <img style="height: 20px; width: 20px; position: relative; left: 40%; top: 5%;" src="{% static 'img/plus.png' %}">
-                </a>
                 <ol>
-
                             {% for taxi_call in taxi_calls %}
-                            <li>
-                                <p style="font-size: 16px; font-weight: bolder; disply: flex; justify-content:left; position: relative; right:110px;">{{ taxi_call.client }}</p>
-                                <p style="font-size: 14px;disply: flex; justify-content:left; margin-right: 100px; white-space: nowrap; margin-bottom: 30px;">{{ taxi_call.address }}</p>
+                            <li style="background-color: #EEEEEE; border-radius: 10px; margin-right: 20px;">
+                                <div>
+                                    <p style="font-size: 16px; font-weight: bolder; disply: flex; justify-content:left;">{{ taxi_call.client }}</p>
+                                    <p style="font-size: 14px;disply: flex; justify-content:left;  white-space: nowrap; margin-right:10px; margin-bottom: 10px;">{{ taxi_call.address }}</p>
+                                </div>
+
                             </li>
                             {% endfor %}
                 </ol>
