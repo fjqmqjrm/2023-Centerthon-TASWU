@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script
       type="text/javascript"
-      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=df9fbbf360a12deca34689f55c0a89ec&libraries=services"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fc41df168f7cfb2ea655c2baae9a7ad1&libraries=services"
     ></script>
 
     <style>
@@ -271,6 +271,12 @@
                     if (status === kakao.maps.services.Status.OK) {
                         var stationLatLng = new kakao.maps.LatLng(result[0].y, result[0].x);
 
+                        var mapOptions = {
+                            center: stationLatLng, // 호출 주소를 중심으로 지도 설정
+                            level: 3
+                        };
+                        var map = new kakao.maps.Map(mapContainer, mapOptions);
+
                         var stationMarker = new kakao.maps.Marker({
                             position: stationLatLng,
                             map: map,
@@ -279,7 +285,7 @@
                         });
 
                         // 마커를 클릭했을 때 정보 창 등을 표시하는 로직 추가 가능
-                    } else {
+                    }  else {
                         console.error("주소 변환 오류:", status);
                     }
                 });
