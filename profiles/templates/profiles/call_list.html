@@ -177,7 +177,15 @@
                          <div style="width: 315px; height: 100px; background-color: #e8e8e8; border-radius: 10px; margin-top: 7px; display: flex; align-items: center;
                          position: relative; right: 11%;">
                              
-                            <img style="height: 42px; width: 42px; margin-left: 15px;" src="{% static 'img/profile.png' %}"> 
+
+                            {% csrf_token %} {% if taxi_call.client.image %}
+                            <img style="height: 42px; width: 42px; margin-left: 15px;" src="{{ taxi_call.client.image.url }}" >
+
+                            {% else %}
+                            <!-- 프로필 사진 등록 안 했을 때 기본 프로필 이미지 -->
+                            <img style="height: 42px; width: 42px; margin-left: 15px;" src="{% static 'img/profile.png' %}">
+                            {% endif %}
+
                             <div style="flex-direction: column; flex-grow: 1;">
                                 <p style="color: #000000; font-weight: bold; white-space: nowrap; position: relative; left:-35%;">{{ taxi_call.client }}</p>
                                 <p class="address" href="#"
