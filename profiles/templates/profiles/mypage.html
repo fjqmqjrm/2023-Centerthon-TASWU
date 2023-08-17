@@ -11,6 +11,10 @@
             background-color: #e9e9e9;
             overflow: scroll;
             margin:0px;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         #iphone-frame {
@@ -165,7 +169,6 @@
             transform: translate(-50%, -50%);
             box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
             border-style: none;
-            overflow-y: auto;
 
         }
 
@@ -200,7 +203,7 @@
         <!-- 상단바 -->
         <div class="top-bar">
             {% if user_profile.is_taxi_driver %}
-            <p class="user" style="color: #ffffff; font-weight: bolder; font-size: large;">{{ user.username }} 기사님</p>
+            <p class="user" style="color: #ffffff; font-weight: bolder; font-size: large;position: relative; left: 25%;">{{ user.username }} 기사님</p>
             {% else %}
             <p class="user" style="color: #ffffff; font-weight: bolder; font-size: large;">{{ user.username }}님</p>
             {% endif %}
@@ -260,8 +263,8 @@
                 <!-- 기사님 -->
                 {% if user_profile.is_taxi_driver %}
                 <p style="font-weight: bold; font-size: 17px; white-space: nowrap;">호출 수락 내역</p>
-
-                <ol>
+                
+                <ol style="margin-top:15px; max-height: 350px; overflow-y: auto;">
                             {% for taxi_call in taxi_calls %}
                             <li style="background-color: #EEEEEE; border-radius: 10px; margin-right: 20px;">
                                 <div>
@@ -287,7 +290,6 @@
                             <ul class="station-list" style=" margin-top: 40px; max-height: 350px; overflow-y: auto;">
                                 {% for station in user_profile.station_set.all %}
 
-
                                 <div style="disply: flex; height: 90px; background-color: #EEEEEE; margin-bottom: 10px; width: 270px; border-radius: 10px; margin-left: -10%;">
 
                                     <div>
@@ -300,7 +302,6 @@
                                         <input style="width: 20px; height: 20px; position: relative; margin-right: -80%; margin-top:-15%;" 
                                         type="checkbox" name="stations_to_delete" value="{{ station.id }}">
                                         <p style="position: relative; margin-top: -5%; text-align: left; margin-left: 23%;">{{ station.address }}</p>
-
                                     </div>
 
                                 </div>
@@ -319,7 +320,7 @@
 
 
             <div style="position : absolute; top: 29%; right: 230px; display: flex;">
-                <button id="showFormButton">기사님 인증하기</button>
+                <button style="font-weight: bolder;" id="showFormButton">기사님 인증하기</button>
 
             </div>
 
@@ -329,10 +330,10 @@
             <form style="position : absolute; top: 30%; right: 100px; display: flex;" method="post" action="{% url 'profiles:my_page' %}">
                 {% csrf_token %}
                 <div style="margin-right: 20px; color: white; font-weight: bold;">
-
                     <input type="checkbox" name="is_taxi_driver" {% if user_profile.is_taxi_driver %}checked{% endif %}>
                     <label for="is_taxi_driver">기사님 입니다</label>
                 </div>
+
                 <div>
                     <button style="color: #000000; background-color: rgba(255, 255, 255, 0.773); border-radius: 3px;
                     border-style: none; font-weight: bold; position : relative; left: 130%;" type="submit">저장</button>
