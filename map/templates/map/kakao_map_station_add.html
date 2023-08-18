@@ -546,31 +546,47 @@
 
 
 
-        function registerTaxiStation() {
-            var addressInfoDiv = document.getElementById('addressInfo');
-            var address = addressInfoDiv.innerText;
+          function registerTaxiStation() {
+                var addressInfoDiv = document.getElementById('addressInfo');
+                var address = addressInfoDiv.innerText;
 
-            var form = document.createElement('form');
-            form.method = 'post';
-            form.action = "{% url 'map:station_add' %}";
-            form.style.display = 'none';
+                var stationNameInput = document.getElementById('stationName');
+                var station_name = stationNameInput.value;  // 승강장 이름 값 가져오기
 
-            var csrfToken = document.createElement('input');
-            csrfToken.type = 'hidden';
-            csrfToken.name = 'csrfmiddlewaretoken';
-            csrfToken.value = '{{ csrf_token }}';
+                var coins = {{ user_profile.coins }};  // 유저 프로필의 코인 값 가져오기
 
-            var addressField = document.createElement('input');
-            addressField.type = 'hidden';
-            addressField.name = 'address';
-            addressField.value = address;
+                if (coins <= 1) {
+                    alert('코인이 부족하여 승강장을 등록할 수 없습니다.');
+                    return;  // 등록 중지
+                }
 
-            form.appendChild(csrfToken);
-            form.appendChild(addressField);
+                var form = document.createElement('form');
+                form.method = 'post';
+                form.action = "{% url 'map:station_add' %}";
+                form.style.display = 'none';
 
-            document.body.appendChild(form);
-            form.submit();
-        }
+                var csrfToken = document.createElement('input');
+                csrfToken.type = 'hidden';
+                csrfToken.name = 'csrfmiddlewaretoken';
+                csrfToken.value = '{{ csrf_token }}';
+
+                var addressField = document.createElement('input');
+                addressField.type = 'hidden';
+                addressField.name = 'address';
+                addressField.value = address;
+
+                var nameField = document.createElement('input');  // 새로운 input 필드 생성
+                nameField.type = 'hidden';
+                nameField.name = 'station_name';
+                nameField.value = station_name;  // 승강장 이름 값 설정
+
+                form.appendChild(csrfToken);
+                form.appendChild(addressField);
+                form.appendChild(nameField);  // 폼에 승강장 이름 필드 추가
+
+                document.body.appendChild(form);
+                form.submit();
+            }
 
 
       </script>
