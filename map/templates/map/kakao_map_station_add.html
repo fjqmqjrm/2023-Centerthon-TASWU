@@ -408,191 +408,169 @@
       </div>
 
 
-      <script>
+    <script type="text/javascript">
+    function loadScript(src, callback) {
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src = src;
+        script.onload = callback;
+        document.head.appendChild(script);
+    }
 
-         window.onload = function() {
-         const arrivalSound = document.getElementById('sound3');
+    document.addEventListener("DOMContentLoaded", function() {
+        loadScript("//dapi.kakao.com/v2/maps/sdk.js?appkey=fc41df168f7cfb2ea655c2baae9a7ad1&libraries=services", function() {
 
-          // 음성 재생
-          arrivalSound.play();
-          };
+            var fixedLatitude = 37.468303898809104; // 고정된 위도
+            var fixedLongitude = 127.03924813184642; // 고정된 경도
 
-        document.addEventListener("DOMContentLoaded", function() {
-        kakao.maps.load(function() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    var latitude = position.coords.latitude;
-                    var longitude = position.coords.longitude;
-                    var mapContainer = document.getElementById('map');
-                    var mapOptions = {
-                        center: new kakao.maps.LatLng(latitude, longitude),
-                        level: 3
-                    };
-                    var map = new kakao.maps.Map(mapContainer, mapOptions);
+            var mapContainer = document.getElementById('map');
+            var mapOptions = {
+                center: new kakao.maps.LatLng(fixedLatitude, fixedLongitude),
+                level: 3
+            };
+            var map = new kakao.maps.Map(mapContainer, mapOptions);
 
-                    var imageSrc = "/static/img/marker_red.png";
-                    var imageSize = new kakao.maps.Size(23, 31);
-                    var imageOption = { offset: new kakao.maps.Point(20, 90) };
-                    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+            var imageSrc = "/static/img/marker_red.png";
+            var imageSize = new kakao.maps.Size(23, 31);
+            var imageOption = { offset: new kakao.maps.Point(20, 90) };
+            var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
 
-                    var marker = new kakao.maps.Marker({
-                        position: new kakao.maps.LatLng(latitude, longitude),
-                        map: map,
-                        image: markerImage,
-                        draggable: true,
-                        zIndex: 2
-                    });
-
-                    marker.setMap(map);
-
-                    // user_stations에 해당하는 마커들을 추가하는 부분
-                    var stations = [
-                        {% for station in user_stations %}
-                        {
-                            address: "{{ station.address }}",
-                            name: "{{ station.name }}",
-                        },
-                        {% endfor %}
-                    ];
-
-                    var stationMarkerImage = "/static/img/station_marker.png"; // 새로운 마커 이미지 경로
-                    var stationMarkerSize = new kakao.maps.Size(23, 31);
-                    var stationMarkerOption = { offset: new kakao.maps.Point(20, 90) };
-                    var stationMarkerImageObj = new kakao.maps.MarkerImage(stationMarkerImage, stationMarkerSize, stationMarkerOption);
-
-                    var geocoder = new kakao.maps.services.Geocoder();
-
-
-                    // input 누르면 search로 이동
-                     var inputElement = document.getElementById("keyword");
-
-                    inputElement.addEventListener("click", function() {
-                        // 원하는 동작을 수행 (새로운 페이지로 이동 등)
-                         window.location.href = "{% url 'map:map_search' %}";
-                    });
-                    for (let i = 0; i < stations.length; i++) {
-                        let station = stations[i];
-                        console.log("Station Address:", station.address); // 주소 정보 출력
-                        geocoder.addressSearch(station.address, function(result, status) {
-                            if (status === kakao.maps.services.Status.OK) {
-                                var stationLatLng = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-                                var stationMarker = new kakao.maps.Marker({
-                                    position: stationLatLng,
-                                    map: map,
-                                    image: stationMarkerImageObj,
-                                    draggable: false // 마커 드래그 비활성화
-                                });
-
-                                  // 마커를 클릭했을 때 정보 창 등을 표시하는 로직 추가 가능
-                                  kakao.maps.event.addListener(stationMarker, 'click', function() {
-                                    var addressInfoDiv = document.getElementById('addressInfo');
-                                    addressInfoDiv.innerText = station.address; // 해당 마커의 주소 정보를 표시
-                                });
-
-
-                              // 커스텀 오버레이에 표시할 content
-                              var content = '<div class="wrap">' +
-                                '    <div class="info">' +
-                                '     <div class="info-content">'+ station.name +'</div>' +
-                                '    </div>' +
-                                '</div>';
-
-                              // 역 마커를 위한 인포윈도우 생성
-                              var overlay = new kakao.maps.CustomOverlay({
-                                  content: content,
-                                  map: map,
-                                  position: stationLatLng,
-                              });
-
-                              // 마커 클릭 시 인포윈도우 열기 위한 클릭 이벤트 리스너 추가
-                              kakao.maps.event.addListener(stationMarker, 'click', function() {
-                                overlay.setMap(map);
-                              });
-
-                              // 커스텀 오버레이를 닫기 위해 호출되는 함수
-                              function closeOverlay() {
-                                overlay.setMap(null);
-                              }
-                            } else {
-                                console.error("주소 변환 오류:", status);
-                            }
-                        });
-                    }
-
-                    var addressInfoDiv = document.getElementById('addressInfo');
-                    geocoder.coord2Address(longitude, latitude, function(result, status) {
-                        if (status === kakao.maps.services.Status.OK) {
-                            var address = result[0].address.address_name;
-                            addressInfoDiv.innerText = address;
-                        } else {
-                            console.error("주소 변환 오류:", status);
-                            addressInfoDiv.innerText = '주소 변환 오류';
-                        }
-                    });
-
-                    kakao.maps.event.addListener(marker, 'dragend', function() {
-                        var latlng = marker.getPosition();
-                        geocoder.coord2Address(latlng.getLng(), latlng.getLat(), function(result, status) {
-                            if (status === kakao.maps.services.Status.OK) {
-                                var address = result[0].address.address_name;
-                                addressInfoDiv.innerText = address;
-                            } else {
-                                console.error("주소 변환 오류:", status);
-                                addressInfoDiv.innerText = '주소 변환 오류';
-                            }
-                        });
-                    });
-                });
-            } else {
-                console.log("Geolocation is not available.");
-                }
+            var marker = new kakao.maps.Marker({
+                position: new kakao.maps.LatLng(fixedLatitude, fixedLongitude),
+                map: map,
+                image: markerImage,
+                draggable: true,
+                zIndex: 2
             });
-        });
 
-        function registerTaxiStation() {
-                var addressInfoDiv = document.getElementById('addressInfo');
-                var address = addressInfoDiv.innerText;
+            marker.setMap(map);
 
-                var stationNameInput = document.getElementById('stationName');
-                var station_name = stationNameInput.value;  // 승강장 이름 값 가져오기
+            // user_stations에 해당하는 마커들을 추가하는 부분
+            var stations = [
+                {% for station in user_stations %}
+                {
+                    address: "{{ station.address }}",
+                    name: "{{ station.name }}",
+                    // 다른 필요한 정보들도 추가 가능
+                },
+                {% endfor %}
+            ];
 
-                var coins = {{ user_profile.coins }};  // 유저 프로필의 코인 값 가져오기
+            var stationMarkerImage = "/static/img/station_marker.png"; // 새로운 마커 이미지 경로
+            var stationMarkerSize = new kakao.maps.Size(23, 31);
+            var stationMarkerOption = { offset: new kakao.maps.Point(20, 90) };
+            var stationMarkerImageObj = new kakao.maps.MarkerImage(stationMarkerImage, stationMarkerSize, stationMarkerOption);
 
-                if (coins <= 1) {
-                    alert('코인이 부족하여 승강장을 등록할 수 없습니다.');
-                    return;  // 등록 중지
-                }
+            var geocoder = new kakao.maps.services.Geocoder();
+            // input 누르면 search로 이동
+            var inputElement = document.getElementById("keyword");
 
-                var form = document.createElement('form');
-                form.method = 'post';
-                form.action = "{% url 'map:station_add' %}";
-                form.style.display = 'none';
+            inputElement.addEventListener("click", function() {
+            // 원하는 동작을 수행 (새로운 페이지로 이동 등)
+            window.location.href = "{% url 'map:map_search' %}";
+            });
+            for (let i = 0; i < stations.length; i++) {
+                let station = stations[i];
+                console.log("Station Address:", station.address); // 주소 정보 출력
+                geocoder.addressSearch(station.address, function(result, status) {
+                    if (status === kakao.maps.services.Status.OK) {
+                        var stationLatLng = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-                var csrfToken = document.createElement('input');
-                csrfToken.type = 'hidden';
-                csrfToken.name = 'csrfmiddlewaretoken';
-                csrfToken.value = '{{ csrf_token }}';
+                        var stationMarker = new kakao.maps.Marker({
+                            position: stationLatLng,
+                            map: map,
+                            image: stationMarkerImageObj,
+                            draggable: false // 마커 드래그 비활성화
+                        });
 
-                var addressField = document.createElement('input');
-                addressField.type = 'hidden';
-                addressField.name = 'address';
-                addressField.value = address;
+                        // 마커를 클릭했을 때 정보 창 등을 표시하는 로직 추가 가능
+                        kakao.maps.event.addListener(stationMarker, 'click', function() {
+                            var addressInfoDiv = document.getElementById('addressInfo');
+                            addressInfoDiv.innerText = station.address; // 해당 마커의 주소 정보를 표시
+                        });
 
-                var nameField = document.createElement('input');  // 새로운 input 필드 생성
-                nameField.type = 'hidden';
-                nameField.name = 'station_name';
-                nameField.value = station_name;  // 승강장 이름 값 설정
+                        // 커스텀 오버레이에 표시할 content
+                        var content = '<div class="wrap">' +
+                            '    <div class="info">' +
+                            '     <div class="info-content">'+ station.name +'</div>' +
+                            '    </div>' +
+                            '</div>';
 
-                form.appendChild(csrfToken);
-                form.appendChild(addressField);
-                form.appendChild(nameField);  // 폼에 승강장 이름 필드 추가
+                        // 마커 위에 커스텀오버레이를 표시
+                        var overlay = new kakao.maps.CustomOverlay({
+                            content: content,
+                            map: map,
+                            position: stationLatLng,
+                        });
 
-                document.body.appendChild(form);
-                form.submit();
+                        // 마커를 클릭했을 때 커스텀 오버레이를 표시
+                        kakao.maps.event.addListener(stationMarker, 'click', function() {
+                            overlay.setMap(map);
+                        });
+
+                        // 커스텀 오버레이를 닫기 위해 호출되는 함수
+                        function closeOverlay() {
+                            overlay.setMap(null);
+                        }
+                    } else {
+                        console.error("주소 변환 오류:", status);
+                    }
+                });
             }
 
+            var addressInfoDiv = document.getElementById('addressInfo');
+            geocoder.coord2Address(fixedLongitude, fixedLatitude, function(result, status) {
+                if (status === kakao.maps.services.Status.OK) {
+                    var address = result[0].address.address_name;
+                    addressInfoDiv.innerText = address;
+                } else {
+                    console.error("주소 변환 오류:", status);
+                    addressInfoDiv.innerText = '주소 변환 오류';
+                }
+            });
 
+            kakao.maps.event.addListener(marker, 'dragend', function() {
+                var latlng = marker.getPosition();
+                geocoder.coord2Address(latlng.getLng(), latlng.getLat(), function(result, status) {
+                    if (status === kakao.maps.services.Status.OK) {
+                        var address = result[0].address.address_name;
+                        addressInfoDiv.innerText = address;
+                    } else {
+                        console.error("주소 변환 오류:", status);
+                        addressInfoDiv.innerText = '주소 변환 오류';
+                    }
+                });
+            });
+        });
+    });
+
+
+
+        function registerTaxiStation() {
+            var addressInfoDiv = document.getElementById('addressInfo');
+            var address = addressInfoDiv.innerText;
+
+            var form = document.createElement('form');
+            form.method = 'post';
+            form.action = "{% url 'map:station_add' %}";
+            form.style.display = 'none';
+
+            var csrfToken = document.createElement('input');
+            csrfToken.type = 'hidden';
+            csrfToken.name = 'csrfmiddlewaretoken';
+            csrfToken.value = '{{ csrf_token }}';
+
+            var addressField = document.createElement('input');
+            addressField.type = 'hidden';
+            addressField.name = 'address';
+            addressField.value = address;
+
+            form.appendChild(csrfToken);
+            form.appendChild(addressField);
+
+            document.body.appendChild(form);
+            form.submit();
+        }
 
 
       </script>
