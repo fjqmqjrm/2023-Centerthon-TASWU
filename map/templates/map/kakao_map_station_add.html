@@ -416,7 +416,12 @@
         script.onload = callback;
         document.head.appendChild(script);
     }
+    window.onload = function() {
+         const arrivalSound = document.getElementById('sound3');
 
+          // 음성 재생
+          arrivalSound.play();
+          };
     document.addEventListener("DOMContentLoaded", function() {
         loadScript("//dapi.kakao.com/v2/maps/sdk.js?appkey=fc41df168f7cfb2ea655c2baae9a7ad1&libraries=services", function() {
 

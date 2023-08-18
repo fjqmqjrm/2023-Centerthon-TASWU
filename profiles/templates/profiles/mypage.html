@@ -203,11 +203,7 @@
 
         <!-- 상단바 -->
         <div class="top-bar">
-            {% if user_profile.is_taxi_driver %}
-            <p class="user" style="color: #ffffff; font-weight: bolder; font-size: large;position: relative; left: 25%;">{{ user.username }} 기사님</p>
-            {% else %}
             <p class="user" style="color: #ffffff; font-weight: bolder; font-size: large;">{{ user.username }}님</p>
-            {% endif %}
 
             {% csrf_token %} {% if user_profile.image %}
             <img class="profile" id="profileImage" src="{{ user_profile.image.url }}" onclick="openImageUploader()" style="border-radius: 50px"/>
@@ -216,6 +212,7 @@
             <!-- 프로필 사진 등록 안 했을 때 기본 프로필 이미지 -->
             <img class="profile" src="{% static 'img/profile.png' %}" onclick="openImageUploader()"/>
             {% endif %}
+
 
 
             {% csrf_token %}
