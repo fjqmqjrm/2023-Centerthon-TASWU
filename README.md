@@ -1,5 +1,4 @@
 # 나만의 택시정거장, PICKXI (2023-Centerton-TASWU)
-![image](C:\Users\82103\Downloads\PICKXI.png)
 
 
 저희 **PICKXI**는, **디지털 취약계층**이 겪을 수 있는 아래 문제들을 해결하고자 합니다.
