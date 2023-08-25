@@ -68,7 +68,7 @@
       <td align="center"><a href="https://github.com/hansun-hub"><img src="https://avatars.githubusercontent.com/u/68306239?v=4" width="100px;" alt=""/><br /><sub><b>BE : 김한선</b></sub></a><br /></td>
      <tr/>
       <td align="center"><a href="https://github.com/fjqmqjrm"><img src="https://avatars.githubusercontent.com/u/126189239?v=4" width="100px;" alt=""/><br /><sub><b>BE : 박서윤</b></sub></a><br /></td>
-      <td align="center"><a href="https://github.com/daeun-han><img src="[https://avatars.githubusercontent.com/u/111632494?v=4](https://avatars.githubusercontent.com/u/111632494?v=4)" width="100px;" alt=""/><br /><sub><b>BE : 한다은</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/daeun-han"><img src="[https://avatars.githubusercontent.com/u/111632494?v=4](https://avatars.githubusercontent.com/u/111632494?v=4)" width="100px;" alt=""/><br /><sub><b>BE : 한다은</b></sub></a><br /></td>
     </tr>
   </tbody>
 </table>
