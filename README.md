@@ -1,5 +1,4 @@
-# 2023-Centerton-TASWU
-# 나만의 택시정거장, PICKXI
+# 나만의 택시정거장, PICKXI (2023-Centerton-TASWU)
 
 ---
 
@@ -34,7 +33,7 @@
 
 📃  호출 내역
 
-✅  **호출 수락
+✅  호출 수락
 
 🗺️  길 안내
 
