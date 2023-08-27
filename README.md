@@ -1,4 +1,5 @@
 # 나만의 택시정거장, PICKXI (2023-Centerton-TASWU)
+![PICKXI](https://github.com/daeun-han/2023-Centerthon-TASWU/assets/127743683/887ae656-e521-4aa5-a568-1290bc6b1be4)
 
 
 저희 **PICKXI**는, **디지털 취약계층**이 겪을 수 있는 아래 문제들을 해결하고자 합니다.
